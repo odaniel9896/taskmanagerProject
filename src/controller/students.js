@@ -1,10 +1,11 @@
+
+const {sendEmail} = require("../middleware/emailConfirmation");
 const Student = require("../models/Student");
 const { generateToken } = require("../utils");
 
 module.exports = {
     async store(req, res) {
         const { name, email, password } = req.body;
-
         try {
             let student = await Student.findOne({
                 where: {
@@ -19,6 +20,10 @@ module.exports = {
                 email,
                 password,
             });
+            sendEmail(
+                email
+            )
+            //sendEmail(email)
 
             const token = generateToken({
                 studentId: student.id,
@@ -40,4 +45,5 @@ module.exports = {
             res.status(500).send(error);
         }
     }
+    
 }

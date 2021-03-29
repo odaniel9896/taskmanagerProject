@@ -13,9 +13,9 @@ const routes = express.Router();
 
 //Rotas para o Student
 
-routes.post("/students", studentController.store)
-// routes.get("/sendEmail", emailMiddleware.sendEmail);
+routes.post("/students", studentController.store);
 
-// routes.get('/verify', emailMiddleware.verifyEmail, studentController.store)
+//Verificar cadastro
+// routes.get('/verify', emailMiddleware.verifyEmail);
 
 module.exports = routes;
