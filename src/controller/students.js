@@ -23,7 +23,10 @@ module.exports = {
             sendEmail(
                 email
             )
-            //sendEmail(email)
+            // verifyEmail(
+            //     email
+            // )
+           
 
             const token = generateToken({
                 studentId: student.id,

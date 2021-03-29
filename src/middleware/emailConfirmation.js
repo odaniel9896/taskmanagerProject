@@ -29,24 +29,30 @@ const sendEmail = (email) => {
         }
     });
 }
-
 module.exports = { sendEmail };
 
-// const verifyEmail = async (req, res, next) => {
 
-//         if (req.query.id == rand) {
-            
-//             const student = await Student.findOne({
-                
-//             })
+// const verifyEmail = async (req, res, email) => {
 
-//             return next()
+//     if (req.query.id == rand) {
+
+//         const student = await Student.findOne({
+//             where: {
+//                 email: email
+//             }
+//         })
+//         if(student) {
+//             student.isValid = true
+//             await student.save
+
 //         }
-//         else {
-//             console.log("email is not verified");
-//             res.end("<h1>Bad Request</h1>");
-//         }
+//     }
+//     else {
+//         console.log("Email não verificado");
+//         res.end("<h1>Bad Request</h1>");
+//     }
 // }
+
 // module.exports = { verifyEmail };
 
 
