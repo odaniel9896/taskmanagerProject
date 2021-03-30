@@ -16,6 +16,6 @@ const routes = express.Router();
 routes.post("/students", studentController.store);
 
 //Verificar cadastro
-// routes.get('/verify', emailMiddleware.verifyEmail);
+routes.get('/verify', emailMiddleware.verifyEmail);
 
 module.exports = routes;

@@ -3,7 +3,6 @@ const Student = require("../models/Student");
 const rand = Math.floor((Math.random() * 100) + 54);
 
 const sendEmail = (email) => {
-    console.log(email);
 
     let Transport = nodemailer.createTransport({
         service: "Gmail",
@@ -16,8 +15,10 @@ const sendEmail = (email) => {
     const mailOptions = {
         to: email,
         subject: "Confirmação de Email",
-        html: `Olá <br> Clique aqui para verificar o seu Email <br><a href=http://localhost:3000/verify?id=${rand}>Clique aqui para a verificação</a>`,
+        html: `Olá <br> Clique aqui para verificar o seu Email <br><a href=http://localhost:3333/verify?id=${rand}&email=${email}>Clique aqui para a verificação</a>`,
     }
+
+    //verifyEmail(email)
 
     console.log(mailOptions);
 
@@ -29,30 +30,33 @@ const sendEmail = (email) => {
         }
     });
 }
-module.exports = { sendEmail };
 
 
-// const verifyEmail = async (req, res, email) => {
 
-//     if (req.query.id == rand) {
+const verifyEmail = async (req, res) => {
 
-//         const student = await Student.findOne({
-//             where: {
-//                 email: email
-//             }
-//         })
-//         if(student) {
-//             student.isValid = true
-//             await student.save
+    if (req.query.id == rand) {
+        console.log(rand)
+        console.log(req.query.id)
 
-//         }
-//     }
-//     else {
-//         console.log("Email não verificado");
-//         res.end("<h1>Bad Request</h1>");
-//     }
-// }
+        const student = await Student.findOne({
+            where: {
+                email: req.query.email
+            }
+        })
+        console.log(student)
+        if(student) {
+            student.isValid = true
+            student.save()
 
-// module.exports = { verifyEmail };
+        }
+    }
+    else {
+        console.log("Email não verificado");
+        res.end("<h1>Bad Request</h1>");
+    }
+}
+
+module.exports = { sendEmail, verifyEmail };
 
 

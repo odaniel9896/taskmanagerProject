@@ -5,9 +5,11 @@ class Student extends Model {
         super.init(
             {
                 name: DataTypes.STRING,
+                isValid: DataTypes.BOOLEAN,
                 email: DataTypes.STRING,
                 password: DataTypes.STRING,
                 profileImage: DataTypes.STRING,
+                
             },
             {
                 sequelize,
