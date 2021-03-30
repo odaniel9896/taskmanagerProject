@@ -1,5 +1,5 @@
 
-const {sendEmail, verifyEmail} = require("../middleware/emailConfirmation");
+const {sendEmail, verifyEmail} = require("./emailConfirmation");
 const Student = require("../models/Student");
 const { generateToken } = require("../utils");
 

@@ -26,7 +26,7 @@ const sendEmail = (email) => {
         if (error) {
             console.log(error);
         } else {
-            console.log("Message sent: " + response.message);
+            console.log("Mensagem enviada " + response.message);
         }
     });
 }

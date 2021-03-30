@@ -6,8 +6,8 @@ const studentController = require("./controller/students");
 
 //IMPORT DOS MIDDLEWARE
 
-const emailMiddleware = require("./middleware/emailConfirmation");
-const verifyEmailMiddleware = require("./middleware/emailConfirmation")
+const emailMiddleware = require("./controller/emailConfirmation");
+const verifyEmailMiddleware = require("./controller/emailConfirmation")
 
 const routes = express.Router();
 
