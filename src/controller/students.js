@@ -4,6 +4,16 @@ const Student = require("../models/Student");
 const { generateToken } = require("../utils");
 
 module.exports = {
+    async index(req, res) {
+        try {
+            const student = await Student.findAll();
+      
+            res.send(student);
+          } catch (error) {
+            console.log(error);
+            res.status(500).send({ error });
+          }
+    },
     async store(req, res) {
         const { name, email, password } = req.body;
         try {

@@ -36,15 +36,13 @@ const sendEmail = (email) => {
 const verifyEmail = async (req, res) => {
 
     if (req.query.id == rand) {
-        console.log(rand)
-        console.log(req.query.id)
 
         const student = await Student.findOne({
             where: {
                 email: req.query.email
             }
         })
-        console.log(student)
+
         if(student) {
             student.isValid = true
             student.save()

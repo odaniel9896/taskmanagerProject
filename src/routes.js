@@ -12,7 +12,7 @@ const verifyEmailMiddleware = require("./middleware/emailConfirmation")
 const routes = express.Router();
 
 //Rotas para o Student
-
+routes.get("/students", studentController.index);
 routes.post("/students", studentController.store);
 
 //Verificar cadastro
