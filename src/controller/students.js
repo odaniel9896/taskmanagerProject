@@ -1,18 +1,19 @@
 
-const {sendEmail, verifyEmail} = require("./emailConfirmation");
+const { sendEmail, verifyEmail } = require("./emailConfirmation");
 const Student = require("../models/Student");
 const { generateToken } = require("../utils");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
     async index(req, res) {
         try {
             const student = await Student.findAll();
-      
+
             res.send(student);
-          } catch (error) {
+        } catch (error) {
             console.log(error);
             res.status(500).send({ error });
-          }
+        }
     },
     async store(req, res) {
         const { name, email, password } = req.body;
@@ -25,32 +26,22 @@ module.exports = {
             if (student)
                 return res.status(400).send({ error: "Email já cadastrado no sistema" });
 
+            const passwordCript = bcrypt.hashSync(password);
+
             student = await Student.create({
                 name,
                 email,
-                password,
+                password: passwordCript,
             });
             sendEmail(
                 email
             )
-            // verifyEmail(
-            //     email
-            // )
-           
-
-            const token = generateToken({
-                studentId: student.id,
-                studentName: student.name,
-            });
-
-
             res.status(201).send({
                 student: {
                     studentId: student.id,
                     name: student.name,
                     email: student.email,
-                },
-                token
+                }
             });
 
         } catch (error) {
@@ -58,5 +49,5 @@ module.exports = {
             res.status(500).send(error);
         }
     }
-    
+
 }

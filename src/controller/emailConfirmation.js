@@ -18,8 +18,6 @@ const sendEmail = (email) => {
         html: `Olá <br> Clique aqui para verificar o seu Email <br><a href=http://localhost:3333/verify?id=${rand}&email=${email}>Clique aqui para a verificação</a>`,
     }
 
-    //verifyEmail(email)
-
     console.log(mailOptions);
 
     Transport.sendMail(mailOptions, function (error, response) {
@@ -48,6 +46,7 @@ const verifyEmail = async (req, res) => {
             student.save()
 
         }
+        res.send("E-mail confirmado com sucesso");
     }
     else {
         console.log("Email não verificado");
