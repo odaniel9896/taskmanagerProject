@@ -10,11 +10,15 @@ const sessionController =  require("./controller/sessions")
 const emailMiddleware = require("./controller/emailConfirmation");
 const verifyEmailMiddleware = require("./controller/emailConfirmation")
 
+//IMPORT DOS MIDDLEWARES
+
+const studentValidators = require("./validators/students");
+
 const routes = express.Router();
 
 //Rotas para o Student
 routes.get("/students", studentController.index);
-routes.post("/students", studentController.store);
+routes.post("/students", studentValidators.create, studentController.store);
 
 
 //ROTAS PARA A SEÇÃO

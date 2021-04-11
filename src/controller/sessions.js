@@ -9,12 +9,15 @@ module.exports = {
     try {
       const student = await Student.findOne({
         where: {
-          email,
+          email
         },
       });
 
       if (!student || !bcrypt.compareSync(password, student.password))
         return res.status(403).send({ error: "Usuário e/ou senha inválidos" });
+
+      if (student.isValid == false)
+        return res.status(403).send({ error: "Usuário não confirmado"});
 
       const token = generateToken({
         studentId: student.id,
