@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('teachers', {
+    queryInterface.createTable('group', { 
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -12,24 +12,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      profileImage: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      isValid: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-        allowNull: false,  
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -43,6 +25,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("teachers");
+    queryInterface.dropTable("group");
   }
 };

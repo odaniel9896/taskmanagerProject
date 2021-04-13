@@ -1,14 +1,10 @@
 const { Model, DataTypes } = require("sequelize");
 
-class Student extends Model {
+class Group extends Model {
     static init(sequelize) {
         super.init(
             {
                 name: DataTypes.STRING,
-                isValid: DataTypes.BOOLEAN,
-                email: DataTypes.STRING,
-                password: DataTypes.STRING,
-                profileImage: DataTypes.STRING,
                 
             },
             {
@@ -17,8 +13,7 @@ class Student extends Model {
         )
     }
     static associate(models) {
-        // realizar as associate
     }
 }
 
-module.exports = Student;
+module.exports = Group;

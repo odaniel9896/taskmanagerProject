@@ -16,7 +16,9 @@ module.exports = {
         }
     },
     async store(req, res) {
+        
         const { name, email, password } = req.body;
+
         try {
             let student = await Student.findOne({
                 where: {

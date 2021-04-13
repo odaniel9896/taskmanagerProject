@@ -46,7 +46,7 @@ const verifyEmail = async (req, res) => {
             student.save()
 
         }
-        res.send("E-mail confirmado com sucesso");
+        res.redirect("localhost:3333/orderconfirmemail")
     }
     else {
         console.log("Email não verificado");
