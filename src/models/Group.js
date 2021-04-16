@@ -13,6 +13,8 @@ class Group extends Model {
         )
     }
     static associate(models) {
+        this.belongsToMany(models.Teacher, { through: "teacherGroup" });
+        this.belongsToMany(models.Student, { through: "studentGroup" });
     }
 }
 

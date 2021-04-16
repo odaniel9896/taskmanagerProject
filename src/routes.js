@@ -7,8 +7,8 @@ const sessionController =  require("./controller/sessions")
 
 //IMPORT DOS MIDDLEWARE
 
-const emailMiddleware = require("./controller/emailConfirmation");
-const verifyEmailMiddleware = require("./controller/emailConfirmation")
+const emailMiddleware = require("./services/emailConfirmation");
+const verifyEmailMiddleware = require("./services/emailConfirmation")
 
 //IMPORT DOS MIDDLEWARES
 

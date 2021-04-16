@@ -17,6 +17,7 @@ class School extends Model {
     }
     static associate(models) {
         //REALIZAR OS ASSOCIATE
+        this.belongsToMany(models.Teacher, { through: "teacherSchool" });
     }
 }
 

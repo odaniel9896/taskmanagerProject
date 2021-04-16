@@ -5,9 +5,6 @@ class Student extends Model {
         super.init(
             {
                 name: DataTypes.STRING,
-                isValid: DataTypes.BOOLEAN,
-                email: DataTypes.STRING,
-                password: DataTypes.STRING,
                 profileImage: DataTypes.STRING,
                 
             },
@@ -17,7 +14,8 @@ class Student extends Model {
         )
     }
     static associate(models) {
-        // realizar as associate
+        this.belongsToMany(models.Group, { through: "studentGroup" });
+        this.belongsTo(models.User);
     }
 }
 

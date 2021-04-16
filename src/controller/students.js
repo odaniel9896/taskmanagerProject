@@ -1,8 +1,9 @@
 
-const { sendEmail, verifyEmail } = require("./emailConfirmation");
+const { sendEmail, verifyEmail } = require("../services/emailConfirmation.js");
 const Student = require("../models/Student");
 const { generateToken } = require("../utils");
 const bcrypt = require("bcryptjs");
+const User = require("../models/User.js");
 
 module.exports = {
     async index(req, res) {
@@ -16,11 +17,11 @@ module.exports = {
         }
     },
     async store(req, res) {
-        
+
         const { name, email, password } = req.body;
 
         try {
-            let student = await Student.findOne({
+            let student = await User.findOne({
                 where: {
                     email: email,
                 },
@@ -30,19 +31,24 @@ module.exports = {
 
             const passwordCript = bcrypt.hashSync(password);
 
-            student = await Student.create({
-                name,
+            const createUser = await User.create({
                 email,
-                password: passwordCript,
+                password: passwordCript
             });
+
+            let createStundent = await User.createStudent({
+                name,
+                userId: createUser.id
+            });
+       
+
             sendEmail(
                 email
             )
             res.status(201).send({
                 student: {
-                    studentId: student.id,
-                    name: student.name,
-                    email: student.email,
+                    studentId: createUser.id,
+                    email: createUser.email,
                 }
             });
 

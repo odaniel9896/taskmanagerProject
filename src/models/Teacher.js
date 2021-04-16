@@ -5,10 +5,7 @@ class Teacher extends Model {
         super.init(
             {
                 name: DataTypes.STRING,
-                email: DataTypes.STRING,
-                password: DataTypes.STRING,
                 profileImage: DataTypes.STRING,
-                isValid: DataTypes.BOOLEAN,
                 
             },
             {
@@ -17,8 +14,10 @@ class Teacher extends Model {
         )
     }
     static associate(models) {
+        this.belongsToMany(models.School, { through: "teacherSchool" });
+        this.belongsToMany(models.Group, { through: "teacherGroup" });
+        this.belongsTo(models.User);
 
-        //REALIZAR AS ASSOCIATE COM AS TABELAS NECESSARIAS 
     }
 }
 

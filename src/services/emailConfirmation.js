@@ -1,6 +1,8 @@
 const nodemailer = require("nodemailer");
 const Student = require("../models/Student");
 const rand = Math.floor((Math.random() * 100) + 54);
+const path = require("path");
+const hbs = require('nodemailer-express-handlebars');
 
 const sendEmail = (email) => {
 
@@ -12,10 +14,22 @@ const sendEmail = (email) => {
         }
     })
 
+
+    Transport.use('compile', hbs({
+        viewEngine: {
+            partialsDir: './src/services/views/',
+            defaultLayout: ""
+        },
+        viewPath: './src/services/views/',
+        extName: ".hbs"
+    }))
+
+
     const mailOptions = {
         to: email,
         subject: "Confirmação de Email",
-        html: `Olá <br> Clique aqui para verificar o seu Email <br><a href=http://localhost:3333/verify?id=${rand}&email=${email}>Clique aqui para a verificação</a>`,
+        template: 'index'
+        //html: `Olá <br> Clique aqui para verificar o seu Email <br><a href=http://localhost:3333/verify?id=${rand}&email=${email}>Clique aqui para a verificação</a>`,
     }
 
     console.log(mailOptions);

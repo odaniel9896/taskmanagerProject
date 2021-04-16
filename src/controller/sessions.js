@@ -1,36 +1,33 @@
-const Student = require("../models/Student");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../utils");
+const User = require("../models/User");
 
 module.exports = {
   async store(req, res) {
     const { email, password } = req.body;
 
     try {
-      const student = await Student.findOne({
+      const user = await User.findOne({
         where: {
           email
         },
       });
 
-      if (!student || !bcrypt.compareSync(password, student.password))
+      if (!user || !bcrypt.compareSync(password, user.password))
         return res.status(403).send({ error: "Usuário e/ou senha inválidos" });
 
-      if (student.isValid == false)
+      if (user.isValid == false)
         return res.status(403).send({ error: "Usuário não confirmado"});
 
       const token = generateToken({
-        studentId: student.id,
-        studentName: student.name,
+        userId: user.id,
       });
 
       setTimeout(() => {
         res.status(201).send({
-          student: {
-            studentId: student.id,
-            name: student.name,
-            email: student.email,
-            image: student.image,
+          user: {
+            userId: user.id,
+            email: user.email,
           },
           token,
         });
