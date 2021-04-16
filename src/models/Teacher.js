@@ -6,6 +6,8 @@ class Teacher extends Model {
             {
                 name: DataTypes.STRING,
                 profileImage: DataTypes.STRING,
+                userId: DataTypes.INTEGER,
+                
                 
             },
             {

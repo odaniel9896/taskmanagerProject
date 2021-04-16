@@ -31,8 +31,8 @@ User.associate(connection.models);
 
 
 
-for (let assoc of Object.keys(Student.associations)) {
-    for (let accessor of Object.keys(Student.associations[assoc].accessors)) {
-        console.log(Student.name + '.' + Student.associations[assoc].accessors[accessor] + '()');
+for (let assoc of Object.keys(User.associations)) {
+    for (let accessor of Object.keys(User.associations[assoc].accessors)) {
+        console.log(User.name + '.' + User.associations[assoc].accessors[accessor] + '()');
     }
 }

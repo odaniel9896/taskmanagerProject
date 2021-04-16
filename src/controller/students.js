@@ -36,7 +36,9 @@ module.exports = {
                 password: passwordCript
             });
 
-            let createStundent = await User.createStudent({
+            console.log(createUser.id)
+
+            const createStundent = await Student.create({
                 name,
                 userId: createUser.id
             });
