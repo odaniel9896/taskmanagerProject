@@ -3,7 +3,8 @@ const express = require("express");
 //IMPORT DOS CONTROLLERS
 
 const studentController = require("./controller/students");
-const sessionController =  require("./controller/sessions")
+const sessionController =  require("./controller/sessions");
+const teacherController = require("./controller/teachers")
 
 //IMPORT DOS MIDDLEWARE
 
@@ -19,6 +20,10 @@ const routes = express.Router();
 //Rotas para o Student
 routes.get("/students", studentController.index);
 routes.post("/students", studentValidators.create, studentController.store);
+
+//Rotas para o Professor
+
+routes.post("/teachers", teacherController.store);
 
 
 //ROTAS PARA A SEÇÃO

@@ -8,6 +8,7 @@ class User extends Model {
                 password: DataTypes.STRING,
                 role: DataTypes.STRING,
                 isValid: DataTypes.BOOLEAN,
+                confirmationCode: DataTypes.STRING
                 
             },
             {

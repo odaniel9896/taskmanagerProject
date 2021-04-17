@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../utils");
 const User = require("../models/User");
+const { use } = require("../routes");
 
 module.exports = {
   async store(req, res) {
@@ -17,10 +18,15 @@ module.exports = {
         return res.status(403).send({ error: "Usuário e/ou senha inválidos" });
 
       if (user.isValid == false)
-        return res.status(403).send({ error: "Usuário não confirmado"});
+        return res.status(403).send({ error: "Usuário não confirmado" });
+
+
+
 
       const token = generateToken({
         userId: user.id,
+        userRole: user.role,
+        userEmail: user.email
       });
 
       setTimeout(() => {

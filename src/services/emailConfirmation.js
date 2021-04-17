@@ -1,10 +1,8 @@
 const nodemailer = require("nodemailer");
-const Student = require("../models/Student");
-const rand = Math.floor((Math.random() * 100) + 54);
-const path = require("path");
 const hbs = require('nodemailer-express-handlebars');
+const User = require("../models/User");
 
-const sendEmail = (email) => {
+const sendEmail = (email, rand) => {
 
     let Transport = nodemailer.createTransport({
         service: "Gmail",
@@ -28,8 +26,8 @@ const sendEmail = (email) => {
     const mailOptions = {
         to: email,
         subject: "Confirmação de Email",
-        template: 'index'
-        //html: `Olá <br> Clique aqui para verificar o seu Email <br><a href=http://localhost:3333/verify?id=${rand}&email=${email}>Clique aqui para a verificação</a>`,
+        //template: 'index'
+        html: `Olá <br> Clique aqui para verificar o seu Email <br><a href=http://localhost:3333/verify?confirmationCode=${rand}>Clique aqui para a verificação</a>`,
     }
 
     console.log(mailOptions);
@@ -47,23 +45,22 @@ const sendEmail = (email) => {
 
 const verifyEmail = async (req, res) => {
 
-    if (req.query.id == rand) {
+    if (req.query.confirmationCode != null ) {
 
-        const student = await Student.findOne({
+        const user = await User.findOne({
             where: {
-                email: req.query.email
+                confirmationCode: req.query.confirmationCode
             }
         })
 
-        if(student) {
-            student.isValid = true
-            student.save()
-
+        if(user) {
+            user.isValid = true  
+            user.save()
         }
-        res.redirect("localhost:3333/orderconfirmemail")
+        res.redirect("localhost:3000/orderconfirmemail")
     }
     else {
-        console.log("Email não verificado");
+        console.log("Email já foi verificado");
         res.end("<h1>Bad Request</h1>");
     }
 }

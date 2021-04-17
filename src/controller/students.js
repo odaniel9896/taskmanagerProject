@@ -1,9 +1,9 @@
 
 const { sendEmail, verifyEmail } = require("../services/emailConfirmation.js");
 const Student = require("../models/Student");
-const { generateToken } = require("../utils");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User.js");
+const randomstring = require("randomstring");
 
 module.exports = {
     async index(req, res) {
@@ -29,23 +29,23 @@ module.exports = {
             if (student)
                 return res.status(400).send({ error: "Email já cadastrado no sistema" });
 
+            const rand = randomstring.generate(120)    
+
             const passwordCript = bcrypt.hashSync(password);
 
             const createUser = await User.create({
                 email,
-                password: passwordCript
+                password: passwordCript,
+                role : "student",
+                confirmationCode: rand
             });
-
-            console.log(createUser.id)
-
             const createStundent = await Student.create({
                 name,
                 userId: createUser.id
             });
-       
-
             sendEmail(
-                email
+                email,
+                rand
             )
             res.status(201).send({
                 student: {
