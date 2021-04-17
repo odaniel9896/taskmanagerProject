@@ -14,6 +14,9 @@ const verifyEmailMiddleware = require("./services/emailConfirmation")
 //IMPORT DOS MIDDLEWARES
 
 const studentValidators = require("./validators/students");
+const teacherValidators =  require("./validators/teachers");
+const userValidator =  require("./validators/user");
+const sessionValidator = require("./validators/session")
 
 const routes = express.Router();
 
@@ -23,11 +26,11 @@ routes.post("/students", studentValidators.create, studentController.store);
 
 //Rotas para o Professor
 
-routes.post("/teachers", teacherController.store);
+routes.post("/teachers", teacherValidators.create, teacherController.store);
 
 
 //ROTAS PARA A SEÇÃO
-routes.post("/login", sessionController.store);
+routes.post("/login", sessionValidator.create, sessionController.store);
 
 //Verificar cadastro
 routes.get('/verify', emailMiddleware.verifyEmail);
