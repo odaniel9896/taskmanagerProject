@@ -1,7 +1,7 @@
 module.exports = {
     host: "localhost",
     username: "root",
-    password: "9896123",
+    password: "bcd127",
     database: "db_task_manager_project",
     dialect: "mysql",
     define: {

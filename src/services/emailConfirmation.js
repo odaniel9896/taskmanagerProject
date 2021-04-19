@@ -57,7 +57,8 @@ const verifyEmail = async (req, res) => {
             user.isValid = true  
             user.save()
         }
-        res.redirect("localhost:3000/orderconfirmemail")
+        res.redirect("http://localhost:3000/confirmemail")
+        console.log(res.redirect)
     }
     else {
         console.log("Email já foi verificado");
