@@ -4,6 +4,7 @@ const { errors } = require("celebrate");
 
 const cors = require("cors");
 
+require("dotenv").config()
 
 const routes = require("./routes");
 

@@ -10,7 +10,7 @@ const School = require("../models/School");
 const User = require("../models/User");
 
 
-const connection = new Sequelize(dbConfig);
+const connection = new Sequelize(dbConfig.url, dbConfig.config);
 
 
 //INICIALIZA OS MODELS

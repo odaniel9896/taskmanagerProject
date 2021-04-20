@@ -33,9 +33,11 @@ module.exports = {
                 name,
                 userId: createUser.id
             });
+            const url = `http://localhost:3333/verify?confirmationCode=${rand}`
+
             sendEmail(
                 email,
-                confirmationCode
+                url
             )
             res.status(201).send({
                 teacher: {
