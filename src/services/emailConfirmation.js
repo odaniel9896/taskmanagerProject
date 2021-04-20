@@ -1,9 +1,11 @@
 const nodemailer = require("nodemailer");
 const hbs = require('nodemailer-express-handlebars');
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
 
-const sendEmail = (email, rand) => {
 
+const sendEmail = (email, url) => {
+    console.log(url)
     let Transport = nodemailer.createTransport({
         service: "Gmail",
         auth: {
@@ -27,7 +29,7 @@ const sendEmail = (email, rand) => {
         to: email,
         subject: "Confirmação de Email",
         //template: 'index'
-        html: `Olá <br> Clique aqui para verificar o seu Email <br><a href=http://localhost:3333/verify?confirmationCode=${rand}>Clique aqui para a verificação</a>`,
+        html: `Olá <br> Clique aqui para realizar a verificação <br><a href=${url}>Clique aqui para a verificação</a>`,
     }
 
     console.log(mailOptions);
@@ -45,7 +47,7 @@ const sendEmail = (email, rand) => {
 
 const verifyEmail = async (req, res) => {
 
-    if (req.query.confirmationCode != null ) {
+    if (req.query.confirmationCode != null) {
 
         const user = await User.findOne({
             where: {
@@ -53,11 +55,38 @@ const verifyEmail = async (req, res) => {
             }
         })
 
-        if(user) {
-            user.isValid = true  
+        if (user) {
+            user.isValid = true
             user.save()
         }
         res.redirect("http://localhost:3000/confirmemail")
+        console.log(res.redirect)
+    }
+    else {
+        console.log("Status atualizado");
+        res.end("<h1>Bad Request</h1>");
+    }
+}
+
+const passwordEmailReset = async (req, res) => {
+
+    const { password } = req.body
+
+    if (req.query.passwordToken != null) {
+
+        const user = await User.findOne({
+            where: {
+                passwordToken: req.query.passwordToken
+            }
+        })
+
+        if (user) {
+            const passwordCript = bcrypt.hashSync(password);
+
+            user.password = passwordCript
+            user.save()
+        }
+        res.status(200).send("senha resetada")
         console.log(res.redirect)
     }
     else {
@@ -66,6 +95,6 @@ const verifyEmail = async (req, res) => {
     }
 }
 
-module.exports = { sendEmail, verifyEmail };
+module.exports = { sendEmail, verifyEmail, passwordEmailReset };
 
 

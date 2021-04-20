@@ -4,7 +4,8 @@ const express = require("express");
 
 const studentController = require("./controller/students");
 const sessionController =  require("./controller/sessions");
-const teacherController = require("./controller/teachers")
+const teacherController = require("./controller/teachers");
+const passwordController = require("./controller/password.js");
 
 //IMPORT DOS MIDDLEWARE
 
@@ -27,6 +28,10 @@ routes.post("/students", studentValidators.create, studentController.store);
 //Rotas para o Professor
 
 routes.post("/teachers", teacherValidators.create, teacherController.store);
+
+//ROTAS PARA O password
+routes.get("/emailpassword", passwordController.sendEmailPassword);
+routes.put("/passwordreset", emailMiddleware.passwordEmailReset)
 
 
 //ROTAS PARA A SEÇÃO
