@@ -25,15 +25,11 @@ module.exports = {
                 return res.status(404).send({ error: "Student não encontrado" });
 
             if (user.role == "teacher")
-                await group.addTeacher({
-                    teacherId: user.id
-            })
-            if (user.role == "student")
-             await group.addStudent(
-                student.id
-            )  
+                await group.addTeacher(teacher.id)
 
-            console.log({studentId: student.id})
+            if (user.role == "student")
+                await group.addStudent(student.id)
+
 
             res.status(201).send({
                 group: {
