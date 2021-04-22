@@ -1,8 +1,45 @@
 const Group = require("../models/Group");
 const Student = require("../models/Student");
 const User = require("../models/User");
+const { Op } = require("sequelize");
 
 module.exports = {
+    async index(req, res) {
+        try {
+            const groupFeed = await Group.findAll({
+                attributes: [
+                    "id",
+                    "name",
+                    "createdAt",
+                ],
+                include: [
+                    {
+                        association: "Student",
+                        attributes: ["id", "name", "profileImage"],
+                        through: { attributes: [] },
+                        include: {
+                            association: "User",
+                            attributes: ["id"],
+                        },
+                    },
+                    {
+                        association: "Teacher",
+                        attributes: ["id", "name", "profileImage"],
+                        through: { attributes: [] },
+                        include: {
+                            association: "Student",
+                            attributes: ["id"],
+                        },
+                    }
+                ],
+                order: [["createdAt", "DESC"]],
+            });
+            res.send(groupFeed)
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
+    },
     async store(req, res) {
         const { name } = req.body;
         const id = req.query.id;
