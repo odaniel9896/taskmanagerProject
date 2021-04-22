@@ -6,6 +6,7 @@ const studentController = require("./controller/students");
 const sessionController =  require("./controller/sessions");
 const teacherController = require("./controller/teachers");
 const passwordController = require("./controller/password.js");
+const groupController = require("./controller/group")
 
 //IMPORT DOS MIDDLEWARE
 
@@ -31,8 +32,10 @@ routes.post("/teachers", teacherValidators.create, teacherController.store);
 
 //ROTAS PARA O password
 routes.get("/emailpassword", passwordController.sendEmailPassword);
-routes.put("/passwordreset", emailMiddleware.passwordEmailReset)
+routes.put("/passwordreset", emailMiddleware.passwordEmailReset);
 
+//ROTAS PARA O GRUPOS
+routes.post("/group", groupController.store);
 
 //ROTAS PARA A SEÇÃO
 routes.post("/login", sessionValidator.create, sessionController.store);

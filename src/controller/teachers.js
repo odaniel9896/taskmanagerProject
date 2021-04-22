@@ -19,15 +19,19 @@ module.exports = {
             if (teacher)
                 return res.status(400).send({ error: "Email já cadastrado no sistema" });
 
-            const rand = randomstring.generate(120)
+            const rand = randomstring.generate(120);
+            const passwordToken = randomstring.generate(240);   
 
             const passwordCript = bcrypt.hashSync(password);
+            const passwordTokenCript = bcrypt.hashSync(passwordToken)
 
             const createUser = await User.create({
                 email,
                 password: passwordCript,
                 role: "teacher",
-                confirmationCode: rand
+                confirmationCode: rand,
+                passwordToken: passwordTokenCript
+
             });
             const createTeacher = await Teacher.create({
                 name,

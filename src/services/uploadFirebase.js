@@ -4,7 +4,7 @@ const admin = require("firebase-admin");
 const serviceAccount = require("../config/firebase-key");
 
 //alterar para o seu bucket
-const BUCKET = "senai-overflow-2021-01.appspot.com";
+const BUCKET = "tecnotcc-fb3e0.appspot.com";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

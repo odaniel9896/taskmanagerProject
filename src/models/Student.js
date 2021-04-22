@@ -6,9 +6,7 @@ class Student extends Model {
             {
                 name: DataTypes.STRING,
                 profileImage: DataTypes.STRING,
-                userId: DataTypes.INTEGER,
-                isValid: DataTypes.BOOLEAN,
-                
+                userId: DataTypes.INTEGER,                
             },
             {
                 sequelize,
