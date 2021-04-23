@@ -6,9 +6,7 @@ class Teacher extends Model {
             {
                 name: DataTypes.STRING,
                 profileImage: DataTypes.STRING,
-                userId: DataTypes.INTEGER,
-                
-                
+
             },
             {
                 sequelize,
@@ -19,7 +17,6 @@ class Teacher extends Model {
         this.belongsToMany(models.School, { through: "teacherSchool" });
         this.belongsToMany(models.Group, { through: "teacherGroup" });
         this.belongsTo(models.User);
-
     }
 }
 

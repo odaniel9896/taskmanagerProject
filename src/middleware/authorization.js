@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
     const payload = jwt.verify(token, auth.secret);
 
     //coloca o id do aluno na requisição
-    req.studentId = payload.studentId;
+    req.userId = payload.userId;
 
     //envia a requisição para frente (controller)
     return next();

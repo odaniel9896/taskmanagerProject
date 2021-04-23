@@ -30,7 +30,7 @@ module.exports = {
                 return res.status(400).send({ error: "Email já cadastrado no sistema" });
 
             const rand = randomstring.generate(120);
-            const passwordToken = randomstring.generate(240);    
+            const passwordToken = randomstring.generate(240);
 
             const passwordCript = bcrypt.hashSync(password);
             const passwordTokenCript = bcrypt.hashSync(passwordToken)
@@ -38,17 +38,19 @@ module.exports = {
             const createUser = await User.create({
                 email,
                 password: passwordCript,
-                role : "student",
+                role: "student",
                 confirmationCode: rand,
                 passwordToken: passwordTokenCript
             });
-            const createStundent = await Student.create({
+
+
+            await createUser.createStudent({
                 name,
-                userId: createUser.id
+                id: createUser.id
             });
 
             const url = `http://localhost:3333/verify?confirmationCode=${rand}`
-            
+
             sendEmail(
                 email,
                 url

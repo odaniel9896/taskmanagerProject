@@ -10,7 +10,7 @@ class User extends Model {
                 isValid: DataTypes.BOOLEAN,
                 confirmationCode: DataTypes.STRING,
                 passwordToken: DataTypes.STRING
-                
+
             },
             {
                 sequelize,
@@ -18,8 +18,9 @@ class User extends Model {
         )
     }
     static associate(models) {
-        this.hasOne(models.Student);
-        this.hasOne(models.Teacher);
+        this.hasOne(models.Student, { foreignKey: "id" });
+        this.hasOne(models.Teacher, { foreignKey: "id" });
+        this.hasOne(models.Invite);
     }
 }
 

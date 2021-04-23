@@ -1,5 +1,6 @@
 const express = require("express");
 
+
 //IMPORT DOS CONTROLLERS
 
 const studentController = require("./controller/students");
@@ -8,39 +9,44 @@ const teacherController = require("./controller/teachers");
 const passwordController = require("./controller/password.js");
 const groupController = require("./controller/group")
 
-//IMPORT DOS MIDDLEWARE
+//IMPORT DOS SERVICES
 
 const emailMiddleware = require("./services/emailConfirmation");
 const verifyEmailMiddleware = require("./services/emailConfirmation")
 
 //IMPORT DOS MIDDLEWARES
 
+const authMiddleware = require("./middleware/authorization");
+
+//IMPORT DOS VALIDATOR
 const studentValidators = require("./validators/students");
 const teacherValidators =  require("./validators/teachers");
 const userValidator =  require("./validators/user");
 const sessionValidator = require("./validators/session")
 
 const routes = express.Router();
-
-//Rotas para o Student
+//     ROTAS PUBLICAS
 routes.get("/students", studentController.index);
 routes.post("/students", studentValidators.create, studentController.store);
 
-//Rotas para o Professor
+
 
 routes.post("/teachers", teacherValidators.create, teacherController.store);
 
-//ROTAS PARA O password
 routes.get("/emailpassword", passwordController.sendEmailPassword);
 routes.put("/passwordreset", emailMiddleware.passwordEmailReset);
 
-//ROTAS PARA O GRUPOS
-routes.post("/group", groupController.store);
 
-//ROTAS PARA A SEÇÃO
 routes.post("/login", sessionValidator.create, sessionController.store);
 
-//Verificar cadastro
 routes.get('/verify', emailMiddleware.verifyEmail);
+
+routes.use(authMiddleware)
+
+//       ROTAS PRIVADAS
+routes.post("/group", groupController.store);
+routes.get("/group", groupController.index)
+
+
 
 module.exports = routes;

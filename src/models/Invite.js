@@ -1,11 +1,13 @@
 const { Model, DataTypes } = require("sequelize");
 
-class Student extends Model {
+class Invite extends Model {
     static init(sequelize) {
         super.init(
             {
-                name: DataTypes.STRING,
-                profileImage: DataTypes.STRING,              
+                status: DataTypes.BOOLEAN,
+                userId: DataTypes.INTEGER,
+                groupId: DataTypes.INTEGER
+                
             },
             {
                 sequelize,
@@ -13,9 +15,9 @@ class Student extends Model {
         )
     }
     static associate(models) {
-        this.belongsToMany(models.Group, { through: "studentGroup" });
         this.belongsTo(models.User);
+        this.belongsTo(models.Group);
     }
 }
 
-module.exports = Student;
+module.exports = Invite;

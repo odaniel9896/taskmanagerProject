@@ -33,9 +33,9 @@ module.exports = {
                 passwordToken: passwordTokenCript
 
             });
-            const createTeacher = await Teacher.create({
+            await createUser.createTeacher({
                 name,
-                userId: createUser.id
+                id: createUser.id
             });
             const url = `http://localhost:3333/verify?confirmationCode=${rand}`
 

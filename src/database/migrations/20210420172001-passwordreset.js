@@ -5,7 +5,8 @@ module.exports = {
     queryInterface.addColumn('users', 'passwordToken', {
       type: Sequelize.STRING,
       allowNull: false,
-    })
+    },
+    )
   },
 
   down: async (queryInterface, Sequelize) => {

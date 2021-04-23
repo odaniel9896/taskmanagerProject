@@ -8,6 +8,7 @@ const Teacher = require("../models/Teacher");
 const Group = require("../models/Group");
 const School = require("../models/School");
 const User = require("../models/User");
+const Invite = require("../models/Invite");
 
 
 const connection = new Sequelize(dbConfig.url, dbConfig.config);
@@ -20,6 +21,7 @@ Teacher.init(connection);
 Group.init(connection);
 School.init(connection);
 User.init(connection);
+Invite.init(connection);
 
 //INICIALIZA OS RELACIONAMENTOS
 Student.associate(connection.models);
@@ -27,12 +29,13 @@ Teacher.associate(connection.models);
 Group.associate(connection.models);
 School.associate(connection.models);
 User.associate(connection.models);
+Invite.associate(connection.models);
 
 
 
 
-for (let assoc of Object.keys(Group.associations)) {
-    for (let accessor of Object.keys(Group.associations[assoc].accessors)) {
-        console.log(Group.name + '.' + Group.associations[assoc].accessors[accessor] + '()');
+for (let assoc of Object.keys(User.associations)) {
+    for (let accessor of Object.keys(User.associations[assoc].accessors)) {
+        console.log(User.name + '.' + User.associations[assoc].accessors[accessor] + '()');
     }
 }
