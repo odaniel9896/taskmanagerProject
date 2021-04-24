@@ -1,40 +1,41 @@
 const Group = require("../models/Group");
 const Student = require("../models/Student");
 const User = require("../models/User");
-const { Op } = require("sequelize");
+const Teacher = require("../models/Teacher");
 
 module.exports = {
     async index(req, res) {
 
-        const { userId } = req;
-        console.log("index -> userId", userId)
+        const { userId, userRole } = req;
 
         try {
-            const groupFeed = await Group.findAll({
-                attributes: [
-                    "id",
-                    "name",
-                    "createdAt",
-                ],
-                include: [
-                    {
-                        association: "Students",
-                        attributes: ["id", "name", "profileImage"],
-                        through: {
-                            attributes: [],
-                        },
 
-                    },
+            let userGroup;
+
+            if(userRole == "teacher")
+                userGroup = Teacher
+            else
+                userGroup = Student    
+
+            const findGroupUser = await userGroup.findByPk(userId)
+
+
+            if (!findGroupUser)
+                return res.status(403).send({ error: "Nenhum usuário encontrado encontrado" });
+
+            const findGroup = await findGroupUser.getGroups({
+                include: [
                     {
                         association: "Teachers",
                         attributes: ["id", "name", "profileImage"],
-                        through: {
-                            attributes: [],
-                        },
-
-                    }
-                ],
-                order: [["createdAt", "DESC"]],
+                        through: { attributes: [] },
+                    },
+                    {
+                        association: "Students",
+                        attributes: ["id", "name", "profileImage"],
+                        through: { attributes: [] },
+                    },
+                ]
             });
 
             // select * from`groups` g
@@ -42,7 +43,7 @@ module.exports = {
             // left join studentGroup sg  on g.id = sg.groupId
             // where tg.teacherId = 3
             // or sg.studentId = 3;
-            res.send(groupFeed)
+            res.send(findGroup)
         } catch (error) {
             console.log(error);
             res.status(500).send(error);

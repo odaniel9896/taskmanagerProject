@@ -16,7 +16,7 @@ class Teacher extends Model {
     static associate(models) {
         this.belongsToMany(models.School, { through: "teacherSchool" });
         this.belongsToMany(models.Group, { through: "teacherGroup" });
-        this.belongsTo(models.User);
+        this.belongsTo(models.User, { foreignKey: "id" });
     }
 }
 

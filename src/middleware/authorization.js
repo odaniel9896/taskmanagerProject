@@ -21,6 +21,7 @@ module.exports = (req, res, next) => {
 
     //coloca o id do aluno na requisição
     req.userId = payload.userId;
+    req.userRole = payload.userRole
 
     //envia a requisição para frente (controller)
     return next();

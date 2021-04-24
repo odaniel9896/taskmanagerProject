@@ -14,7 +14,7 @@ class Student extends Model {
     }
     static associate(models) {
         this.belongsToMany(models.Group, { through: "studentGroup" });
-        this.belongsTo(models.User);
+        this.belongsTo(models.User, { foreignKey: "id" });
     }
 }
 
