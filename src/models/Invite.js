@@ -1,13 +1,21 @@
 const { Model, DataTypes } = require("sequelize");
+const { v4: uuidv4 } = require('uuid');
+
 
 class Invite extends Model {
     static init(sequelize) {
         super.init(
             {
+                id: {
+                    type: DataTypes.UUID,
+                    primaryKey: true,
+                    allowNull: false,
+                    defaultValue: () => uuidv4(),
+                },
                 status: DataTypes.BOOLEAN,
                 userId: DataTypes.INTEGER,
                 groupId: DataTypes.INTEGER
-                
+
             },
             {
                 sequelize,

@@ -21,7 +21,7 @@ module.exports = {
 
 
             if (!findGroupUser)
-                return res.status(403).send({ error: "Nenhum usuário encontrado encontrado" });
+                return res.status(403).send({ error: "Nenhum usuário encontrado" });
 
             const findGroup = await findGroupUser.getGroups({
                 include: [

@@ -20,7 +20,7 @@ module.exports = {
             else
                 userUpdate = Student    
 
-            const userImage = await Student.findByPk(userId,
+            const userImage = await Student.findByPk(userId
                 // {
                 //     attributes: [
                 //         "id",

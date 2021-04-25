@@ -5,7 +5,9 @@ const bcrypt = require("bcryptjs");
 
 
 const sendEmail = (email, url) => {
-    console.log(url)
+console.log("🚀 ~ file: emailConfirmation.js ~ line 8 ~ sendEmail ~ url", url)
+console.log("🚀 ~ file: emailConfirmation.js ~ line 8 ~ sendEmail ~ email", email)
+
     let Transport = nodemailer.createTransport({
         service: "Gmail",
         auth: {
@@ -28,7 +30,7 @@ const sendEmail = (email, url) => {
     const mailOptions = {
         to: email,
         subject: "Confirmação de Email",
-        //template: 'index'
+        //template: 'index',
         html: `Olá <br> Clique aqui para realizar a verificação <br><a href=${url}>Clique aqui para a verificação</a>`,
     }
 
