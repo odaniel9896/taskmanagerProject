@@ -21,6 +21,7 @@ class User extends Model {
         this.hasOne(models.Student, { foreignKey: "id" });
         this.hasOne(models.Teacher, { foreignKey: "id" });
         this.hasOne(models.Invite);
+        this.belongsToMany(models.Friend, { through: "userFriend" });
     }
 }
 

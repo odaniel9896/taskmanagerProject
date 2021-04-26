@@ -12,38 +12,49 @@ module.exports = {
 
             let userGroup;
 
-            if(userRole == "teacher")
+
+            if (userRole == "teacher")
                 userGroup = Teacher
             else
-                userGroup = Student    
+                userGroup = Student
 
-            const findGroupUser = await userGroup.findByPk(userId)
+            // if(userRole == "teacher")    
 
-
-            if (!findGroupUser)
-                return res.status(403).send({ error: "Nenhum usuário encontrado" });
-
-            const findGroup = await findGroupUser.getGroups({
+            const findGroupUser = await userGroup.findByPk(userId, {
                 include: [
                     {
-                        association: "Teachers",
-                        attributes: ["id", "name", "profileImage"],
+                        association: "Groups",
+                        attributes: ["id", "name"],
                         through: { attributes: [] },
+                        include: [
+                            {
+                                association: "Students",
+                                attributes: ["id", "name"],
+                                through: { attributes: [] }
+                            },
+                            {
+                                association: "Teachers",
+                                attributes: ["id", "name"],
+                                through: { attributes: [] }
+                            },
+                        ]
                     },
-                    {
-                        association: "Students",
-                        attributes: ["id", "name", "profileImage"],
-                        through: { attributes: [] },
-                    },
-                ]
-            });
+
+                ],
+            })
+
+
+            // if (!findGroupUser)
+            //     return res.status(403).send({ error: "Nenhum usuário encontrado" });
+
+            // const findGroup = await findGroupUser.getGroups({ through: { attributes: [] } });
 
             // select * from`groups` g
             // left join teacherGroup tg  on g.id = tg.groupId
             // left join studentGroup sg  on g.id = sg.groupId
             // where tg.teacherId = 3
             // or sg.studentId = 3;
-            res.send(findGroup)
+            res.send(findGroupUser.Groups);
         } catch (error) {
             console.log(error);
             res.status(500).send(error);
