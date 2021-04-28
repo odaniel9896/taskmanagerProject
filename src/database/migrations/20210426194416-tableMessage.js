@@ -11,9 +11,24 @@ module.exports = {
         primaryKey: true,
       },
       text: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: false,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id"
+        },
+      },
+      chatId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "chats",
+          key: "id"
+        },
       },
       createdAt: {
         type: Sequelize.DATE,

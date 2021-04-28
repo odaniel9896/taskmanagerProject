@@ -5,9 +5,9 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     queryInterface.createTable('chats', {
       id: {
-        type: Sequelize.UUID,
-        defaultValue: uuidv4(),
+        type: Sequelize.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
       },
       name: {
