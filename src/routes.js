@@ -58,7 +58,7 @@ routes.post("/group", groupValidator.create, groupController.store);
 routes.get("/group", groupController.index);
 
 
-routes.get("/group/member/add/:groupId/:userEmail", memberGroup.addMemberGroup);
+routes.get("/group/add/:inviteToken", memberGroup.addMemberGroup);
 routes.post("/group/invite/:groupId", memberGroup.sendInviteGroup);
 
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);

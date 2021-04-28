@@ -2,9 +2,7 @@ const Invite = require("../models/Invite");
 const urlSend = require('generating-url');
 const User = require("../models/User");
 const { sendEmail } = require("../services/emailConfirmation");
-const Teacher = require("../models/Teacher");
-const { use } = require("../routes");
-const Student = require("../models/Student");
+const randomstring = require("randomstring");
 const Group = require("../models/Group");
 
 
@@ -22,16 +20,18 @@ module.exports = {
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });
 
+            const tokenInvite = randomstring.generate(140)
+
             const createInvite = await user.createInvite({
                 groupId: groupId,
+                inviteToken: tokenInvite
             });
 
             let path = urlSend.generate({
                 baseUrl: 'http://localhost:3333',
-                path: 'group/member/add/:groupId/:userEmail',
+                path: 'group/add/:inviteToken',
                 params: {
-                    groupId: groupId,
-                    userEmail: emailSend
+                    token: tokenInvite
                 },
                 query: false
             });
@@ -47,26 +47,26 @@ module.exports = {
         }
     },
     async addMemberGroup(req, res) {
-        const groupId = req.params.groupId
-        const userEmail = req.params.userEmail
+        const token = req.params.token
+        const {userRole} = req;
 
         try {
-            const user = await User.findOne({
+            const invite = await Invite.findOne({
                 where: {
-                    email: userEmail
+                    inviteToken: token
                 }
             })
-            const group = await Group.findByPk(groupId);
+            const group = await Group.findByPk(invite.groupId);
 
             if (!group)
                 return res.status(404).send({ error: "Grupo não existe" })
 
-            if (user) {
-                if (user.role == "teacher")
-                    await group.addTeacher(user.id)
+            if (invite) {
+                if (userRole == "teacher")
+                    await group.addTeacher(invite.userId)
 
-                if (user.role == "student")
-                    await group.addStudent(user.id)
+                if (userRole == "student")
+                    await group.addStudent(invite.userId)
             }
             else {
                 return res.status(404).send({ error: "Usuário não encontrado" })
@@ -74,7 +74,7 @@ module.exports = {
 
             res.status(200).send({
                 group: {
-                    userId: user.id,
+                    userId: invite.userId,
                     groupName: group.name
                 }
             });

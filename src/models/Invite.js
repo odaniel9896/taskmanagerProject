@@ -13,6 +13,7 @@ class Invite extends Model {
                     defaultValue: () => uuidv4(),
                 },
                 status: DataTypes.BOOLEAN,
+                inviteToken: DataTypes.STRING,
                 userId: DataTypes.INTEGER,
                 groupId: DataTypes.INTEGER
 
