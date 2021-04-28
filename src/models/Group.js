@@ -4,7 +4,7 @@ class Group extends Model {
     static init(sequelize) {
         super.init(
             {
-                name: DataTypes.STRING,
+                room: DataTypes.STRING,
                 
             },
             {
@@ -16,6 +16,7 @@ class Group extends Model {
         this.belongsToMany(models.Teacher, { through: "teacherGroup" });
         this.belongsToMany(models.Student, { through: "studentGroup" });
         this.hasOne(models.Invite);
+        this.hasOne(models.Chat);
     }
 }
 

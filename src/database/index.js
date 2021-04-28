@@ -9,6 +9,8 @@ const Group = require("../models/Group");
 const School = require("../models/School");
 const User = require("../models/User");
 const Invite = require("../models/Invite");
+const Chat = require("../models/Chat");
+const Message = require("../models/Message");
 
 
 const connection = new Sequelize(dbConfig.url, dbConfig.config);
@@ -22,6 +24,8 @@ Group.init(connection);
 School.init(connection);
 User.init(connection);
 Invite.init(connection);
+Chat.init(connection);
+Message.init(connection);
 
 //INICIALIZA OS RELACIONAMENTOS
 Student.associate(connection.models);
@@ -30,6 +34,8 @@ Group.associate(connection.models);
 School.associate(connection.models);
 User.associate(connection.models);
 Invite.associate(connection.models);
+Chat.associate(connection.models);
+Message.associate(connection.models);
 
 
 

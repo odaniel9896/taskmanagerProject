@@ -30,6 +30,14 @@ module.exports = {
           key: "id"
         },
       },
+      groupId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "groups",
+          key: "id"
+        },
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

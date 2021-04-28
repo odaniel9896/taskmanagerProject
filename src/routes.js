@@ -53,12 +53,10 @@ routes.get('/verify', emailMiddleware.verifyEmail);
 
 routes.use(authMiddleware)
 
-//       ROTAS PRIVADAS
+//Rotas para grupo
 routes.post("/group", groupValidator.create, groupController.store);
 routes.get("/group", groupController.index);
-
 routes.patch("/group/:inviteToken/add", memberGroup.addMemberGroup);
-
 routes.post("/group/:groupId/invite", memberGroup.sendInviteGroup);
 
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);

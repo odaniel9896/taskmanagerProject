@@ -10,7 +10,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      room: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,
