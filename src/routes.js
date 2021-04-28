@@ -57,9 +57,9 @@ routes.use(authMiddleware)
 routes.post("/group", groupValidator.create, groupController.store);
 routes.get("/group", groupController.index);
 
+routes.patch("/group/:inviteToken/add", memberGroup.addMemberGroup);
 
-routes.get("/group/add/:inviteToken", memberGroup.addMemberGroup);
-routes.post("/group/invite/:groupId", memberGroup.sendInviteGroup);
+routes.post("/group/:groupId/invite", memberGroup.sendInviteGroup);
 
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);
 

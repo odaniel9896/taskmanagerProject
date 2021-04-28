@@ -12,6 +12,7 @@ module.exports = {
         const { userId } = req;
         const groupId = req.params.groupId;
         const { emailSend } = req.body;
+        
 
         try {
 
@@ -20,7 +21,8 @@ module.exports = {
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });
 
-            const tokenInvite = randomstring.generate(140)
+            const tokenInvite = randomstring.generate(120);
+            
 
             const createInvite = await user.createInvite({
                 groupId: groupId,
@@ -29,14 +31,15 @@ module.exports = {
 
             let path = urlSend.generate({
                 baseUrl: 'http://localhost:3333',
-                path: 'group/add/:inviteToken',
+                path: 'group/:inviteToken/add',
                 params: {
-                    token: tokenInvite
+                    inviteToken: tokenInvite
                 },
                 query: false
             });
+            console.log("sendInviteGroup -> path", path)
 
-            const email = emailSend
+            const email = emailSend;
             const url = path;
 
             sendEmail(email, url)
@@ -47,8 +50,8 @@ module.exports = {
         }
     },
     async addMemberGroup(req, res) {
-        const token = req.params.token
-        const {userRole} = req;
+        const token = req.params.inviteToken
+        const {userRole, userId} = req;
 
         try {
             const invite = await Invite.findOne({
@@ -61,12 +64,13 @@ module.exports = {
             if (!group)
                 return res.status(404).send({ error: "Grupo não existe" })
 
-            if (invite) {
+            if (group) {
                 if (userRole == "teacher")
-                    await group.addTeacher(invite.userId)
+                    await group.addTeacher(userId)
 
                 if (userRole == "student")
-                    await group.addStudent(invite.userId)
+                    await group.addStudent(userId)
+
             }
             else {
                 return res.status(404).send({ error: "Usuário não encontrado" })
