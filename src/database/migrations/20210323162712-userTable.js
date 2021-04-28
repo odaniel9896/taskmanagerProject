@@ -29,7 +29,11 @@ module.exports = {
       },
       confirmationCode: {
         type: Sequelize.STRING,
-      allowNull: true, 
+        allowNull: true,
+      },
+      passwordToken: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,

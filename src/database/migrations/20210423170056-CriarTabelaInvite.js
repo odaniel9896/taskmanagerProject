@@ -15,6 +15,10 @@ module.exports = {
         allowNull: false,
         defaultValue: false,
       },
+      inviteToken: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
