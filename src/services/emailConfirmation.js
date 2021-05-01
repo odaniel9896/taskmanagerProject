@@ -11,8 +11,8 @@ console.log("🚀 ~ file: emailConfirmation.js ~ line 8 ~ sendEmail ~ email", em
     let Transport = nodemailer.createTransport({
         service: "Gmail",
         auth: {
-            user: process.env.SEND_EMAIL_GMAIL_EMAIL,
-            pass: process.env.SEND_EMAIL_GMAIL_PASSWORD
+            user: "tccemailvalidator@gmail.com",
+            pass: "taskmanagerproject"
         }
     })
 
