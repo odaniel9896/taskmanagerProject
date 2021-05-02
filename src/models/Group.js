@@ -4,7 +4,7 @@ class Group extends Model {
     static init(sequelize) {
         super.init(
             {
-                room: DataTypes.STRING,
+                name: DataTypes.STRING,
                 
             },
             {

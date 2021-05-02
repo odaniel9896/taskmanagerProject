@@ -41,7 +41,7 @@ routes.post("/teachers", teacherValidators.create, teacherController.store);
 
 
 //rotas para atualizar senha
-routes.get("/emailpassword", passwordController.sendEmailPassword);
+routes.get("/emailpassword/:email", passwordController.sendEmailPassword);
 routes.put("/passwordreset", emailMiddleware.passwordEmailReset);
 
 //login

@@ -3,7 +3,7 @@ const { sendEmail } = require("../services/emailConfirmation");
 
 module.exports = {
     async sendEmailPassword(req, res) {
-        const {email} = req.body;
+        const email = req.params.email;
 
         try {
             let user = await User.findOne({
@@ -15,8 +15,8 @@ module.exports = {
                 return res.status(404).send({error: "Usuário não existe"})
 
             const token = user.passwordToken;
-
-            const url = `http://localhost:3333/passwordreset?passwordToken=${token}`
+            
+            const url = `http://192.168.0.10:3333/passwordreset?passwordToken=${token}`
             sendEmail(
                 email,
                 url
