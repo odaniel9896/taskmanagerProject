@@ -49,7 +49,7 @@ module.exports = {
                 id: createUser.id
             });
 
-            const url = `http://192.168.0.10:3333/verify?confirmationCode=${rand}`
+            const url = `http://localhost:3333/verify?confirmationCode=${rand}`
 
             sendEmail(
                 email,
