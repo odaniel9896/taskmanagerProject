@@ -11,6 +11,7 @@ const User = require("../models/User");
 const Invite = require("../models/Invite");
 const Chat = require("../models/Chat");
 const Message = require("../models/Message");
+const Annotation = require("../models/Annotation");
 
 
 const connection = new Sequelize(dbConfig.url, dbConfig.config);
@@ -26,6 +27,7 @@ User.init(connection);
 Invite.init(connection);
 Chat.init(connection);
 Message.init(connection);
+Annotation.init(connection);
 
 //INICIALIZA OS RELACIONAMENTOS
 Student.associate(connection.models);
@@ -36,12 +38,13 @@ User.associate(connection.models);
 Invite.associate(connection.models);
 Chat.associate(connection.models);
 Message.associate(connection.models);
+Annotation.associate(connection.models);
 
 
 
 
-for (let assoc of Object.keys(Group.associations)) {
-    for (let accessor of Object.keys(Group.associations[assoc].accessors)) {
-        console.log(Group.name + '.' + Group.associations[assoc].accessors[accessor] + '()');
-    }
-}
+// for (let assoc of Object.keys(Group.associations)) {
+//     for (let accessor of Object.keys(Group.associations[assoc].accessors)) {
+//         console.log(Group.name + '.' + Group.associations[assoc].accessors[accessor] + '()');
+//     }
+// }
