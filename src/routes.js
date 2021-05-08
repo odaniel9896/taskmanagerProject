@@ -24,7 +24,8 @@ const uploadSingleImage = require("./middleware/uploadImage");
 const studentValidators = require("./validators/students");
 const teacherValidators =  require("./validators/teachers");
 const sessionValidator = require("./validators/session");
-const groupValidator = require("./validators/group")
+const groupValidator = require("./validators/group");
+const e = require("cors");
 
 
 
@@ -58,6 +59,9 @@ routes.post("/group", groupValidator.create, groupController.store);
 routes.get("/group", groupController.index);
 routes.patch("/group/:inviteToken/add", memberGroup.addMemberGroup);
 routes.post("/group/:groupId/invite", memberGroup.sendInviteGroup);
+routes.delete("/group/:id", groupController.delete);
+routes.put("/group/:id", groupController.update);
+
 
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);
 

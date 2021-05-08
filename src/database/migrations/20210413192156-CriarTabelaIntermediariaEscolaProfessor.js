@@ -10,6 +10,8 @@ module.exports = {
           model: "teachers",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       schoolId: {
         type: Sequelize.INTEGER,
@@ -18,6 +20,8 @@ module.exports = {
           model: "schools",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       createdAt: {
         type: Sequelize.DATE,

@@ -10,6 +10,8 @@ module.exports = {
           model: "teachers",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       groupId: {
         type: Sequelize.INTEGER,
@@ -18,13 +20,15 @@ module.exports = {
           model: "groups",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
       },
       updatedAt: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATE, 
         allowNull: false,
       }
     })

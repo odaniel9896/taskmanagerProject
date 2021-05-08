@@ -29,15 +29,14 @@ module.exports = {
         userEmail: user.email
       });
 
-      setTimeout(() => {
-        res.status(201).send({
-          user: {
-            userId: user.id,
-            email: user.email,
-          },
-          token,
-        });
-      }, 3000);
+      res.status(201).send({
+        user: {
+          userId: user.id,
+          email: user.email,
+        },
+        token,
+      });
+
     } catch (error) {
       console.log(error);
       res.status(500).send(error);

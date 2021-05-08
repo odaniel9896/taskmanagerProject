@@ -15,7 +15,7 @@ class Chat extends Model {
     static associate(models) {
         this.belongsToMany(models.User, { through: "userChat" });
         this.hasOne(models.Message);
-        this.hasOne(models.Group);
+        this.hasOne(models.Group, { foreignKey: "id" });
     }
 }
 

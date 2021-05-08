@@ -43,8 +43,8 @@ Annotation.associate(connection.models);
 
 
 
-// for (let assoc of Object.keys(Group.associations)) {
-//     for (let accessor of Object.keys(Group.associations[assoc].accessors)) {
-//         console.log(Group.name + '.' + Group.associations[assoc].accessors[accessor] + '()');
-//     }
-// }
+for (let assoc of Object.keys(Student.associations)) {
+    for (let accessor of Object.keys(Student.associations[assoc].accessors)) {
+        console.log(Student.name + '.' + Student.associations[assoc].accessors[accessor] + '()');
+    }
+}

@@ -2,6 +2,7 @@ const Group = require("../models/Group");
 const Student = require("../models/Student");
 const User = require("../models/User");
 const Teacher = require("../models/Teacher");
+const { use } = require("../routes");
 
 module.exports = {
     async index(req, res) {
@@ -66,6 +67,7 @@ module.exports = {
 
         try {
             const user = await User.findByPk(userId);
+
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });
 
@@ -89,6 +91,70 @@ module.exports = {
             });
 
 
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
+    },
+    async delete(req, res) {
+
+        const { userId } = req;
+        const groupId = req.params.id;
+
+        try {
+
+            const user = await User.findByPk(userId);
+            // let userGroup;
+
+            // if (user.role == "teacher")
+            //     userGroup = Teacher
+            // else
+            //     userGroup = Student
+
+            if (!user)
+                return res.status(404).send({ error: "Usuário não existe" });
+
+            const group = await Group.findByPk(groupId);
+
+            if (!group)
+                return res.status(404).send({ error: "Grupo não encontrado" });
+
+            // await userGroup.removeGroup({
+            //     groupId : group.id
+            // })
+
+            await group.destroy();
+
+            res.status(200).send();
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
+    },
+    async update(req, res) {
+
+        const { userId } = req;
+
+        const groupId = req.params.id;
+
+        const { name } = req.body;
+
+        try {
+
+            const user = await User.findByPk(userId);
+
+            if (!user)
+                return res.status(404).send({ error: "Usuário não existe" });
+
+            const group = await Group.findByPk(groupId);
+
+            if (!group)
+                return res.status(404).send({ error: "Grupo não encontrado" });
+
+            group.name = name;
+            group.save();
+
+            res.status(200).send();
         } catch (error) {
             console.log(error);
             res.status(500).send(error);

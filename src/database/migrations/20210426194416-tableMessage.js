@@ -21,6 +21,8 @@ module.exports = {
           model: "users",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       chatId: {
         type: Sequelize.INTEGER,
@@ -37,6 +39,8 @@ module.exports = {
           model: "groups",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       createdAt: {
         type: Sequelize.DATE,
