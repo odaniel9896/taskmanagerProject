@@ -61,6 +61,7 @@ routes.patch("/group/:inviteToken/add", memberGroup.addMemberGroup);
 routes.post("/group/:groupId/invite", memberGroup.sendInviteGroup);
 routes.delete("/group/:id", groupController.delete);
 routes.put("/group/:id", groupController.update);
+routes.delete("/group/:groupId/delete/:idDeleteUser", memberGroup.deleteMemberGroup);
 
 
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);

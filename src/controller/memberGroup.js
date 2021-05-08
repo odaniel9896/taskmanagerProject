@@ -12,7 +12,7 @@ module.exports = {
         const { userId } = req;
         const groupId = req.params.groupId;
         const { emailSend } = req.body;
-        
+
 
         try {
 
@@ -22,7 +22,7 @@ module.exports = {
                 return res.status(404).send({ error: "Usuário não encontrado" });
 
             const tokenInvite = randomstring.generate(120);
-            
+
 
             const createInvite = await user.createInvite({
                 groupId: groupId,
@@ -51,7 +51,7 @@ module.exports = {
     },
     async addMemberGroup(req, res) {
         const token = req.params.inviteToken
-        const {userRole, userId} = req;
+        const { userRole, userId } = req;
 
         try {
             const invite = await Invite.findOne({
@@ -87,5 +87,34 @@ module.exports = {
             res.status(500).send(error);
         }
 
+    },
+    async deleteMemberGroup(req, res) {
+
+        const { userId } = req;
+        const idDeleteUser = req.params.idDeleteUser;
+        const groupId = req.params.groupId
+
+        try {
+            const user = await User.findByPk(userId);
+
+            if (!user)
+                return res.status(404).send({ error: "Usuário não existe" });
+
+            if (user.role = "teacher") {
+
+                const deleteUser = await Group.findByPk(groupId);
+
+                await deleteUser.removeStudent(idDeleteUser);
+
+                return res.status(200).send();
+
+            }
+            else
+                return res.status(404).send({ error: "Você não tem permissão para pagar um estudante do grupo" })
+
+
+        } catch (error) {
+
+        }
     }
 }
