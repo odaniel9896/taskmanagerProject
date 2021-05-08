@@ -10,6 +10,7 @@ const passwordController = require("./controller/password.js");
 const groupController = require("./controller/group");
 const userImage = require("./controller/userImage.js");
 const memberGroup = require("./controller/memberGroup");
+const annotationController = require("./controller/annotation");
 
 //IMPORT DOS SERVICES
 
@@ -63,9 +64,16 @@ routes.delete("/group/:id", groupController.delete);
 routes.put("/group/:id", groupController.update);
 routes.delete("/group/:groupId/delete/:idDeleteUser", memberGroup.deleteMemberGroup);
 
-
+//Rotas para enviar imagens
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);
 
+
+//Rotas para annotations
+
+routes.get("/annotations", annotationController.index);
+routes.post("/annotations", annotationController.store);
+routes.delete("/annotations/:id", annotationController.delete);
+routes.put("/annotations/:id", annotationController.update);
 
 
 module.exports = routes;
