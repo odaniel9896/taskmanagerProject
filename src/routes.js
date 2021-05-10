@@ -11,6 +11,7 @@ const groupController = require("./controller/group");
 const userImage = require("./controller/userImage.js");
 const memberGroup = require("./controller/memberGroup");
 const annotationController = require("./controller/annotation");
+const workspaceController = require("./controller/workspace")
 
 //IMPORT DOS SERVICES
 
@@ -74,6 +75,10 @@ routes.get("/annotations", annotationController.index);
 routes.post("/annotations", annotationController.store);
 routes.delete("/annotations/:id", annotationController.delete);
 routes.put("/annotations/:id", annotationController.update);
+
+// ROTAS PARA O WORKSPACE
+
+routes.post("/workspace/:groupId", workspaceController.store);
 
 
 module.exports = routes;

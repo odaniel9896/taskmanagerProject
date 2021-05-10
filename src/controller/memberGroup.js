@@ -4,6 +4,7 @@ const User = require("../models/User");
 const { sendEmail } = require("../services/emailConfirmation");
 const randomstring = require("randomstring");
 const Group = require("../models/Group");
+const { use } = require("../routes");
 
 
 module.exports = {
@@ -117,16 +118,17 @@ module.exports = {
                             through: { attributes: [] }
                         },
                     ],
-                });
+                });     
 
-                if (group.Teachers.id == user.id) {
-                    await user.removeStudent(idDeleteUser);
+                if (user.id === userId) {
+                    await group.removeStudent(idDeleteUser);
 
-                    return res.status(200).send(group);
+                    return res.status(200).send();
                 }
                 else
-                    return res.status(404).send({ error: "Você não tem permissão para apagar um estudante do grupo" })
+                    return res.status(404).send({ error: "Você não faz parte desse grupo" })
             }
+
             else
                 return res.status(404).send({ error: "Você não tem permissão para apagar um estudante do grupo" })
 

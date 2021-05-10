@@ -46,7 +46,7 @@ module.exports = {
                 text: text,
             });
 
-            res.status(201).send()
+            res.status(201).send(createAnnotation)
         } catch (error) {
             console.log(error);
             res.status(500).send(error);
