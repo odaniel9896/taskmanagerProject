@@ -92,7 +92,7 @@ module.exports = {
 
         const { userId } = req;
         const idDeleteUser = req.params.idDeleteUser;
-        const groupId = req.params.groupId
+        const groupIdA = req.params.groupId
 
         try {
             const user = await User.findByPk(userId);
@@ -100,21 +100,39 @@ module.exports = {
             if (!user)
                 return res.status(404).send({ error: "Usuário não existe" });
 
-            if (user.role = "teacher") {
+            if (user.role == "teacher") {
 
-                const deleteUser = await Group.findByPk(groupId);
+                const group = await Group.findByPk(groupIdA, {
+                    attributes: [
+                        "id",
+                        "name",
+                    ],
+                    include: [
+                        {
+                            association: "Teachers",
+                            attributes: ["id", "name"],
+                            where: {
+                                id: user.id,
+                            },
+                            through: { attributes: [] }
+                        },
+                    ],
+                });
 
-                await deleteUser.removeStudent(idDeleteUser);
+                if (group.Teachers.id == user.id) {
+                    await user.removeStudent(idDeleteUser);
 
-                return res.status(200).send();
-
+                    return res.status(200).send(group);
+                }
+                else
+                    return res.status(404).send({ error: "Você não tem permissão para apagar um estudante do grupo" })
             }
             else
-                return res.status(404).send({ error: "Você não tem permissão para pagar um estudante do grupo" })
-
+                return res.status(404).send({ error: "Você não tem permissão para apagar um estudante do grupo" })
 
         } catch (error) {
-
+            console.log(error);
+            res.status(500).send(error);
         }
     }
 }

@@ -62,7 +62,7 @@ routes.patch("/group/:inviteToken/add", memberGroup.addMemberGroup);
 routes.post("/group/:groupId/invite", memberGroup.sendInviteGroup);
 routes.delete("/group/:id", groupController.delete);
 routes.put("/group/:id", groupController.update);
-routes.delete("/group/:groupId/delete/:idDeleteUser", memberGroup.deleteMemberGroup);
+routes.delete("/group/:groupId/students/:idDeleteUser", memberGroup.deleteMemberGroup);
 
 //Rotas para enviar imagens
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);

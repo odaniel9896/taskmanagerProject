@@ -12,6 +12,9 @@ const Invite = require("../models/Invite");
 const Chat = require("../models/Chat");
 const Message = require("../models/Message");
 const Annotation = require("../models/Annotation");
+const List = require("../models/List");
+const Workspace = require("../models/Workspace");
+const Card = require("../models/Card");
 
 
 const connection = new Sequelize(dbConfig.url, dbConfig.config);
@@ -28,6 +31,9 @@ Invite.init(connection);
 Chat.init(connection);
 Message.init(connection);
 Annotation.init(connection);
+Card.init(connection);
+List.init(connection);
+Workspace.init(connection);
 
 //INICIALIZA OS RELACIONAMENTOS
 Student.associate(connection.models);
@@ -39,12 +45,14 @@ Invite.associate(connection.models);
 Chat.associate(connection.models);
 Message.associate(connection.models);
 Annotation.associate(connection.models);
+Card.associate(connection.models);
+List.associate(connection.models);
+Workspace.associate(connection.models);
 
 
 
-
-for (let assoc of Object.keys(User.associations)) {
-    for (let accessor of Object.keys(User.associations[assoc].accessors)) {
-        console.log(User.name + '.' + User.associations[assoc].accessors[accessor] + '()');
-    }
-}
+// for (let assoc of Object.keys(User.associations)) {
+//     for (let accessor of Object.keys(User.associations[assoc].accessors)) {
+//         console.log(User.name + '.' + User.associations[assoc].accessors[accessor] + '()');
+//     }
+// }

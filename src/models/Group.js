@@ -17,6 +17,7 @@ class Group extends Model {
         this.belongsToMany(models.Student, { through: "studentGroup" });
         this.hasOne(models.Invite);
         this.hasOne(models.Chat);
+        this.hasOne(models.Workspace);
     }
 }
 
