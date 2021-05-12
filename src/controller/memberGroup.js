@@ -118,9 +118,9 @@ module.exports = {
                             through: { attributes: [] }
                         },
                     ],
-                });     
-
-                if (user.id === userId) {
+                });
+                
+                if (group.Teachers[0].id === userId) {
                     await group.removeStudent(idDeleteUser);
 
                     return res.status(200).send();

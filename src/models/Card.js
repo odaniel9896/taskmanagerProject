@@ -6,6 +6,7 @@ class Card extends Model {
             {
                 description: DataTypes.STRING,
                 dueDate: DataTypes.DATE,
+                order: DataTypes.INTEGER,
                 listId: DataTypes.INTEGER,              
             },
             {

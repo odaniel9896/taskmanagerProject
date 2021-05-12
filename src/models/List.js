@@ -5,6 +5,7 @@ class List extends Model {
         super.init(
             {
                 name: DataTypes.STRING,
+                order: DataTypes.INTEGER,
                 workspaceId: DataTypes.INTEGER,              
             },
             {

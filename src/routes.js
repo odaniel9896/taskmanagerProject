@@ -11,7 +11,8 @@ const groupController = require("./controller/group");
 const userImage = require("./controller/userImage.js");
 const memberGroup = require("./controller/memberGroup");
 const annotationController = require("./controller/annotation");
-const workspaceController = require("./controller/workspace")
+const workspaceController = require("./controller/workspace");
+const listController = require("./controller/lists");
 
 //IMPORT DOS SERVICES
 
@@ -80,5 +81,10 @@ routes.put("/annotations/:id", annotationController.update);
 
 routes.post("/workspace/:groupId", workspaceController.store);
 
+//ROTAS PARA LISTAS
+
+routes.post("/lists/:groupId", listController.store);
+routes.put("/lists/:listId", listController.update);
+routes.delete("/lists/:listId", listController.delete);
 
 module.exports = routes;

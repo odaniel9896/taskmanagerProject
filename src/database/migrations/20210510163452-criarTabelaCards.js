@@ -17,6 +17,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      order: {
+        type : Sequelize.INTEGER,
+        allowNull: false,
+      },
       listId: {
         type: Sequelize.INTEGER,
         allowNull: false,
