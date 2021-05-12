@@ -11,6 +11,8 @@ module.exports = {
 
         const groupId = req.params.groupId;
 
+        //select * from cards order by `order` asc
+
         // update cards set`order` = 4
         // where id = 145;
 
