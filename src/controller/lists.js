@@ -1,9 +1,57 @@
 const Group = require("../models/Group");
 const List = require("../models/List");
+const User = require("../models/User");
 
 module.exports = {
     async index(req, res) {
 
+
+        const groupId = req.params.groupId;
+
+        try {
+
+            const group = await Group.findByPk(groupId, {
+                attributes: ["id", "name"],
+                include: [
+                    {
+                        association: "Workspace",
+                        attributes: ["id", "name"],
+                    }
+                ]
+            });
+
+            if (!group)
+                return res.status(404).send({ error: "Grupo não existe" });
+
+            if (!group.Workspace.id)
+                return res.status(404).send({ error: "Esse grupo não tem uma workspace" });
+
+            const list = await List.findAll({
+                attributes: ["id", "name", "order"],
+                include: [
+                    {
+                        association: "Workspace",
+                        attributes: ["id", "name"],
+                        include: [
+                            {
+                                association: "Group",
+                                attributes: ["id", "name"],
+                            }
+                        ]
+                    }
+                ],
+                where: {
+                    workspaceId: group.Workspace.id
+                },
+                order: [["order", "ASC"]]
+
+            })
+
+            res.send(list)
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ error });
+        }
     },
     async store(req, res) {
 
@@ -56,7 +104,67 @@ module.exports = {
 
     },
     async delete(req, res) {
+        const { userId, userRole } = req;
 
+        const listId = req.params.listId;
+
+        const groupId = req.params.groupId;
+
+        try {
+
+            const user = await User.findByPk(userId);
+
+            if (!user)
+                return res.status(404).send({ error: "Usuário não encontrado" });
+
+            let association;
+            
+            if(userRole === "teacher")
+                association = "Teachers"
+            else
+                association = "Students"    
+
+            const group = await Group.findByPk(groupId, {
+                attributes: [
+                    "id",
+                    "name",
+                ],
+                include: [
+                    {
+                        association: `${association}`,
+                        attributes: ["id", "name"],
+                        where: {
+                            id: user.id,
+                        },
+                        through: { attributes: [] }
+                    },
+                    {
+                        association: "Workspace",
+                        attributes: ["id", "name"],
+                    }
+                ],
+            });
+
+            const list = await List.findOne({
+                where: {
+                    id: listId,
+                    workspaceId: group.Workspace.id
+                }
+            });
+
+            if(!list)
+                return res.status(404).send({ error: "Lista não encontrada"});
+            
+            if(list.workspaceId !== group.Workspace.id)
+                return res.status(404).send({ error: "Essa lista não pertence a esse workspace" });
+
+            await list.destroy();
+
+            res.status(200).send();
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ error });
+        }
     },
     async update(req, res) {
 

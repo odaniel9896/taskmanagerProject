@@ -83,8 +83,9 @@ routes.post("/workspace/:groupId", workspaceController.store);
 
 //ROTAS PARA LISTAS
 
+routes.get("/lists/:groupId", listController.index);
 routes.post("/lists/:groupId", listController.store);
 routes.put("/lists/:listId", listController.update);
-routes.delete("/lists/:listId", listController.delete);
+routes.delete("/lists/:listId/:groupId", listController.delete);
 
 module.exports = routes;
