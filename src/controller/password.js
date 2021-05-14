@@ -16,7 +16,7 @@ module.exports = {
 
             const token = user.passwordToken;
             
-            const url = `http://localhost:3333/passwordreset?passwordToken=${token}`
+            const url = `http://localhost:3000/passwordreset?passwordToken=${token}`
             sendEmail(
                 email,
                 url
