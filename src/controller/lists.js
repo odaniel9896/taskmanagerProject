@@ -167,6 +167,36 @@ module.exports = {
         }
     },
     async update(req, res) {
+        const listId = req.params.listId;
 
+        const workspaceId = req.params.workspaceId;
+
+        const { name } = req.body;
+
+        try {
+            const list = await List.findOne({
+                where: {
+                    id: listId,
+                    workspaceId: workspaceId
+                }
+            });
+            if (!list)
+                return res.status(404).send({ error: "Lista não encontrada" });
+
+            if (list.workspaceId != workspaceId)
+                return res.status(404).send({ error: "Não permitido" });
+
+            list.name = name;
+
+            list.save();
+            
+            res.status(200).send({
+                    id: list.id,
+                    name: list.name
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
     }
 }

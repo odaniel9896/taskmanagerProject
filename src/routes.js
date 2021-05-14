@@ -85,7 +85,7 @@ routes.post("/workspace/:groupId", workspaceController.store);
 
 routes.get("/lists/:groupId", listController.index);
 routes.post("/lists/:groupId", listController.store);
-routes.put("/lists/:listId", listController.update);
+routes.put("/lists/:listId/:workspaceId", listController.update);
 routes.delete("/lists/:listId/:groupId", listController.delete);
 
 module.exports = routes;
