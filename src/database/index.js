@@ -56,3 +56,4 @@ for (let assoc of Object.keys(List.associations)) {
         console.log(List.name + '.' + List.associations[assoc].accessors[accessor] + '()');
     }
 }
+module.exports = connection

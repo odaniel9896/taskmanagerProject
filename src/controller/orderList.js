@@ -1,6 +1,7 @@
 const List = require("../models/List");
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
 const { QueryTypes } = require('sequelize');
+const connection = require("../database");
 
 module.exports = {
     async update(req, res) {
@@ -18,47 +19,50 @@ module.exports = {
             })
             if (!list)
                 return res.status(404).send({ error: "Lista não encontrada" });
- 
+
             if (order > list.order) {
-                const teste = await List.update(
-                    { 
-                        order: `order` - 1
-                        
+                await connection.query(
+                    'UPDATE lists set `order` = `order` - 1 where `order` between :aux and :order',
+                    {
+                        type: QueryTypes.UPDATE,
+                        replacements: { aux: list.order + 1, order: order },
+                    }
+                );
+                await List.update(
+                    {
+                        order: order
                     },
                     {
                         where: {
-                            order: {
-                                [Op.between]: [list.order + 1, order]
-                            }
+                            id: listId
                         }
                     }
                 )
-                   console.log(teste)
-                // const teste2 = await List.update(
-                //     {
-                //         order: position
-                //     },
-                //     {
-                //         where: {
-                //             id : listId
-                //         }
-                //     }
-                // )
-                
-                res.send("teste")
+                res.status(200).send()
+            }
+            else {
+                await connection.query(
+                    'UPDATE lists set `order` = `order` + 1 where `order` between :aux and :order',
+                    {
+                        type: QueryTypes.UPDATE,
+                        replacements: { aux: list.order, order: order },
+                    }
+                );
+                await List.update(
+                    {
+                        order: order
+                    },
+                    {
+                        where: {
+                            id: listId
+                        }
+                    }
+                )
+                res.status(200).send()
             }
         } catch (error) {
             console.log(error);
             res.status(500).send({ error });
         }
-
-        //select * from cards order by `order` asc
-
-        // update cards set`order` = 4
-        // where id = 145;
-
-        // update cards set`order` = `order` - 1
-        // where`order` between 3 and 4;
-
     }
 }
