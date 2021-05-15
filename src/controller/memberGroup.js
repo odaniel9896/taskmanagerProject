@@ -31,7 +31,7 @@ module.exports = {
             });
 
             let path = urlSend.generate({
-                baseUrl: 'http://localhost:3333',
+                baseUrl: 'http://localhost:3000',
                 path: 'group/:inviteToken/add',
                 params: {
                     inviteToken: tokenInvite
