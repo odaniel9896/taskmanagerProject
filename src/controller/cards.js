@@ -63,28 +63,40 @@ module.exports = {
     async update(req, res) {
         const cardId = req.params.cardId;
 
+        const { userId } = req;
+
         const { description } = req.body;
 
         try {
             const card = await Card.findOne({
                 where: {
                     id: cardId,
-                }
+                },
+                include: [
+                    {
+                        association: "Users",
+                        attributes: ["id"]
+                    }
+                ]
             });
-            if (!card)
-                return res.status(404).send({ error: "Lista não encontrada" });
 
-            if (list.workspaceId != workspaceId)
+            if (!card)
+                return res.status(404).send({ error: "Card não encontrada" });
+
+            // if(!card.Users.map(user => user.id).every(verify));
+            //    return res.status(404).send({error "não allowed"})
+
+            if (!card.Users.map(user => user.id).indexOf(card.Users.map(user => user.id)) === userId)
                 return res.status(404).send({ error: "Não permitido" });
 
-            list.name = name;
+            card.description = description;
 
-            list.save();
+            card.save();
 
             res.status(200).send({
-                id: list.id,
-                name: list.name
-            })
+                id: card.id,
+                description: card.description
+            });
         } catch (error) {
             console.log(error);
             res.status(500).send(error);

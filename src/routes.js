@@ -97,7 +97,7 @@ routes.put("/lists/:listId/:workspaceId/order", listOrderController.update);
 routes.get("/cards/:listId", cardController.index);
 routes.post("/cards/:listId", cardController.store);
 routes.put("/cards/:cardId", cardController.update);
-routes.delete("/cards/:listId", cardController.delete);
+routes.delete("/cards/:cardId", cardController.delete);
 
 
 module.exports = routes;
