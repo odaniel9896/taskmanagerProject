@@ -13,6 +13,7 @@ const memberGroup = require("./controller/memberGroup");
 const annotationController = require("./controller/annotation");
 const workspaceController = require("./controller/workspace");
 const listController = require("./controller/lists");
+const listOrderController = require("./controller/orderList")
 
 //IMPORT DOS SERVICES
 
@@ -87,5 +88,6 @@ routes.get("/lists/:groupId", listController.index);
 routes.post("/lists/:groupId", listController.store);
 routes.put("/lists/:listId/:workspaceId", listController.update);
 routes.delete("/lists/:listId/:groupId", listController.delete);
+routes.put("/lists/:listId/:workspaceId/order", listOrderController.update);
 
 module.exports = routes;
