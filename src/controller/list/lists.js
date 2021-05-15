@@ -1,6 +1,6 @@
-const Group = require("../models/Group");
-const List = require("../models/List");
-const User = require("../models/User");
+const Group = require("../../models/Group");
+const List = require("../../models/List");
+const User = require("../../models/User");
 
 module.exports = {
     async index(req, res) {

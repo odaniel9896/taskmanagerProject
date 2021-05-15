@@ -1,8 +1,8 @@
-const Group = require("../models/Group");
-const Student = require("../models/Student");
-const User = require("../models/User");
-const Teacher = require("../models/Teacher");
-const { use } = require("../routes");
+const Group = require("../../models/Group");
+const Student = require("../../models/Student");
+const User = require("../../models/User");
+const Teacher = require("../../models/Teacher");
+const { use } = require("../../routes");
 
 module.exports = {
     async index(req, res) {

@@ -1,6 +1,6 @@
-const Teacher = require("../models/Teacher");
-const { sendEmail, verifyEmail } = require("../services/emailConfirmation.js");
-const User = require("../models/User");
+const Teacher = require("../../models/Teacher");
+const { sendEmail, verifyEmail } = require("../../services/emailConfirmation.js");
+const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const randomstring = require("randomstring");
 

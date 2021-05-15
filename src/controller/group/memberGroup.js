@@ -1,10 +1,10 @@
-const Invite = require("../models/Invite");
+const Invite = require("../../models/Invite");
 const urlSend = require('generating-url');
-const User = require("../models/User");
-const { sendEmail } = require("../services/emailConfirmation");
+const User = require("../../models/User");
+const { sendEmail } = require("../../services/emailConfirmation");
 const randomstring = require("randomstring");
-const Group = require("../models/Group");
-const { use } = require("../routes");
+const Group = require("../../models/Group");
+const { use } = require("../../routes");
 
 
 module.exports = {

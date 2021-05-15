@@ -1,8 +1,8 @@
 
-const { sendEmail, verifyEmail } = require("../services/emailConfirmation.js");
-const Student = require("../models/Student");
+const { sendEmail, verifyEmail } = require("../../services/emailConfirmation.js");
+const Student = require("../../models/Student");
 const bcrypt = require("bcryptjs");
-const User = require("../models/User.js");
+const User = require("../../models/User.js");
 const randomstring = require("randomstring");
 
 module.exports = {

@@ -1,5 +1,5 @@
-const User = require("../models/User");
-const { sendEmail } = require("../services/emailConfirmation");
+const User = require("../../models/User");
+const { sendEmail } = require("../../services/emailConfirmation");
 
 module.exports = {
     async sendEmailPassword(req, res) {

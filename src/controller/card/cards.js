@@ -1,5 +1,5 @@
-const Card = require("../models/Card");
-const List = require("../models/List");
+const Card = require("../../models/Card");
+const List = require("../../models/List");
 
 module.exports = {
     async index(req, res) {

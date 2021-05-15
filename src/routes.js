@@ -3,18 +3,18 @@ const express = require("express");
 
 //IMPORT DOS CONTROLLERS
 
-const studentController = require("./controller/students");
-const sessionController =  require("./controller/sessions");
-const teacherController = require("./controller/teachers");
-const passwordController = require("./controller/password.js");
-const groupController = require("./controller/group");
-const userImage = require("./controller/userImage.js");
-const memberGroup = require("./controller/memberGroup");
-const annotationController = require("./controller/annotation");
-const workspaceController = require("./controller/workspace");
-const listController = require("./controller/lists");
-const listOrderController = require("./controller/orderList");
-const cardController = require("./controller/cards")
+const studentController = require("./controller/student/students");
+const sessionController =  require("./controller/session/sessions");
+const teacherController = require("./controller/teachers/teachers");
+const passwordController = require("./controller/password/password.js");
+const groupController = require("./controller/group/group");
+const userImage = require("./controller/image/userImage.js");
+const memberGroup = require("./controller/group/memberGroup");
+const annotationController = require("./controller/annotations/annotation");
+const workspaceController = require("./controller/workspace/workspace");
+const listController = require("./controller/list/lists");
+const listOrderController = require("./controller/list/orderList");
+const cardController = require("./controller/card/cards")
 
 //IMPORT DOS SERVICES
 

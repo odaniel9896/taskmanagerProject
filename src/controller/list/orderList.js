@@ -1,7 +1,7 @@
-const List = require("../models/List");
+const List = require("../../models/List");
 const { Op, Sequelize } = require("sequelize");
 const { QueryTypes } = require('sequelize');
-const connection = require("../database");
+const connection = require("../../database");
 
 module.exports = {
     async update(req, res) {

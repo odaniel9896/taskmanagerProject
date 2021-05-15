@@ -1,5 +1,5 @@
-const Annotation = require("../models/Annotation");
-const User = require("../models/User");
+const Annotation = require("../../models/Annotation");
+const User = require("../../models/User");
 
 module.exports = {
     async index(req, res) {
