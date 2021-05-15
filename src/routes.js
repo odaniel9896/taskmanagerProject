@@ -14,7 +14,8 @@ const annotationController = require("./controller/annotations/annotation");
 const workspaceController = require("./controller/workspace/workspace");
 const listController = require("./controller/list/lists");
 const listOrderController = require("./controller/list/orderList");
-const cardController = require("./controller/card/cards")
+const cardController = require("./controller/card/cards");
+const cardOrderController = require("./controller/card/orderCard");
 
 //IMPORT DOS SERVICES
 
@@ -98,6 +99,7 @@ routes.get("/cards/:listId", cardController.index);
 routes.post("/cards/:listId", cardController.store);
 routes.put("/cards/:cardId", cardController.update);
 routes.delete("/cards/:cardId", cardController.delete);
+routes.put("/cards/order/:cardId/:listId", cardOrderController.update);
 
 
 module.exports = routes;
