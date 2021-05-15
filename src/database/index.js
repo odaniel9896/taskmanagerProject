@@ -51,9 +51,9 @@ Workspace.associate(connection.models);
 
 
 
-for (let assoc of Object.keys(List.associations)) {
-    for (let accessor of Object.keys(List.associations[assoc].accessors)) {
-        console.log(List.name + '.' + List.associations[assoc].accessors[accessor] + '()');
+for (let assoc of Object.keys(Card.associations)) {
+    for (let accessor of Object.keys(Card.associations[assoc].accessors)) {
+        console.log(Card.name + '.' + Card.associations[assoc].accessors[accessor] + '()');
     }
 }
 module.exports = connection

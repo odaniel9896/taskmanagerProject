@@ -13,7 +13,8 @@ const memberGroup = require("./controller/memberGroup");
 const annotationController = require("./controller/annotation");
 const workspaceController = require("./controller/workspace");
 const listController = require("./controller/lists");
-const listOrderController = require("./controller/orderList")
+const listOrderController = require("./controller/orderList");
+const cardController = require("./controller/cards")
 
 //IMPORT DOS SERVICES
 
@@ -52,9 +53,10 @@ routes.put("/passwordreset", emailMiddleware.passwordEmailReset);
 //login
 routes.post("/login", sessionValidator.create, sessionController.store);
 
-
 //verificar cadastro
 routes.get('/verify', emailMiddleware.verifyEmail);
+
+
 
 routes.use(authMiddleware)
 
@@ -89,5 +91,13 @@ routes.post("/lists/:groupId", listController.store);
 routes.put("/lists/:listId/:workspaceId", listController.update);
 routes.delete("/lists/:listId/:groupId", listController.delete);
 routes.put("/lists/:listId/:workspaceId/order", listOrderController.update);
+
+//ROTAS PARA CARDS
+
+routes.get("/cards/:listId", cardController.index);
+routes.post("/cards/:listId", cardController.store);
+routes.put("/cards/:listId", cardController.update);
+routes.delete("/cards/:listId", cardController.delete);
+
 
 module.exports = routes;
