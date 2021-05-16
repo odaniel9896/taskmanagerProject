@@ -1,8 +1,7 @@
-const Teacher = require("../../models/Teacher");
 const { sendEmail, verifyEmail } = require("../../services/emailConfirmation.js");
-const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const randomstring = require("randomstring");
+const { createUserTeacher, findUserByEmail } = require("../../repositories/user");
 
 
 module.exports = {
@@ -11,11 +10,8 @@ module.exports = {
         const { name, email, password } = req.body;
 
         try {
-            let teacher = await User.findOne({
-                where: {
-                    email: email,
-                },
-            });
+            let teacher = await findUserByEmail(email)
+            
             if (teacher)
                 return res.status(400).send({ error: "Email já cadastrado no sistema" });
 
@@ -25,14 +21,8 @@ module.exports = {
             const passwordCript = bcrypt.hashSync(password);
             const passwordTokenCript = bcrypt.hashSync(passwordToken)
 
-            const createUser = await User.create({
-                email,
-                password: passwordCript,
-                role: "teacher",
-                confirmationCode: rand,
-                passwordToken: passwordTokenCript
+            const createUser = await createUserTeacher(email, passwordCript, passwordTokenCript, rand);
 
-            });
             await createUser.createTeacher({
                 name,
                 id: createUser.id

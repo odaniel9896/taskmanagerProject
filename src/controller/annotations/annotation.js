@@ -29,7 +29,7 @@ module.exports = {
         const { text } = req.body;
 
         try {
-            const user = await User.findByPk(userId);
+            const user = await findUserById(userId);
 
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });

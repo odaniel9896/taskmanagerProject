@@ -2,13 +2,14 @@
 const { sendEmail, verifyEmail } = require("../../services/emailConfirmation.js");
 const Student = require("../../models/Student");
 const bcrypt = require("bcryptjs");
-const User = require("../../models/User.js");
 const randomstring = require("randomstring");
+const { findUserByEmail, createUserStudent } = require("../../repositories/user.js");
+const { findAllStudents } = require("../../repositories/students.js");
 
 module.exports = {
     async index(req, res) {
         try {
-            const student = await Student.findAll();
+            const student = await findAllStudents()
 
             res.send(student);
         } catch (error) {
@@ -21,11 +22,8 @@ module.exports = {
         const { name, email, password } = req.body;
 
         try {
-            let student = await User.findOne({
-                where: {
-                    email: email,
-                },
-            });
+            let student = await findUserByEmail(email);
+
             if (student)
                 return res.status(400).send({ error: "Email já cadastrado no sistema" });
 
@@ -35,14 +33,7 @@ module.exports = {
             const passwordCript = bcrypt.hashSync(password);
             const passwordTokenCript = bcrypt.hashSync(passwordToken)
 
-            const createUser = await User.create({
-                email,
-                password: passwordCript,
-                role: "student",
-                confirmationCode: rand,
-                passwordToken: passwordTokenCript
-            });
-
+            const createUser = await createUserStudent(email, passwordCript, passwordTokenCript, rand);
 
             await createUser.createStudent({
                 name,
