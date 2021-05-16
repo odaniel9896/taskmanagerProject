@@ -1,6 +1,10 @@
 const Group = require("../../models/Group");
 const List = require("../../models/List");
 const User = require("../../models/User");
+const { findGroupWorkspace } = require("../../repositories/group");
+const { findAllList, countList, createList, findOneList } = require("../../repositories/lists");
+const { findUserById } = require("../../repositories/user");
+
 
 module.exports = {
     async index(req, res) {
@@ -10,15 +14,7 @@ module.exports = {
 
         try {
 
-            const group = await Group.findByPk(groupId, {
-                attributes: ["id", "name"],
-                include: [
-                    {
-                        association: "Workspace",
-                        attributes: ["id", "name"],
-                    }
-                ]
-            });
+            const group = await findGroupWorkspace(groupId);
 
             if (!group)
                 return res.status(404).send({ error: "Grupo não existe" });
@@ -26,26 +22,7 @@ module.exports = {
             if (!group.Workspace.id)
                 return res.status(404).send({ error: "Esse grupo não tem uma workspace" });
 
-            const list = await List.findAll({
-                attributes: ["id", "name", "order"],
-                include: [
-                    {
-                        association: "Workspace",
-                        attributes: ["id", "name"],
-                        include: [
-                            {
-                                association: "Group",
-                                attributes: ["id", "name"],
-                            }
-                        ]
-                    }
-                ],
-                where: {
-                    workspaceId: group.Workspace.id
-                },
-                order: [["order", "ASC"]]
-
-            })
+            const list = await findAllList({workspaceId : group.Workspace.id})
 
             res.send(list)
         } catch (error) {
@@ -68,15 +45,7 @@ module.exports = {
         // where`order` between 3 and 4;
 
         try {
-            const group = await Group.findByPk(groupId, {
-                attributes: ["id", "name"],
-                include: [
-                    {
-                        association: "Workspace",
-                        attributes: ["id", "name"],
-                    }
-                ]
-            });
+            const group = await findGroupWorkspace(groupId);
 
             if (!group)
                 return res.status(404).send({ error: "Grupo não encontrado" });
@@ -84,17 +53,9 @@ module.exports = {
             if (!group.Workspace.id)
                 return res.status(404).send({ error: "Esse grupo não tem uma workspace" });
 
-            const totalList = await List.count({
-                where: {
-                    workspaceId: group.Workspace.id
-                }
-            });
+            const totalList = await countList({workspaceId : group.Workspace.id});
 
-            const list = await List.create({
-                name: name,
-                workspaceId: group.Workspace.id,
-                order: totalList + 1
-            })
+            const list = await createList( {name, workspaceId : group.Workspace.id, order : totalList + 1} )
 
             res.send(list)
         } catch (error) {
@@ -112,7 +73,7 @@ module.exports = {
 
         try {
 
-            const user = await User.findByPk(userId);
+            const user = await findUserById(userId);
 
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });
@@ -174,12 +135,8 @@ module.exports = {
         const { name } = req.body;
 
         try {
-            const list = await List.findOne({
-                where: {
-                    id: listId,
-                    workspaceId: workspaceId
-                }
-            });
+            const list = await findOneList(listId, workspaceId)
+
             if (!list)
                 return res.status(404).send({ error: "Lista não encontrada" });
 

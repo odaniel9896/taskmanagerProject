@@ -1,5 +1,6 @@
 const Teacher = require("../../models/Teacher");
 const Student = require("../../models/Student");
+const { findStudentByPk } = require("../../repositories/students");
 
 module.exports = {
 
@@ -20,15 +21,7 @@ module.exports = {
             else
                 userUpdate = Student    
 
-            const userImage = await Student.findByPk(userId
-                // {
-                //     attributes: [
-                //         "id",
-                //         "name",
-                //         "profileImage",
-                //         "createdAt"
-                //     ],
-                );
+            const userImage = await findStudentByPk(userId);
 
             userImage.profileImage = firebaseUrl;
 

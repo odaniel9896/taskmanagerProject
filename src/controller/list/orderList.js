@@ -2,6 +2,7 @@ const List = require("../../models/List");
 const { Op, Sequelize } = require("sequelize");
 const { QueryTypes } = require('sequelize');
 const connection = require("../../database");
+const { findOneListOrder, listOrderUpdate } = require("../../repositories/lists");
 
 module.exports = {
     async update(req, res) {
@@ -11,12 +12,8 @@ module.exports = {
         const { order } = req.body;
 
         try {
-            const list = await List.findByPk(listId, {
-                attributes: ["id", "name", "order", "workspaceId"],
-                where: {
-                    workspaceId: workspaceId
-                },
-            })
+            const list = await findOneListOrder(listId, workspaceId)
+
             if (!list)
                 return res.status(404).send({ error: "Lista não encontrada" });
 
@@ -28,16 +25,7 @@ module.exports = {
                         replacements: { aux: list.order + 1, order: order },
                     }
                 );
-                await List.update(
-                    {
-                        order: order
-                    },
-                    {
-                        where: {
-                            id: listId
-                        }
-                    }
-                )
+                await listOrderUpdate(order, listId);
                 res.status(200).send()
             }
             else {
@@ -48,16 +36,7 @@ module.exports = {
                         replacements: { aux: list.order, order: order },
                     }
                 );
-                await List.update(
-                    {
-                        order: order
-                    },
-                    {
-                        where: {
-                            id: listId
-                        }
-                    }
-                )
+                await listOrderUpdate(order, listId)
                 res.status(200).send()
             }
         } catch (error) {

@@ -1,4 +1,4 @@
-const User = require("../../models/User");
+const { findUserByEmail } = require("../../repositories/user");
 const { sendEmail } = require("../../services/emailConfirmation");
 
 module.exports = {
@@ -6,11 +6,8 @@ module.exports = {
         const email = req.params.email;
 
         try {
-            let user = await User.findOne({
-                where: {
-                    email: email
-                }
-            })
+            let user = await findUserByEmail(email);
+
             if(!user)
                 return res.status(404).send({error: "Usuário não existe"})
 
