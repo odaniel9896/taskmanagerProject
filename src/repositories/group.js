@@ -18,5 +18,56 @@ module.exports = {
             ]
         });
         return group;
-    }
+    },
+    async findGroupByPykStudentOrTeacher(userGroup, userId) {
+        const findGroupUser = await userGroup.findByPk(userId, {
+            include: [
+                {
+                    association: "Groups",
+                    attributes: ["id", "name"],
+                    through: { attributes: [] },
+                    include: [
+                        {
+                            association: "Students",
+                            attributes: ["id", "name"],
+                            through: { attributes: [] }
+                        },
+                        {
+                            association: "Teachers",
+                            attributes: ["id", "name"],
+                            through: { attributes: [] }
+                        },
+                    ]
+                },
+
+            ],
+        });
+
+        return findGroupUser;
+    },
+    async createGroup(name) {
+        const group = await Group.create({
+            name
+        });
+        return group
+    },
+    async findGroupDelete({groupIdA, userId}) {
+        const group = await Group.findByPk(groupIdA, {
+            attributes: [
+                "id",
+                "name",
+            ],
+            include: [
+                {
+                    association: "Teachers",
+                    attributes: ["id", "name"],
+                    where: {
+                        id: userId,
+                    },
+                    through: { attributes: [] }
+                },
+            ],
+        });
+        return group
+    } 
 }

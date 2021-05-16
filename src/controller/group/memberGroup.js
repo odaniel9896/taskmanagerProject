@@ -4,8 +4,9 @@ const User = require("../../models/User");
 const { sendEmail } = require("../../services/emailConfirmation");
 const randomstring = require("randomstring");
 const Group = require("../../models/Group");
-const { use } = require("../../routes");
-
+const { findUserById, createInvite } = require("../../repositories/user");
+const { findOneInvite } = require("../../repositories/invite");
+const { findGroupDelete } = require("../../repositories/group");
 
 module.exports = {
     async sendInviteGroup(req, res) {
@@ -14,21 +15,16 @@ module.exports = {
         const groupId = req.params.groupId;
         const { emailSend } = req.body;
 
-
         try {
 
-            const user = await User.findByPk(userId);
+            const user = await findUserById(userId)
 
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });
 
             const tokenInvite = randomstring.generate(120);
 
-
-            const createInvite = await user.createInvite({
-                groupId: groupId,
-                inviteToken: tokenInvite
-            });
+            await createInvite(groupId, tokenInvite)
 
             let path = urlSend.generate({
                 baseUrl: 'http://localhost:3000',
@@ -38,7 +34,6 @@ module.exports = {
                 },
                 query: false
             });
-            console.log("sendInviteGroup -> path", path)
 
             const email = emailSend;
             const url = path;
@@ -55,11 +50,8 @@ module.exports = {
         const { userRole, userId } = req;
 
         try {
-            const invite = await Invite.findOne({
-                where: {
-                    inviteToken: token
-                }
-            })
+            const invite = await findOneInvite(token);
+
             const group = await Group.findByPk(invite.groupId);
 
             if (!group)
@@ -96,30 +88,15 @@ module.exports = {
         const groupIdA = req.params.groupId
 
         try {
-            const user = await User.findByPk(userId);
+            const user = await findUserById(userId)
 
             if (!user)
                 return res.status(404).send({ error: "Usuário não existe" });
 
             if (user.role == "teacher") {
 
-                const group = await Group.findByPk(groupIdA, {
-                    attributes: [
-                        "id",
-                        "name",
-                    ],
-                    include: [
-                        {
-                            association: "Teachers",
-                            attributes: ["id", "name"],
-                            where: {
-                                id: user.id,
-                            },
-                            through: { attributes: [] }
-                        },
-                    ],
-                });
-                
+                const group = await findGroupDelete({groupIdA, userId})
+
                 if (group.Teachers[0].id === userId) {
                     await group.removeStudent(idDeleteUser);
 

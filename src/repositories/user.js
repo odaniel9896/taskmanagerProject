@@ -35,5 +35,12 @@ module.exports = {
         });
 
         return createUser;
+    },
+    async createInvite(groupId, tokenInvite) {
+        const createInvite = await User.createInvite({
+            groupId: groupId,
+            inviteToken: tokenInvite
+        });
+        return createInvite
     }
 }

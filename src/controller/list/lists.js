@@ -1,6 +1,5 @@
 const Group = require("../../models/Group");
 const List = require("../../models/List");
-const User = require("../../models/User");
 const { findGroupWorkspace } = require("../../repositories/group");
 const { findAllList, countList, createList, findOneList } = require("../../repositories/lists");
 const { findUserById } = require("../../repositories/user");

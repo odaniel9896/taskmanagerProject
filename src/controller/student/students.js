@@ -1,6 +1,4 @@
-
 const { sendEmail, verifyEmail } = require("../../services/emailConfirmation.js");
-const Student = require("../../models/Student");
 const bcrypt = require("bcryptjs");
 const randomstring = require("randomstring");
 const { findUserByEmail, createUserStudent } = require("../../repositories/user.js");

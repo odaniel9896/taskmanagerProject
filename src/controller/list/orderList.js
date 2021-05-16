@@ -1,5 +1,3 @@
-const List = require("../../models/List");
-const { Op, Sequelize } = require("sequelize");
 const { QueryTypes } = require('sequelize');
 const connection = require("../../database");
 const { findOneListOrder, listOrderUpdate } = require("../../repositories/lists");
@@ -33,7 +31,7 @@ module.exports = {
                     'UPDATE lists set `order` = `order` + 1 where `order` between :aux and :order',
                     {
                         type: QueryTypes.UPDATE,
-                        replacements: { aux: list.order, order: order },
+                        replacements: { aux: order, order: list.order },
                     }
                 );
                 await listOrderUpdate(order, listId)
