@@ -1,28 +1,20 @@
 const Annotation = require("../../models/Annotation");
 const User = require("../../models/User");
+const { findAllAnnotations, createAnnotation, findOneAnnotation } = require("../../repositories/annotations");
+const { findUserById } = require("../../repositories/user");
 
 module.exports = {
     async index(req, res) {
         const { userId } = req;
 
         try {
-            const user = await User.findByPk(userId);
+            const user = await findUserById(userId);
 
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });
 
-            const annotation = await Annotation.findAll({
-                where: {
-                    userId: user.id,
-                },
-                attributes: [
-                    "id",
-                    "text",
-                    "createdAt",
-                    "userId"
-                ],
-                order: [["createdAt", "DESC"]]
-            });
+            const annotation = await findAllAnnotations(userId)
+
             res.send(annotation);
 
         } catch (error) {
@@ -42,11 +34,9 @@ module.exports = {
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });
 
-            const createAnnotation = await user.createAnnotation({
-                text: text,
-            });
+            const createAnnotationA = await createAnnotation(text, user)
 
-            res.status(201).send(createAnnotation)
+            res.status(201).send(createAnnotationA)
         } catch (error) {
             console.log(error);
             res.status(500).send(error);
@@ -54,14 +44,11 @@ module.exports = {
     },
     async delete(req, res) {
         const annotationId = req.params.id;
-
         const { userId } = req;
 
         try {
-            const annotation = await Annotation.findOne({
-                id: annotationId,
-                userId: userId
-            });
+            const annotation = await findOneAnnotation(annotationId);
+
             if (!annotation)
                 return res.status(404).send({ error: "Anotação não encontrada" });
 
@@ -84,12 +71,8 @@ module.exports = {
         const { text } = req.body;
 
         try {
-            const annotation = await Annotation.findOne({
-                where: {
-                    id: annotationId,
-                    userId: userId
-                }
-            });
+            const annotation = await findOneAnnotation(annotationId);
+
             if (!annotation)
                 return res.status(404).send({ error: "Anotação não encontrada" });
 
