@@ -1,5 +1,7 @@
 const Card = require("../../models/Card");
 const List = require("../../models/List");
+const { findAllCards, totalCards, cardCreate, findOneCard } = require("../../repositories/cards");
+const { findListByPk } = require("../../repositories/lists");
 
 module.exports = {
     async index(req, res) {
@@ -8,15 +10,10 @@ module.exports = {
 
         try {
 
-            const cards = await Card.findAll({
-                attributes: ["id", "description", "order", "dueDate", "listId"],
-                where: {
-                    listId: listId
-                },
-            });
+            const cards = await findAllCards(listId);
 
             if (!cards)
-                return res.status(404).send({ error: "Grupo não existe" });
+                return res.status(404).send({ error: "Essa lista não existe" });
 
             res.send(cards)
         } catch (error) {
@@ -31,29 +28,21 @@ module.exports = {
         const { description, dueDate, users } = req.body;
 
         try {
-            const list = await List.findByPk(listId);
+            const list = await findListByPk(listId);
 
             if (!list)
                 return res.status(404).send({ error: "Lista não encontrada" });
 
-            const totalCard = await Card.count({
-                where: {
-                    listId: listId
-                }
-            });
+            const totalCard = await totalCards(listId);
 
-            const cardCreate = await Card.create({
-                description: description,
-                dueDate: new Date,
-                order: totalCard + 1,
-                listId: listId
-            });
+            const cardCreatea = await cardCreate({description, order : totalCard, listId})
 
-            await cardCreate.addUsers(users)
+            await cardCreatea.addUsers(users)
 
             res.status(201).send({
-                id: cardCreate.id,
-                description: cardCreate.description,
+                id: cardCreatea.id,
+                description: cardCreatea.description,
+                order : cardCreatea.order
             })
         } catch (error) {
             console.log(error);
@@ -68,17 +57,7 @@ module.exports = {
         const { description } = req.body;
 
         try {
-            const card = await Card.findOne({
-                where: {
-                    id: cardId,
-                },
-                include: [
-                    {
-                        association: "Users",
-                        attributes: ["id"]
-                    }
-                ]
-            });
+            const card = await findOneCard(cardId)
 
             if (!card)
                 return res.status(404).send({ error: "Card não encontrada" });
@@ -104,23 +83,11 @@ module.exports = {
 
         const { userId } = req;
 
-
         try {
-            const card = await Card.findOne({
-                where: {
-                    id: cardId,
-                },
-                include: [
-                    {
-                        association: "Users",
-                        attributes: ["id"]
-                    }
-                ]
-            });
+            const card = await findOneCard(cardId);
 
             if (!card)
                 return res.status(404).send({ error: "Card não encontrado" });
-
 
             if (!card.Users.map(user => user.id).indexOf(card.Users.map(user => user.id)) === userId)
                 return res.status(404).send({ error: "Não permitido" });

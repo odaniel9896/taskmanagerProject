@@ -72,5 +72,9 @@ module.exports = {
             }
         )
         return list;
+    },
+    async findListByPk(listId) {
+        const list = await List.findByPk(listId);
+        return list
     }
 }
