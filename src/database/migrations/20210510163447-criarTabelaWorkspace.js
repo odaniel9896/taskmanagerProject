@@ -24,6 +24,8 @@ module.exports = {
           model: "workspaces",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       createdAt: {
         type: Sequelize.DATE,

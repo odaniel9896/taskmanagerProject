@@ -28,6 +28,8 @@ module.exports = {
           model: "lists",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       createdAt: {
         type: Sequelize.DATE,
