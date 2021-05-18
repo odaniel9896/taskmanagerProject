@@ -5,7 +5,7 @@ class Group extends Model {
         super.init(
             {
                 name: DataTypes.STRING,
-                
+                image: DataTypes.STRING
             },
             {
                 sequelize,
