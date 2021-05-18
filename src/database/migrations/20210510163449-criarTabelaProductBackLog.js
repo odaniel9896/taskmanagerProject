@@ -2,40 +2,22 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('cards', {
+    queryInterface.createTable('productBacklogs', {
       id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         primaryKey: true,
-        autoIncrement: true,
-        unique: true,
+        autoIncrement: true
       },
       description: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      dueDate: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      order: {
-        type : Sequelize.INTEGER,
-        allowNull: false,
-      },
-      listId: {
+      groupId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "lists",
-          key: "id"
-        },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE"
-      },
-      storieId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "stories",
+          model: "groups",
           key: "id"
         },
       },
@@ -51,6 +33,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("cards");
+    queryInterface.dropTable("productBacklogs")
   }
 };

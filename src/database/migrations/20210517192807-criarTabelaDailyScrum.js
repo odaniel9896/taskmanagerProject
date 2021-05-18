@@ -21,14 +21,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      // groupId: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: false,
-      //   references: {
-      //     model: "groups",
-      //     key: "id"
-      //   },
-      // },
+      sprintId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "sprints",
+          key: "id"
+        },
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
