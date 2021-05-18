@@ -1,9 +1,8 @@
 'use strict';
 
-const { v4: uuidv4 } = require('uuid');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('invites', {
+    queryInterface.createTable('dailyScrums', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -42,6 +41,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("invites")
+    queryInterface.dropTable("dailyScrums")
   }
 };
