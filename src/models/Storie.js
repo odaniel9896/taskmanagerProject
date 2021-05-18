@@ -14,6 +14,7 @@ class Storie extends Model {
     static associate(models) {
         this.hasOne(models.Sprint);
         this.belongsTo(models.SprintPlanning);
+        //VERIFICAR SE É HASMANY
     }
 }
 

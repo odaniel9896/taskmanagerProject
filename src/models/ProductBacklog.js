@@ -14,6 +14,7 @@ class ProductBacklog extends Model {
     }
     static associate(models) {
         this.hasOne(models.SprintPlanning);
+        // VERIFICAR SE É HASMANY
         this.belongsTo(models.Group);
     }
 }

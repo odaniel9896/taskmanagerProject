@@ -17,6 +17,7 @@ class Sprint extends Model {
         this.hasOne(models.SprintReview);
         this.hasOne(models.SprintRetrospective);
         this.belongsTo(models.Storie);
+        //VERIFICAR SE TEM ALGUM HASMANY
     }
 }
 

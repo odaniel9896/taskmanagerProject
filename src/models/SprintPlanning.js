@@ -14,6 +14,8 @@ class SprintPlanning extends Model {
     static associate(models) {
         this.hasOne(models.Storie);
         this.belongsTo(models.ProductBacklog);
+
+        //ALTERAR PARA HASMANY
     }
 }
 
