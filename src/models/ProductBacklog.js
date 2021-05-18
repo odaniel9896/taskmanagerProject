@@ -1,11 +1,11 @@
 const { Model, DataTypes } = require("sequelize");
 
-class SprintReview extends Model {
+class ProductBacklog extends Model {
     static init(sequelize) {
         super.init(
             {
-                feedback: DataTypes.STRING,
-                sprintId: DataTypes.INTEGER,
+                description: DataTypes.STRING,
+                groupId: DataTypes.INTEGER
             },
             {
                 sequelize,
@@ -13,8 +13,9 @@ class SprintReview extends Model {
         )
     }
     static associate(models) {
-        this.belongsTo(models.Sprint);
+        this.hasOne(models.SprintPlanning);
+        this.belongsTo(models.Group);
     }
 }
 
-module.exports = SprintReview;
+module.exports = ProductBacklog;

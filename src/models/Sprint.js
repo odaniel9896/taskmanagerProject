@@ -14,6 +14,8 @@ class Sprint extends Model {
     }
     static associate(models) {
         this.hasOne(models.DailyScrum);
+        this.hasOne(models.SprintReview);
+        this.hasOne(models.SprintRetrospective);
         this.belongsTo(models.Storie);
     }
 }

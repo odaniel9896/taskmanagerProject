@@ -18,6 +18,7 @@ class Group extends Model {
         this.hasOne(models.Invite);
         this.hasOne(models.Chat);
         this.hasOne(models.Workspace);
+        this.hasOne(models.ProductBacklog);
     }
 }
 
