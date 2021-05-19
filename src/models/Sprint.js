@@ -16,8 +16,9 @@ class Sprint extends Model {
         this.hasOne(models.DailyScrum);
         this.hasOne(models.SprintReview);
         this.hasOne(models.SprintRetrospective);
-        this.belongsTo(models.Storie);
-        //VERIFICAR SE TEM ALGUM HASMANY
+        this.hasOne(models.SprintPlanning);
+        this.hasOne(models.SprintBacklog, { foreignKey: "storieId" });
+        this.belongsTo(models.ProductBacklog)
     }
 }
 

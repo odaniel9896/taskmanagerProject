@@ -5,7 +5,8 @@ class ProductBacklog extends Model {
         super.init(
             {
                 description: DataTypes.STRING,
-                groupId: DataTypes.INTEGER
+                groupId: DataTypes.INTEGER,
+                priority: DataTypes.INTEGER
             },
             {
                 sequelize,
@@ -13,9 +14,9 @@ class ProductBacklog extends Model {
         )
     }
     static associate(models) {
-        this.hasOne(models.SprintPlanning);
-        // VERIFICAR SE É HASMANY
+        this.hasOne(models.Sprint);
         this.belongsTo(models.Group);
+        this.hasOne(models.SprintBacklog);
     }
 }
 

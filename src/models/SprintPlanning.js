@@ -4,7 +4,8 @@ class SprintPlanning extends Model {
     static init(sequelize) {
         super.init(
             {
-                tasksId: DataTypes.INTEGER,
+                ata: DataTypes.STRING,
+                sprintId: DataTypes.INTEGER,
             },
             {
                 sequelize,
@@ -12,10 +13,7 @@ class SprintPlanning extends Model {
         )
     }
     static associate(models) {
-        this.hasOne(models.Storie);
-        this.belongsTo(models.ProductBacklog);
-
-        //ALTERAR PARA HASMANY
+        this.belongsTo(models.Sprint);
     }
 }
 
