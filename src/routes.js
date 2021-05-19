@@ -17,6 +17,7 @@ const listController = require("./controller/list/lists");
 const listOrderController = require("./controller/list/orderList");
 const cardController = require("./controller/card/cards");
 const cardOrderController = require("./controller/card/orderCard");
+const dailyScrumsController = require("./controller/dailyscrum/dailyScrum")
 
 //IMPORT DOS SERVICES
 
@@ -102,6 +103,10 @@ routes.post("/cards/:listId", cardController.store);
 routes.put("/cards/:cardId", cardController.update);
 routes.delete("/cards/:cardId", cardController.delete);
 routes.put("/cards/order/:cardId/:listId", cardOrderController.update);
+
+//ROTAS PARA A DAILY_SCRUM
+
+routes.post("/dailyScrum/:sprintId", dailyScrumsController.store);
 
 
 module.exports = routes;

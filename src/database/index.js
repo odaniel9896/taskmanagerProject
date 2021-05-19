@@ -73,9 +73,9 @@ SprintPlanning.associate(connection.models);
 Sprint.associate(connection.models);
 
 
-// for (let assoc of Object.keys(Workspace.associations)) {
-//     for (let accessor of Object.keys(Workspace.associations[assoc].accessors)) {
-//         console.log(Workspace.name + '.' + Workspace.associations[assoc].accessors[accessor] + '()');
-//     }
-// }
+for (let assoc of Object.keys(Workspace.associations)) {
+    for (let accessor of Object.keys(Workspace.associations[assoc].accessors)) {
+        console.log(Workspace.name + '.' + Workspace.associations[assoc].accessors[accessor] + '()');
+    }
+}
 module.exports = connection
