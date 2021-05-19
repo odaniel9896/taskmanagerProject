@@ -27,6 +27,7 @@ module.exports = {
         const { userId } = req;
 
         const { text, title } = req.body;
+        console.log(title);
 
         try {
             const user = await findUserById(userId);
@@ -34,7 +35,10 @@ module.exports = {
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });
 
-            const createAnnotationA = await createAnnotation(text, title, user)
+            const createAnnotationA = await user.createAnnotation({
+                title: title,
+                text : text,
+            })
 
             res.status(201).send(createAnnotationA)
         } catch (error) {

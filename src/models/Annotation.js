@@ -5,7 +5,7 @@ class Annotation extends Model {
         super.init(
             {
                 text: DataTypes.STRING,
-                text: DataTypes.STRING,
+                title: DataTypes.STRING,
                 userId: DataTypes.INTEGER,
             },
             {
