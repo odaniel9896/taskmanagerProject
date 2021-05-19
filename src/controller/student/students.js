@@ -31,7 +31,7 @@ module.exports = {
             const passwordCript = bcrypt.hashSync(password);
             const passwordTokenCript = bcrypt.hashSync(passwordToken)
 
-            const createUser = await createUserStudent(email, passwordCript, passwordTokenCript, rand);
+            const createUser = await createUserStudent(email, passwordCript, rand, passwordTokenCript);
 
             await createUser.createStudent({
                 name,
