@@ -1,22 +1,29 @@
 
 
 insert into cards(`description`, dueDate, `order`, listId, createdAt, updatedAt)
-values("teste2", current_timestamp(), 2, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+values("teste6", current_timestamp(), 6, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into cards(`description`, dueDate, `order`, listId, createdAt, updatedAt)
-values("teste3", current_timestamp(), 3, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+values("teste7", current_timestamp(), 7, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into cards(`description`, dueDate, `order`, listId, createdAt, updatedAt)
-values("teste4", current_timestamp(), 4, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+values("teste8", current_timestamp(), 8, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into cards(`description`, dueDate, `order`, listId, createdAt, updatedAt)
-values("teste5", current_timestamp(), 5, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+values("teste9", current_timestamp(), 9, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+
+insert into productbacklogs(`description`, priority, groupId, createdAt, updatedAt)
+values(current_timestamp(), "urgente", 1, current_timestamp(), current_timestamp());
 
 
-select * from cards;
+insert into sprints(timeBox, storieId, createdAt, updatedAt)
+values(current_timestamp(), 1, current_timestamp(), current_timestamp());
+
+SELECT * FROM db_task_manager_project.dailyscrums;
+select * from cards order by `order` asc
 
 update cards set `order` = 4
-where id = 145 ;
+where id = 153;
 
 update cards set `order` =  `order` - 1
 where `order` between 3 and 4;
