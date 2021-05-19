@@ -2,18 +2,26 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('stories', {
+    queryInterface.createTable('sprintBacklogs', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
       },
-      storie: {
+      productBacklogId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "sprintPlannings",
+          model: "productBacklogs",
+          key: "id"
+        },
+      },
+      sprintId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "sprints",
           key: "id"
         },
       },
@@ -29,6 +37,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("stories")
+    queryInterface.dropTable("sprintBacklogs")
   }
 };

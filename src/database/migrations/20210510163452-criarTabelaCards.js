@@ -35,7 +35,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "stories",
+          model: "sprintBacklogs",
           key: "id"
         },
       },

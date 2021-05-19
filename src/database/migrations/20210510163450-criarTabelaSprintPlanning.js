@@ -9,11 +9,15 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      tasksId: {
+      ata: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      sprintId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "productBacklogs",
+          model: "sprints",
           key: "id"
         },
       },
