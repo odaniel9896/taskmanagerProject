@@ -15,6 +15,13 @@ const Annotation = require("../models/Annotation");
 const List = require("../models/List");
 const Workspace = require("../models/Workspace");
 const Card = require("../models/Card");
+const SprintReview = require("../models/SprintReview");
+const DailyScrum = require("../models/DailyScrum");
+const ProductBacklog = require("../models/ProductBacklog");
+const Sprint = require("../models/SprintReview");
+const SprintRetrospective = require("../models/SprintRetrospective");
+const SprintBacklog = require("../models/SprintBacklog");
+const SprintPlanning = require("../models/SprintPlanning");
 
 
 const connection = new Sequelize(dbConfig.url, dbConfig.config);
@@ -34,6 +41,15 @@ Annotation.init(connection);
 Card.init(connection);
 List.init(connection);
 Workspace.init(connection);
+SprintReview.init(connection);
+DailyScrum.init(connection);
+SprintRetrospective.init(connection);
+ProductBacklog.init(connection);
+SprintBacklog.init(connection);
+SprintPlanning.init(connection);
+Sprint.init(connection);
+
+
 
 //INICIALIZA OS RELACIONAMENTOS
 Student.associate(connection.models);
@@ -48,12 +64,18 @@ Annotation.associate(connection.models);
 Card.associate(connection.models);
 List.associate(connection.models);
 Workspace.associate(connection.models);
+SprintReview.associate(connection.models);
+DailyScrum.associate(connection.models);
+SprintRetrospective.associate(connection.models);
+ProductBacklog.associate(connection.models);
+SprintBacklog.associate(connection.models);
+SprintPlanning.associate(connection.models);
+Sprint.associate(connection.models);
 
 
-
-for (let assoc of Object.keys(Workspace.associations)) {
-    for (let accessor of Object.keys(Workspace.associations[assoc].accessors)) {
-        console.log(Workspace.name + '.' + Workspace.associations[assoc].accessors[accessor] + '()');
-    }
-}
+// for (let assoc of Object.keys(Workspace.associations)) {
+//     for (let accessor of Object.keys(Workspace.associations[assoc].accessors)) {
+//         console.log(Workspace.name + '.' + Workspace.associations[assoc].accessors[accessor] + '()');
+//     }
+// }
 module.exports = connection

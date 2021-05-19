@@ -17,8 +17,8 @@ class Sprint extends Model {
         this.hasOne(models.SprintReview);
         this.hasOne(models.SprintRetrospective);
         this.hasOne(models.SprintPlanning);
-        this.hasOne(models.SprintBacklog, { foreignKey: "storieId" });
-        this.belongsTo(models.ProductBacklog)
+        this.hasOne(models.SprintBacklog);
+        this.belongsTo(models.ProductBacklog, { foreignKey: "storieId" })
     }
 }
 

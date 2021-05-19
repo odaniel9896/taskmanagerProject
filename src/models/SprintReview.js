@@ -4,8 +4,8 @@ class SprintReview extends Model {
     static init(sequelize) {
         super.init(
             {
-                feedback: DataTypes.STRING,
                 sprintId: DataTypes.INTEGER,
+                feedback: DataTypes.STRING,
             },
             {
                 sequelize,
