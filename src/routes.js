@@ -21,17 +21,19 @@ const cardOrderController = require("./controller/card/orderCard");
 //IMPORT DOS SERVICES
 
 const emailMiddleware = require("./services/emailConfirmation");
-const verifyEmailMiddleware = require("./services/emailConfirmation")
 const uploadFirebase = require("./services/uploadFirebase");
 //IMPORT DOS MIDDLEWARES
 
 const authMiddleware = require("./middleware/authorization");
 const uploadSingleImage = require("./middleware/uploadImage");
+
 //IMPORT DOS VALIDATOR
 const studentValidators = require("./validators/students");
 const teacherValidators =  require("./validators/teachers");
 const sessionValidator = require("./validators/session");
 const groupValidator = require("./validators/group");
+const annotationValidator = require("./validators/annotations");
+
 
 const routes = express.Router();
 
@@ -77,7 +79,7 @@ routes.post("/group/images", uploadSingleImage, uploadFirebase, groupImage.store
 //Rotas para annotations
 
 routes.get("/annotations", annotationController.index);
-routes.post("/annotations", annotationController.store);
+routes.post("/annotations", annotationValidator.create, annotationController.store);
 routes.delete("/annotations/:id", annotationController.delete);
 routes.put("/annotations/:id", annotationController.update);
 
