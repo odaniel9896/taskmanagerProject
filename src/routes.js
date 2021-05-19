@@ -9,6 +9,7 @@ const teacherController = require("./controller/teachers/teachers");
 const passwordController = require("./controller/password/password.js");
 const groupController = require("./controller/group/group");
 const userImage = require("./controller/image/userImage.js");
+const groupImage = require("./controller/image/groupImage");
 const memberGroup = require("./controller/group/memberGroup");
 const annotationController = require("./controller/annotations/annotation");
 const workspaceController = require("./controller/workspace/workspace");
@@ -31,9 +32,6 @@ const studentValidators = require("./validators/students");
 const teacherValidators =  require("./validators/teachers");
 const sessionValidator = require("./validators/session");
 const groupValidator = require("./validators/group");
-const e = require("cors");
-
-
 
 const routes = express.Router();
 
@@ -72,6 +70,8 @@ routes.delete("/group/:groupId/students/:idDeleteUser", memberGroup.deleteMember
 
 //Rotas para enviar imagens
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);
+routes.post("/group/images", uploadSingleImage, uploadFirebase, groupImage.store);
+
 
 
 //Rotas para annotations
