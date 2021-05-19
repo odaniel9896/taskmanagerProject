@@ -26,7 +26,7 @@ module.exports = {
 
         const { userId } = req;
 
-        const { text } = req.body;
+        const { text, title } = req.body;
 
         try {
             const user = await findUserById(userId);
@@ -34,7 +34,7 @@ module.exports = {
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });
 
-            const createAnnotationA = await createAnnotation(text, user)
+            const createAnnotationA = await createAnnotation(text, title, user)
 
             res.status(201).send(createAnnotationA)
         } catch (error) {
@@ -68,7 +68,7 @@ module.exports = {
 
         const { userId } = req;
 
-        const { text } = req.body;
+        const { text, title } = req.body;
 
         try {
             const annotation = await findOneAnnotation(annotationId);
@@ -80,12 +80,14 @@ module.exports = {
                 return res.status(404).send({ error: "Não permitido" });
 
             annotation.text = text;
+            annotation.title = title;
 
             annotation.save();
             
             res.status(200).send({
                     id: annotation.id,
-                    text: annotation.text
+                    text: annotation.text,
+                    createdAt: annotation.createdAt,
             })
         } catch (error) {
             console.log(error);
