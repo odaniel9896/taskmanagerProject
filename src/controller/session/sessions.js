@@ -25,6 +25,7 @@ module.exports = {
         user: {
           userId: user.id,
           email: user.email,
+          userRole: user.role
         },
         token,
       });
