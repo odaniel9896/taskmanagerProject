@@ -77,6 +77,7 @@ routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);
 routes.post("/group/images", uploadSingleImage, uploadFirebase, groupImage.store);
 
 routes.put("/students", studentController.update);
+routes.put("/teachers", teacherController.update);
 
 //Rotas para annotations
 

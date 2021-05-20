@@ -2,6 +2,7 @@ const { sendEmail, verifyEmail } = require("../../services/emailConfirmation.js"
 const bcrypt = require("bcryptjs");
 const randomstring = require("randomstring");
 const { createUserTeacher, findUserByEmail } = require("../../repositories/user");
+const { findTeacherByPk } = require("../../repositories/teacher.js");
 
 
 module.exports = {
@@ -39,6 +40,49 @@ module.exports = {
                     email: createUser.email,
                 }
             });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
+    },
+    async update(req, res) {
+
+        const { name, email, currentPassword, newPassword } = req.body;
+
+        const { userId } = req;
+
+        try {
+            let user = await findUserById(userId);
+
+            if (!user)
+                return res.status(400).send({ error: "User não encontrado" });
+
+            if (currentPassword) {
+                if (!bcrypt.compareSync(currentPassword, user.password))
+                    return res.status(403).send({ error: "Sua senha atual está errada" });
+
+                let teacher = await findTeacherByPk(userId);
+
+                teacher.name = name;
+
+                teacher.email = email;
+                teacher.password = newPassword;
+
+                teacher.save();
+                res.status(200).send();
+
+            }
+            else {
+                let teacher = await findTeacherByPk(userId);
+
+                teacher.name = name ;
+
+                teacher.email = email;
+                teacher.password = newPassword;
+
+                teacher.save();
+                res.status(200).send();
+            }
         } catch (error) {
             console.log(error);
             res.status(500).send(error);
