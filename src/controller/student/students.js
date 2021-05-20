@@ -2,7 +2,9 @@ const { sendEmail, verifyEmail } = require("../../services/emailConfirmation.js"
 const bcrypt = require("bcryptjs");
 const randomstring = require("randomstring");
 const { findUserByEmail, createUserStudent, findUserById } = require("../../repositories/user.js");
-const { findAllStudents, findStudentByPk } = require("../../repositories/students.js");
+const { findAllStudents, findStudentByPk, findStudentByUserId } = require("../../repositories/students.js");
+const Student = require("../../models/Student.js");
+const User = require("../../models/User.js");
 
 module.exports = {
     async index(req, res) {
@@ -56,6 +58,22 @@ module.exports = {
             res.status(500).send(error);
         }
     },
+    async find(req, res) {
+        const { userId } = req;
+
+        try {
+            let student = await findStudentByUserId(userId)
+
+            //se aluno não encontrado, retornar not found
+            if (!student)
+                return res.status(404).send({ erro: "Aluno não encontrado" });
+
+            res.send(student);
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ error });
+        }
+    },
     async update(req, res) {
 
         const { name, email, currentPassword, newPassword } = req.body;
@@ -86,7 +104,7 @@ module.exports = {
             else {
                 let student = await findStudentByPk(userId);
 
-                student.name = name ;
+                student.name = name;
 
                 student.email = email;
                 student.password = newPassword;

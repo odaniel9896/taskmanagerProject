@@ -1,7 +1,7 @@
 const { sendEmail, verifyEmail } = require("../../services/emailConfirmation.js");
 const bcrypt = require("bcryptjs");
 const randomstring = require("randomstring");
-const { createUserTeacher, findUserByEmail } = require("../../repositories/user");
+const { createUserTeacher, findUserByEmail, findUserById } = require("../../repositories/user");
 const { findTeacherByPk } = require("../../repositories/teacher.js");
 
 
@@ -43,6 +43,22 @@ module.exports = {
         } catch (error) {
             console.log(error);
             res.status(500).send(error);
+        }
+    },
+    async find(req, res) {
+        const { userId } = req;
+
+        try {
+            let teacher = await findTeacherByUserId(userId)
+
+            //se aluno não encontrado, retornar not found
+            if (!teacher)
+                return res.status(404).send({ erro: "Aluno não encontrado" });
+
+            res.send(teacher);
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ error });
         }
     },
     async update(req, res) {

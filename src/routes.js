@@ -41,7 +41,6 @@ const routes = express.Router();
 //     ROTAS PUBLICAS
 
 //rotas para o estudante
-routes.get("/students", studentController.index);
 routes.post("/students", studentValidators.create, studentController.store);
 
 
@@ -76,8 +75,11 @@ routes.delete("/group/:groupId/students/:idDeleteUser", memberGroup.deleteMember
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);
 routes.post("/group/images", uploadSingleImage, uploadFirebase, groupImage.store);
 
+
+//rotas de alunos e professores privados
 routes.put("/students", studentController.update);
 routes.put("/teachers", teacherController.update);
+routes.get("/students", studentController.find);
 
 //Rotas para annotations
 
