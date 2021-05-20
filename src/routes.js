@@ -80,6 +80,8 @@ routes.post("/group/images", uploadSingleImage, uploadFirebase, groupImage.store
 routes.put("/students", studentController.update);
 routes.put("/teachers", teacherController.update);
 routes.get("/students", studentController.find);
+routes.get("/teachers", teacherController.find);
+
 
 //Rotas para annotations
 
