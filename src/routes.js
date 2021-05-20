@@ -44,6 +44,7 @@ const routes = express.Router();
 routes.get("/students", studentController.index);
 routes.post("/students", studentValidators.create, studentController.store);
 
+
 //Rotas para o professor
 routes.post("/teachers", teacherValidators.create, teacherController.store);
 
@@ -75,7 +76,7 @@ routes.delete("/group/:groupId/students/:idDeleteUser", memberGroup.deleteMember
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);
 routes.post("/group/images", uploadSingleImage, uploadFirebase, groupImage.store);
 
-
+routes.put("/students", studentController.update);
 
 //Rotas para annotations
 

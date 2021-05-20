@@ -1,8 +1,8 @@
 const { sendEmail, verifyEmail } = require("../../services/emailConfirmation.js");
 const bcrypt = require("bcryptjs");
 const randomstring = require("randomstring");
-const { findUserByEmail, createUserStudent } = require("../../repositories/user.js");
-const { findAllStudents } = require("../../repositories/students.js");
+const { findUserByEmail, createUserStudent, findUserById } = require("../../repositories/user.js");
+const { findAllStudents, findStudentByPk } = require("../../repositories/students.js");
 
 module.exports = {
     async index(req, res) {
@@ -51,6 +51,49 @@ module.exports = {
                 }
             });
 
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
+    },
+    async update(req, res) {
+
+        const { name, email, currentPassword, newPassword } = req.body;
+
+        const { userId } = req;
+
+        try {
+            let user = await findUserById(userId);
+
+            if (!user)
+                return res.status(400).send({ error: "User não encontrado" });
+
+            if (currentPassword) {
+                if (!bcrypt.compareSync(currentPassword, user.password))
+                    return res.status(403).send({ error: "Sua senha atual está errada" });
+
+                let student = await findStudentByPk(userId);
+
+                student.name = name;
+
+                student.email = email;
+                student.password = newPassword;
+
+                student.save();
+                res.status(200).send();
+
+            }
+            else {
+                let student = await findStudentByPk(userId);
+
+                student.name = name ;
+
+                student.email = email;
+                student.password = newPassword;
+
+                student.save();
+                res.status(200).send();
+            }
         } catch (error) {
             console.log(error);
             res.status(500).send(error);
