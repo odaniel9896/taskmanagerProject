@@ -1,7 +1,7 @@
 const Card = require("../../models/Card");
 const { QueryTypes } = require('sequelize');
 const connection = require("../../database");
-const { findOneCardOrder } = require("../../repositories/cards");
+const { findOneCardOrder, cardUpdateOrder } = require("../../repositories/cards");
 
 module.exports = {
     async update(req, res) {
