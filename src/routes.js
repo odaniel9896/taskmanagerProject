@@ -4,7 +4,7 @@ const express = require("express");
 //IMPORT DOS CONTROLLERS
 
 const studentController = require("./controller/student/students");
-const sessionController =  require("./controller/session/sessions");
+const sessionController = require("./controller/session/sessions");
 const teacherController = require("./controller/teachers/teachers");
 const passwordController = require("./controller/password/password.js");
 const groupController = require("./controller/group/group");
@@ -30,7 +30,7 @@ const uploadSingleImage = require("./middleware/uploadImage");
 
 //IMPORT DOS VALIDATOR
 const studentValidators = require("./validators/students");
-const teacherValidators =  require("./validators/teachers");
+const teacherValidators = require("./validators/teachers");
 const sessionValidator = require("./validators/session");
 const groupValidator = require("./validators/group");
 const annotationValidator = require("./validators/annotations");

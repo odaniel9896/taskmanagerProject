@@ -74,27 +74,21 @@ const passwordEmailReset = async (req, res) => {
 
     const {password} = req.body
 
-    if(req.query.passwordToken != null) {
-
-        const user = await User.findOne({
-            where: {
-                passwordToken: req.query.passwordToken
-            }
-        })
-
-        if(user) {
-            const passwordCript = bcrypt.hashSync(password);
-
-            user.password = passwordCript
-            user.save()
+    const user = await User.findOne({
+        where: {
+            passwordToken: req.query.passwordToken
         }
-        res.status(200).send("senha resetada")
-        console.log(res.redirect)
+    })
+
+    if(user) {
+        const passwordCript = bcrypt.hashSync(password);
+
+        user.password = passwordCript
+        user.save()
     }
-    else {
-        console.log("Email já foi verificado");
-        res.end("<h1>Bad Request</h1>");
-    }
+    res.status(200).send("senha resetada")
+    console.log(res.redirect)
+
 }
 
 module.exports = {sendEmail, verifyEmail, passwordEmailReset};
