@@ -50,7 +50,7 @@ routes.post("/teachers", teacherValidators.create, teacherController.store);
 
 //rotas para atualizar senha
 routes.get("/emailpassword/:email", passwordController.sendEmailPassword);
-routes.put("/passwordreset", emailMiddleware.passwordEmailReset);
+routes.put("/passwordreset/:passwordToken", emailMiddleware.passwordEmailReset);
 
 //login
 routes.post("/login", sessionValidator.create, sessionController.store);

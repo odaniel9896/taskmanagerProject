@@ -49,8 +49,6 @@ console.log("🚀 ~ file: emailConfirmation.js ~ line 8 ~ sendEmail ~ email", em
 
 const verifyEmail = async (req, res) => {
 
-    if (req.query.confirmationCode != null) {
-
         const user = await User.findOne({
             where: {
                 confirmationCode: req.query.confirmationCode
@@ -61,13 +59,9 @@ const verifyEmail = async (req, res) => {
             user.isValid = true
             user.save()
         }
-        res.redirect("http://localhost:3000/confirmemail")
+        res.redirect("http://192.168.15.122:3000/confirmemail")
         console.log(res.redirect)
-    }
-    else {
-        console.log("Status atualizado");
-        res.end("<h1>Bad Request</h1>");
-    }
+  
 }
 
 const passwordEmailReset = async (req, res) => {
