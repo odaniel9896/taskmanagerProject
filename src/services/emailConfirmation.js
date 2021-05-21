@@ -5,8 +5,8 @@ const bcrypt = require("bcryptjs");
 
 
 const sendEmail = (email, url) => {
-console.log("🚀 ~ file: emailConfirmation.js ~ line 8 ~ sendEmail ~ url", url)
-console.log("🚀 ~ file: emailConfirmation.js ~ line 8 ~ sendEmail ~ email", email)
+    console.log("🚀 ~ file: emailConfirmation.js ~ line 8 ~ sendEmail ~ url", url)
+    console.log("🚀 ~ file: emailConfirmation.js ~ line 8 ~ sendEmail ~ email", email)
 
     let Transport = nodemailer.createTransport({
         service: "Gmail",
@@ -36,8 +36,8 @@ console.log("🚀 ~ file: emailConfirmation.js ~ line 8 ~ sendEmail ~ email", em
 
     console.log(mailOptions);
 
-    Transport.sendMail(mailOptions, function (error, response) {
-        if (error) {
+    Transport.sendMail(mailOptions, function(error, response) {
+        if(error) {
             console.log(error);
         } else {
             console.log("Mensagem enviada " + response.message);
@@ -49,7 +49,7 @@ console.log("🚀 ~ file: emailConfirmation.js ~ line 8 ~ sendEmail ~ email", em
 
 const verifyEmail = async (req, res) => {
 
-    if (req.query.confirmationCode != null) {
+    if(req.query.confirmationCode != null) {
 
         const user = await User.findOne({
             where: {
@@ -57,7 +57,7 @@ const verifyEmail = async (req, res) => {
             }
         })
 
-        if (user) {
+        if(user) {
             user.isValid = true
             user.save()
         }
@@ -72,9 +72,9 @@ const verifyEmail = async (req, res) => {
 
 const passwordEmailReset = async (req, res) => {
 
-    const { password } = req.body
+    const {password} = req.body
 
-    if (req.query.passwordToken != null) {
+    if(req.query.passwordToken != null) {
 
         const user = await User.findOne({
             where: {
@@ -82,7 +82,7 @@ const passwordEmailReset = async (req, res) => {
             }
         })
 
-        if (user) {
+        if(user) {
             const passwordCript = bcrypt.hashSync(password);
 
             user.password = passwordCript
@@ -97,6 +97,6 @@ const passwordEmailReset = async (req, res) => {
     }
 }
 
-module.exports = { sendEmail, verifyEmail, passwordEmailReset };
+module.exports = {sendEmail, verifyEmail, passwordEmailReset};
 
 
