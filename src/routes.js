@@ -17,7 +17,9 @@ const listController = require("./controller/list/lists");
 const listOrderController = require("./controller/list/orderList");
 const cardController = require("./controller/card/cards");
 const cardOrderController = require("./controller/card/orderCard");
-const dailyScrumsController = require("./controller/dailyscrum/dailyScrum")
+const dailyScrumsController = require("./controller/dailyscrum/dailyScrum");
+const sprintReviewController = require("./controller/sprintReview/sprintReview");
+const sprintRetrospectiveController = require("./controller/sprintRetrospective/sprintRetrospective");
 
 //IMPORT DOS SERVICES
 
@@ -113,6 +115,14 @@ routes.put("/cards/order/:cardId/:listId", cardOrderController.update);
 //ROTAS PARA A DAILY_SCRUM
 
 routes.post("/dailyScrum/:sprintId", dailyScrumsController.store);
+
+//ROTAS PARA A SPRINT REVIEW
+
+routes.post("/sprintReview/:sprintId", sprintReviewController.store);
+
+//ROTAS PARA A SPRINT RETROSPECTIVES
+
+routes.post("/sprintRetrospective/:sprintId", sprintRetrospectiveController.store);
 
 
 module.exports = routes;

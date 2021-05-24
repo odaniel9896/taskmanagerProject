@@ -6,10 +6,12 @@ class SprintRetrospective extends Model {
             {
                 doneRight: DataTypes.STRING,
                 doneError: DataTypes.STRING,
+                fieldAction: DataTypes.TEXT,
                 sprintId: DataTypes.INTEGER,
             },
             {
                 sequelize,
+                tableName : "retrospectives",
             }
         )
     }

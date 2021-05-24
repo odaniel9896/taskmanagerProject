@@ -17,6 +17,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      fieldAction: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
       sprintId: {
         type: Sequelize.INTEGER,
         allowNull: false,

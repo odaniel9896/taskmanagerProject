@@ -73,9 +73,9 @@ SprintPlanning.associate(connection.models);
 Sprint.associate(connection.models);
 
 
-for (let assoc of Object.keys(Student.associations)) {
-    for (let accessor of Object.keys(Student.associations[assoc].accessors)) {
-        console.log(Student.name + '.' + Student.associations[assoc].accessors[accessor] + '()');
+for (let assoc of Object.keys(Sprint.associations)) {
+    for (let accessor of Object.keys(Sprint.associations[assoc].accessors)) {
+        console.log(Sprint.name + '.' + Sprint.associations[assoc].accessors[accessor] + '()');
     }
 }
 module.exports = connection
