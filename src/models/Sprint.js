@@ -4,6 +4,7 @@ class Sprint extends Model {
     static init(sequelize) {
         super.init(
             {
+                name: DataTypes.STRING,
                 timeBox: DataTypes.DATE,
             },
             {
@@ -16,7 +17,7 @@ class Sprint extends Model {
         this.hasOne(models.SprintReview);
         this.hasOne(models.SprintRetrospective);
         this.hasOne(models.SprintPlanning);
-        this.hasOne(models.ProductBacklog);
+        this.hasMany(models.ProductBacklog);
     }
 }
 

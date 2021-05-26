@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       timeBox: {
         type: Sequelize.DATE,
         allowNull: false,

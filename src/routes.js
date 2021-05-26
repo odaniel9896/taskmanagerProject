@@ -20,6 +20,7 @@ const cardOrderController = require("./controller/card/orderCard");
 const dailyScrumsController = require("./controller/dailyscrum/dailyScrum");
 const sprintReviewController = require("./controller/sprintReview/sprintReview");
 const sprintRetrospectiveController = require("./controller/sprintRetrospective/sprintRetrospective");
+const sprintController = require("./controller/sprint/sprint");
 
 //IMPORT DOS SERVICES
 
@@ -111,6 +112,10 @@ routes.post("/cards/:listId", cardController.store);
 routes.put("/cards/:cardId", cardController.update);
 routes.delete("/cards/:cardId", cardController.delete);
 routes.put("/cards/order/:cardId/:listId", cardOrderController.update);
+
+//ROTAS PARA A SPRINTS
+
+routes.post("/sprints/:storieId", sprintController.store);
 
 //ROTAS PARA A DAILY_SCRUM
 
