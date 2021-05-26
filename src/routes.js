@@ -115,14 +115,16 @@ routes.put("/cards/order/:cardId/:listId", cardOrderController.update);
 //ROTAS PARA A DAILY_SCRUM
 
 routes.post("/dailyScrum/:sprintId", dailyScrumsController.store);
+routes.get("/dailyScrum/:sprintId", dailyScrumsController.index);
 
 //ROTAS PARA A SPRINT REVIEW
 
 routes.post("/sprintReview/:sprintId", sprintReviewController.store);
+routes.get("sprintReview/:sprintId", sprintRetrospectiveController.index);
 
 //ROTAS PARA A SPRINT RETROSPECTIVES
 
 routes.post("/sprintRetrospective/:sprintId", sprintRetrospectiveController.store);
-
+routes.get("/sprintRetrospective/:sprintId", sprintRetrospectiveController.index)
 
 module.exports = routes;
