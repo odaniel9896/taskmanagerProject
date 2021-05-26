@@ -120,7 +120,7 @@ routes.get("/dailyScrum/:sprintId", dailyScrumsController.index);
 //ROTAS PARA A SPRINT REVIEW
 
 routes.post("/sprintReview/:sprintId", sprintReviewController.store);
-routes.get("sprintReview/:sprintId", sprintRetrospectiveController.index);
+routes.get("/sprintReview/:sprintId", sprintReviewController.index);
 
 //ROTAS PARA A SPRINT RETROSPECTIVES
 

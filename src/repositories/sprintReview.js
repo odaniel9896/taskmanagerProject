@@ -9,7 +9,6 @@ module.exports = {
             attributes: [
                 "id",
                 "feedback",
-                "doneError",
                 "sprintId"
             ],
             order: [["createdAt", "DESC"]]

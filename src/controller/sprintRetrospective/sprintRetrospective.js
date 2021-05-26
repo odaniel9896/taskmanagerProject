@@ -19,6 +19,7 @@ module.exports = {
                 doneRight : doneRight,
                 fieldAction: fieldAction
             })
+            console.log(createSprintReview)
 
             res.status(201).send(createSprintReview);
         } catch (error) {
