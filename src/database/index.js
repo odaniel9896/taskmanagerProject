@@ -20,7 +20,6 @@ const DailyScrum = require("../models/DailyScrum");
 const ProductBacklog = require("../models/ProductBacklog");
 const Sprint = require("../models/Sprint");
 const SprintRetrospective = require("../models/SprintRetrospective");
-const SprintBacklog = require("../models/SprintBacklog");
 const SprintPlanning = require("../models/SprintPlanning");
 
 
@@ -45,7 +44,6 @@ SprintReview.init(connection);
 DailyScrum.init(connection);
 SprintRetrospective.init(connection);
 ProductBacklog.init(connection);
-SprintBacklog.init(connection);
 SprintPlanning.init(connection);
 Sprint.init(connection);
 
@@ -68,7 +66,6 @@ SprintReview.associate(connection.models);
 DailyScrum.associate(connection.models);
 SprintRetrospective.associate(connection.models);
 ProductBacklog.associate(connection.models);
-SprintBacklog.associate(connection.models);
 SprintPlanning.associate(connection.models);
 Sprint.associate(connection.models);
 
