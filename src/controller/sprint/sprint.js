@@ -1,15 +1,44 @@
 const ProductBacklog = require("../../models/ProductBacklog");
+const Sprint = require("../../models/Sprint");
+const { findSprintById } = require("../../repositories/sprint");
+const { Op } = require("sequelize");
 
 module.exports = {
     async store(req, res) {
-        const storieId = req.params.storieId;
+
+        const sprintId = req.params.sprintId;
+
+        const { stories } = req.body;
 
         try {
-            const storie = await ProductBacklog.findByPk(storieId);
 
-            if (!storie)
-                return res.status(404).send({ error: "História não encontrada" })
-                
+            const sprint = await findSprintById(sprintId);
+
+            const storie = await ProductBacklog.findAll({
+                where: {
+                    id: {
+                        [Op.in]: [
+                            `${stories}`
+                        ]
+                    }
+                }
+            });
+
+            console.log(storie)
+
+            // if (!storie)
+            //     return res.status(404).send({ error: "História não encontrada" })
+
+            // const sprint = await Sprint.create({
+            //     name: `Sprint ${storieCount + 1}`,
+            //     timeBox: new Date
+            // });
+
+            // await sprint.addProductBacklogs(
+            //     storieId
+            // );
+            res.status(201).send(storie)
+
         } catch (error) {
             console.log(error);
             res.status(500).send(error);

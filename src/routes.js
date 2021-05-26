@@ -115,7 +115,7 @@ routes.put("/cards/order/:cardId/:listId", cardOrderController.update);
 
 //ROTAS PARA A SPRINTS
 
-routes.post("/sprints/:storieId", sprintController.store);
+routes.post("/sprints/:sprintId", sprintController.store);
 
 //ROTAS PARA A DAILY_SCRUM
 
