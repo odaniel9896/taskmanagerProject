@@ -6,7 +6,8 @@ class ProductBacklog extends Model {
             {
                 description: DataTypes.STRING,
                 groupId: DataTypes.INTEGER,
-                priority: DataTypes.INTEGER
+                priority: DataTypes.INTEGER,
+                sprintId: DataTypes.INTEGER,
             },
             {
                 sequelize,
@@ -14,9 +15,9 @@ class ProductBacklog extends Model {
         )
     }
     static associate(models) {
-        this.hasOne(models.Sprint, {foreignKey: "storieId"});
+        this.belongsTo(models.Sprint);
         this.belongsTo(models.Group);
-        this.hasOne(models.SprintBacklog);
+        this.hasOne(models.Card, {foreignKey: "storieId"});
     }
 }
 

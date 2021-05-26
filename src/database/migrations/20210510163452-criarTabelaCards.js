@@ -33,9 +33,9 @@ module.exports = {
       },
       storieId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
-          model: "sprintBacklogs",
+          model: "productBacklogs",
           key: "id"
         },
       },

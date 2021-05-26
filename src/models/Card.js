@@ -7,7 +7,8 @@ class Card extends Model {
                 description: DataTypes.STRING,
                 dueDate: DataTypes.DATE,
                 order: DataTypes.INTEGER,
-                listId: DataTypes.INTEGER,              
+                listId: DataTypes.INTEGER,
+                storieId: DataTypes.INTEGER            
             },
             {
                 sequelize,
@@ -17,6 +18,7 @@ class Card extends Model {
     static associate(models) {
         this.belongsTo(models.List);
         this.belongsToMany(models.User, { through: "usersCard" });
+        this.belongsTo(models.ProductBacklog, {foreignKey: "storieId"});
     }
 }
 

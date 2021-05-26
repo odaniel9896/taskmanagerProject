@@ -25,6 +25,14 @@ module.exports = {
           key: "id"
         },
       },
+      sprintId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "sprints",
+          key: "id"
+        },
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
