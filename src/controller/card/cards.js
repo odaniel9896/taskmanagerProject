@@ -35,14 +35,15 @@ module.exports = {
 
             const totalCard = await totalCards(listId);
 
-            const cardCreatea = await cardCreate({description, order : totalCard, listId})
+            const cardCreatea = await cardCreate({description, order : totalCard, listId, dueDate})
 
             await cardCreatea.addUsers(users)
 
             res.status(201).send({
                 id: cardCreatea.id,
                 description: cardCreatea.description,
-                order : cardCreatea.order
+                order : cardCreatea.order,
+                dueDate : cardCreatea.dueDate,
             })
         } catch (error) {
             console.log(error);

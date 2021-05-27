@@ -8,7 +8,7 @@ module.exports = {
 
         const groupId = req.params.groupId;
 
-        const { stories, name } = req.body;
+        const { stories, name, timeBox } = req.body;
 
         try {
 
@@ -25,7 +25,7 @@ module.exports = {
 
             const sprint = await group.createSprint({
                 name: name ? name : `Sprint ${sprintCount + 1}`,
-                timeBox: new Date
+                timeBox: timeBox
             })
 
             const productBacklogs = await ProductBacklog.findAll({

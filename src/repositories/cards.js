@@ -20,10 +20,10 @@ module.exports = {
         });
         return totalCard;
     },
-    async cardCreate({ description, order, listId }) {
+    async cardCreate({ description, order, listId, dueDate }) {
         const cardCreate = await Card.create({
             description: description,
-            dueDate: new Date,
+            dueDate: dueDate,
             order: order + 1,
             listId: listId
         });
@@ -65,5 +65,5 @@ module.exports = {
             }
         )
         return card;
-    } 
+    }
 }
