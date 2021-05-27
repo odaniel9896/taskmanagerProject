@@ -21,7 +21,7 @@ const dailyScrumsController = require("./controller/dailyscrum/dailyScrum");
 const sprintReviewController = require("./controller/sprintReview/sprintReview");
 const sprintRetrospectiveController = require("./controller/sprintRetrospective/sprintRetrospective");
 const sprintController = require("./controller/sprint/sprint");
-const productBacklogController = require("./controller/productBacklog/productBacklog")
+const productBacklogController = require("./controller/productBacklog/productBacklog");
 
 //IMPORT DOS SERVICES
 
@@ -38,6 +38,15 @@ const teacherValidators = require("./validators/teachers");
 const sessionValidator = require("./validators/session");
 const groupValidator = require("./validators/group");
 const annotationValidator = require("./validators/annotations");
+const dailyScrumValidator = require("./validators/dailyScrum");
+const sprintRetrospectiveValidator = require("./validators/sprintRetrospective");
+const sprintReviewValidator = require("./validators/sprintReview");
+const storiesValidator = require("./validators/stories");
+const sprintValidator = require("./validators/sprint");
+const cardValidator = require("./validators/cards");
+const listValidator = require("./validators/lists");
+const workspaceValidator = require("./validators/workspace");
+
 
 
 const routes = express.Router();
@@ -92,16 +101,16 @@ routes.get("/teachers", teacherController.find);
 routes.get("/annotations", annotationController.index);
 routes.post("/annotations", annotationValidator.create, annotationController.store);
 routes.delete("/annotations/:id", annotationController.delete);
-routes.put("/annotations/:id", annotationController.update);
+routes.put("/annotations/:id", annotationValidator.create, annotationController.update);
 
 // ROTAS PARA O WORKSPACE
 
-routes.post("/workspace/:groupId", workspaceController.store);
+routes.post("/workspace/:groupId", workspaceValidator.create, workspaceController.store);
 
 //ROTAS PARA LISTAS
 
 routes.get("/lists/:groupId", listController.index);
-routes.post("/lists/:groupId", listController.store);
+routes.post("/lists/:groupId", listValidator.create, listController.store);
 routes.put("/lists/:listId/:workspaceId", listController.update);
 routes.delete("/lists/:listId/:groupId", listController.delete);
 routes.put("/lists/:listId/:workspaceId/order", listOrderController.update);
@@ -109,34 +118,34 @@ routes.put("/lists/:listId/:workspaceId/order", listOrderController.update);
 //ROTAS PARA CARDS
 
 routes.get("/cards/:listId", cardController.index);
-routes.post("/cards/:listId", cardController.store);
+routes.post("/cards/:listId", cardValidator.create, cardController.store);
 routes.put("/cards/:cardId", cardController.update);
 routes.delete("/cards/:cardId", cardController.delete);
 routes.put("/cards/order/:cardId/:listId", cardOrderController.update);
 
 //ROTAS PARA A SPRINTS
 
-routes.post("/sprints/:groupId", sprintController.store);
+routes.post("/sprints/:groupId", sprintValidator.create, sprintController.store);
 routes.put("/sprints/:sprintId", sprintController.update);
 
 //ROTAS PARA A DAILY_SCRUM
 
-routes.post("/dailyScrum/:sprintId", dailyScrumsController.store);
+routes.post("/dailyScrum/:sprintId", dailyScrumValidator.create, dailyScrumsController.store);
 routes.get("/dailyScrum/:sprintId", dailyScrumsController.index);
 
 //ROTAS PARA A SPRINT REVIEW
 
-routes.post("/sprintReview/:sprintId", sprintReviewController.store);
+routes.post("/sprintReview/:sprintId", sprintReviewValidator.create, sprintReviewController.store);
 routes.get("/sprintReview/:sprintId", sprintReviewController.index);
 
 //ROTAS PARA A SPRINT RETROSPECTIVES
 
-routes.post("/sprintRetrospective/:sprintId", sprintRetrospectiveController.store);
+routes.post("/sprintRetrospective/:sprintId", sprintRetrospectiveValidator.create, sprintRetrospectiveController.store);
 routes.get("/sprintRetrospective/:sprintId", sprintRetrospectiveController.index);
 
 //ROTAS PARA A PRODUCT ProductBacklog
 
-routes.post("/stories/:groupId", productBacklogController.store);
-routes.delete("/stories/:storieId/:groupId", productBacklogController.delete);
+routes.post("/stories/:groupId", storiesValidator.create, productBacklogController.store);
+routes.delete("/stories/:storieId/:groupId", storiesValidator.delete, productBacklogController.delete);
 
 module.exports = routes;
