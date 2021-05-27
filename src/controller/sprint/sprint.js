@@ -1,40 +1,46 @@
 const ProductBacklog = require("../../models/ProductBacklog");
 const Sprint = require("../../models/Sprint");
+const { findGroupById } = require("../../repositories/group");
 const { findSprintById } = require("../../repositories/sprint");
 
 module.exports = {
     async store(req, res) {
 
-        const sprintId = req.params.sprintId;
+        const groupId = req.params.groupId;
 
-        const { stories } = req.body;
+        const { stories, name } = req.body;
 
         try {
 
-            const sprint = await findSprintById(sprintId);
+            const group = await findGroupById(groupId);
 
-            const storie = await ProductBacklog.findAll({
+            if (!group)
+                return res.status(404).send({ error: "Grupo não encontrado" })
+
+            const sprintCount = await Sprint.count({
                 where: {
-                    id:         
-                           stories
+                    groupId: groupId
                 }
             });
 
-            console.log(storie)
+            const sprint = await group.createSprint({
+                name: name ? name : `Sprint ${sprintCount + 1}`,
+                timeBox: new Date
+            })
+            
+            const productBacklogs = await ProductBacklog.findAll({
+                where: {
+                    id : 
+                        stories
+                }
+            })
 
-            // if (!storie)
-            //     return res.status(404).send({ error: "História não encontrada" })
+            if(!productBacklogs)
+                return res.status(404).send({ error: "Nenhuma história encontrada para esse grupo"})
 
-            // const sprint = await Sprint.create({
-            //     name: `Sprint ${storieCount + 1}`,
-            //     timeBox: new Date
-            // });
+            const addStoriesSprint = await sprint.addProductBacklogs(productBacklogs)
 
-            // await sprint.addProductBacklogs(
-            //     storieId
-            // );
-
-            res.status(201).send(storie)
+            res.status(201).send(addStoriesSprint)
 
         } catch (error) {
             console.log(error);

@@ -19,6 +19,7 @@ class Group extends Model {
         this.hasOne(models.Chat);
         this.hasOne(models.Workspace);
         this.hasOne(models.Sprint);
+        this.hasMany(models.ProductBacklog);
     }
 }
 
