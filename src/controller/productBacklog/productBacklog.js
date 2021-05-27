@@ -1,3 +1,4 @@
+const ProductBacklog = require("../../models/ProductBacklog");
 const { findGroupById } = require("../../repositories/group");
 
 module.exports = {
@@ -21,6 +22,27 @@ module.exports = {
             res.status(201).send(storie)
         } catch (error) {
             console.log(error);
+            res.status(500).send(error);
+        }
+    },
+    async delete(req, res) {
+        const storieId = req.params.storieId;
+        const groupId = req.params.groupId
+
+        try {
+            const storie = await ProductBacklog.findByPk(storieId);
+
+            if(!storie)
+                return res.status(404).send({ error: "Essa história não existe para ser apagada."});
+            
+            if(!storie.groupId === groupId)
+                return res.status(404).send({ error: "Não permitido"});
+
+            await storie.destroy();
+
+            res.status(200).send()
+        } catch (error) {
+             console.log(error);
             res.status(500).send(error);
         }
     }

@@ -137,5 +137,6 @@ routes.get("/sprintRetrospective/:sprintId", sprintRetrospectiveController.index
 //ROTAS PARA A PRODUCT ProductBacklog
 
 routes.post("/stories/:groupId", productBacklogController.store);
+routes.delete("/stories/:storieId/:groupId", productBacklogController.delete);
 
 module.exports = routes;

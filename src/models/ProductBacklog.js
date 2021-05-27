@@ -6,7 +6,6 @@ class ProductBacklog extends Model {
             {
                 description: DataTypes.STRING,
                 groupId: DataTypes.INTEGER,
-                priority: DataTypes.INTEGER,
                 sprintId: DataTypes.INTEGER,
                 priorityId: DataTypes.INTEGER,
             },
