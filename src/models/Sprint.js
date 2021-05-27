@@ -6,6 +6,7 @@ class Sprint extends Model {
             {
                 name: DataTypes.STRING,
                 timeBox: DataTypes.DATE,
+                groupId: DataTypes.INTEGER
             },
             {
                 sequelize,
@@ -18,6 +19,7 @@ class Sprint extends Model {
         this.hasOne(models.SprintRetrospective);
         this.hasOne(models.SprintPlanning);
         this.hasMany(models.ProductBacklog);
+        this.belongsTo(models.Group);
     }
 }
 

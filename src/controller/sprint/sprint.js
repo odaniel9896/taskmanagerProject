@@ -1,7 +1,6 @@
 const ProductBacklog = require("../../models/ProductBacklog");
 const Sprint = require("../../models/Sprint");
 const { findSprintById } = require("../../repositories/sprint");
-const { Op } = require("sequelize");
 
 module.exports = {
     async store(req, res) {
@@ -16,11 +15,8 @@ module.exports = {
 
             const storie = await ProductBacklog.findAll({
                 where: {
-                    id: {
-                        [Op.in]: [
-                            `${stories}`
-                        ]
-                    }
+                    id:         
+                           stories
                 }
             });
 
@@ -37,6 +33,7 @@ module.exports = {
             // await sprint.addProductBacklogs(
             //     storieId
             // );
+
             res.status(201).send(storie)
 
         } catch (error) {

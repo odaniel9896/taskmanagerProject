@@ -17,6 +17,14 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      groupId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "groups",
+          key: "id"
+        },
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
