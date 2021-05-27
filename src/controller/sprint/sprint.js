@@ -27,16 +27,16 @@ module.exports = {
                 name: name ? name : `Sprint ${sprintCount + 1}`,
                 timeBox: new Date
             })
-            
+
             const productBacklogs = await ProductBacklog.findAll({
                 where: {
-                    id : 
+                    id:
                         stories
                 }
             })
 
-            if(!productBacklogs)
-                return res.status(404).send({ error: "Nenhuma história encontrada para esse grupo"})
+            if (!productBacklogs)
+                return res.status(404).send({ error: "Nenhuma história encontrada para esse grupo" })
 
             const addStoriesSprint = await sprint.addProductBacklogs(productBacklogs)
 
@@ -47,4 +47,25 @@ module.exports = {
             res.status(500).send(error);
         }
     },
+    async update(req, res) {
+        
+        const sprintId = req.params.sprintId
+
+        const { stories } = req.body;
+
+        try {
+
+            const sprint = await findSprintById(sprintId)
+
+            if (!sprint)
+                return res.status(404).send({ error: "Sprint não encontrada" });
+
+            await sprint.addProductBacklogs(stories);
+            
+            res.send()
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
+    }
 }
