@@ -21,6 +21,7 @@ const dailyScrumsController = require("./controller/dailyscrum/dailyScrum");
 const sprintReviewController = require("./controller/sprintReview/sprintReview");
 const sprintRetrospectiveController = require("./controller/sprintRetrospective/sprintRetrospective");
 const sprintController = require("./controller/sprint/sprint");
+const productBacklogController = require("./controller/productBacklog/productBacklog")
 
 //IMPORT DOS SERVICES
 
@@ -131,6 +132,10 @@ routes.get("/sprintReview/:sprintId", sprintReviewController.index);
 //ROTAS PARA A SPRINT RETROSPECTIVES
 
 routes.post("/sprintRetrospective/:sprintId", sprintRetrospectiveController.store);
-routes.get("/sprintRetrospective/:sprintId", sprintRetrospectiveController.index)
+routes.get("/sprintRetrospective/:sprintId", sprintRetrospectiveController.index);
+
+//ROTAS PARA A PRODUCT ProductBacklog
+
+routes.post("/stories/:groupId", productBacklogController.store);
 
 module.exports = routes;

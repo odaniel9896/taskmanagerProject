@@ -8,6 +8,7 @@ class ProductBacklog extends Model {
                 groupId: DataTypes.INTEGER,
                 priority: DataTypes.INTEGER,
                 sprintId: DataTypes.INTEGER,
+                priorityId: DataTypes.INTEGER,
             },
             {
                 sequelize,
@@ -18,6 +19,7 @@ class ProductBacklog extends Model {
         this.belongsTo(models.Sprint);
         this.belongsTo(models.Group);
         this.hasOne(models.Card, {foreignKey: "storieId"});
+        this.hasOne(models.Priority)
     }
 }
 

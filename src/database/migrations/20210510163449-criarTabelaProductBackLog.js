@@ -13,9 +13,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      priority: {
-        type: Sequelize.STRING,
+      priorityId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "prioritys",
+          key: "id"
+        },
       },
       groupId: {
         type: Sequelize.INTEGER,
