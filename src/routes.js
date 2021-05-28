@@ -47,6 +47,8 @@ const sprintValidator = require("./validators/sprint");
 const cardValidator = require("./validators/cards");
 const listValidator = require("./validators/lists");
 const workspaceValidator = require("./validators/workspace");
+const sprintPlanningValidator = require("./validators/sprintPlanning");
+
 
 
 
@@ -151,6 +153,6 @@ routes.delete("/stories/:storieId/:groupId", storiesValidator.delete, productBac
 
 //ROTAS PARA A SPRINT SprintPlanning
 
-routes.post("/sprintPlanning/:sprintId", sprintPlanningController.store);
+routes.post("/sprintPlanning/:sprintId", sprintPlanningValidator.create, sprintPlanningController.store);
 
 module.exports = routes;
