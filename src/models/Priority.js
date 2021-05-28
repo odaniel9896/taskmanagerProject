@@ -12,7 +12,7 @@ class Priority extends Model {
         )
     }
     static associate(models) {
-        this.hasOne(models.ProductBacklog);
+        this.hasMany(models.ProductBacklog);
 
     }
 }
