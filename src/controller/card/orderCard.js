@@ -18,10 +18,10 @@ module.exports = {
 
             if (order > card.order) {
                 await connection.query(
-                    'UPDATE cards set `order` = `order` - 1 where `order` between :aux and :order',
+                    'UPDATE cards set `order` = `order` - 1 where `order` between :aux and :order and listId = :listId',
                     {
                         type: QueryTypes.UPDATE,
-                        replacements: { aux: card.order + 1, order: order },
+                        replacements: { aux: card.order + 1, order: order, listId : listId },
                     }
                 );
 
@@ -31,10 +31,10 @@ module.exports = {
             }
             else {
                 await connection.query(
-                    'UPDATE cards set `order` = `order` + 1 where `order` between :aux and :order',
+                    'UPDATE cards set `order` = `order` + 1 where `order` between :aux and :order and listId = :listId',
                     {
                         type: QueryTypes.UPDATE,
-                        replacements: { aux: order, order: card.order },
+                        replacements: { aux: order, order: card.order, listId : listId },
                     }
                 );
 

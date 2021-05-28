@@ -17,10 +17,10 @@ module.exports = {
 
             if (order > list.order) {
                 await connection.query(
-                    'UPDATE lists set `order` = `order` - 1 where `order` between :aux and :order',
+                    'UPDATE lists set `order` = `order` - 1 where `order` between :aux and :order and workspaceId = :workspaceId',
                     {
                         type: QueryTypes.UPDATE,
-                        replacements: { aux: list.order + 1, order: order },
+                        replacements: { aux: list.order + 1, order: order, workspaceId : workspaceId },
                     }
                 );
                 await listOrderUpdate(order, listId);
@@ -28,10 +28,10 @@ module.exports = {
             }
             else {
                 await connection.query(
-                    'UPDATE lists set `order` = `order` + 1 where `order` between :aux and :order',
+                    'UPDATE lists set `order` = `order` + 1 where `order` between :aux and :order and workspaceId = :workspaceId',
                     {
                         type: QueryTypes.UPDATE,
-                        replacements: { aux: order, order: list.order },
+                        replacements: { aux: order, order: list.order, workspaceId : workspaceId },
                     }
                 );
                 await listOrderUpdate(order, listId)
