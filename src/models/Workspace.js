@@ -14,7 +14,7 @@ class Workspace extends Model {
         )
     }
     static associate(models) {
-        this.hasOne(models.List);
+        this.hasMany(models.List);
         this.belongsTo(models.Group);
     }
 }
