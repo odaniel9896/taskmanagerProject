@@ -20,6 +20,8 @@ module.exports = {
           model: "sprints",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       createdAt: {
         type: Sequelize.DATE,

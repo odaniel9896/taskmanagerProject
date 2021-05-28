@@ -31,6 +31,8 @@ module.exports = {
           model: "chats",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       groupId: {
         type: Sequelize.INTEGER,

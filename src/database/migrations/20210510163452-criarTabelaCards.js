@@ -38,6 +38,8 @@ module.exports = {
           model: "productBacklogs",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       createdAt: {
         type: Sequelize.DATE,

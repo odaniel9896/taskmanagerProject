@@ -24,6 +24,8 @@ module.exports = {
           model: "groups",
           key: "id"
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
       },
       createdAt: {
         type: Sequelize.DATE,
