@@ -1,52 +1,19 @@
 const Workspace = require("../../models/Workspace");
+const { feedCard } = require("../../repositories/feed");
+const { findWorkspaceByPk } = require("../../repositories/workspace");
 
 module.exports = {
     async index(req, res) {
         const workspaceId = req.params.workspaceId
 
         try {
-            const workspace = await Workspace.findByPk(workspaceId);
-
+            const workspace = await findWorkspaceByPk(workspaceId);
+            
             if (!workspace)
                 return res.status(404).send({ error: "Workspace não encontrado" });
 
-            const feed = await Workspace.findAll({
-                where: {
-                    id: workspaceId
-                },
-                attributes: [
-                    "id",
-                    "name",
-                    "backgroundImage"
-                ],
-                include: [
-                    {
-                        association: "Lists",
-                        attributes: ["id", "name", "order", "createdAt"],
-                        include: [
-                            {
-                                association: "Card",
-                                attributes: ["id", "description", "dueDate", "order", "createdAt"],
-                                include: [
-                                    {
-                                        association: "ProductBacklog",
-                                        attributes: ["id", "description", "sprintId", "priorityId"],
-                                        include: [
-                                            {
-                                                association: "Priority",
-                                                attributes: ["id", "priority"]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-            )
+            const feed = await feedCard(workspaceId);
 
-            console.log(feed);
             res.send(feed)
         } catch (error) {
             console.log(error);
