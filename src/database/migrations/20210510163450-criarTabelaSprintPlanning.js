@@ -10,7 +10,7 @@ module.exports = {
         autoIncrement: true
       },
       ata: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       sprintId: {

@@ -22,6 +22,7 @@ const sprintReviewController = require("./controller/sprintReview/sprintReview")
 const sprintRetrospectiveController = require("./controller/sprintRetrospective/sprintRetrospective");
 const sprintController = require("./controller/sprint/sprint");
 const productBacklogController = require("./controller/productBacklog/productBacklog");
+const sprintPlanningController = require("./controller/sprintPlanning/sprintPlanning");
 
 //IMPORT DOS SERVICES
 
@@ -147,5 +148,9 @@ routes.get("/sprintRetrospective/:sprintId", sprintRetrospectiveController.index
 
 routes.post("/stories/:groupId", storiesValidator.create, productBacklogController.store);
 routes.delete("/stories/:storieId/:groupId", storiesValidator.delete, productBacklogController.delete);
+
+//ROTAS PARA A SPRINT SprintPlanning
+
+routes.post("/sprintPlanning/:sprintId", sprintPlanningController.store);
 
 module.exports = routes;
