@@ -1,6 +1,5 @@
-const DailyScrum = require("../../models/DailyScrum");
 const { findSprintById } = require("../../repositories/sprint");
-const { findAllDailyScrum } = require("../../repositories/dailyScrum");
+const { findAllDailyScrum, createDailyScrum } = require("../../repositories/dailyScrum");
 
 module.exports = {
     async store(req, res) {
@@ -15,14 +14,9 @@ module.exports = {
             if (!sprint)
                 return res.status(404).send({ error: "Sprint não encontrada" });
 
-            const createDailyScrum = await DailyScrum.create({
-                doneYesterday: doneYesterday,
-                goingToDoDay: goingToDoDay,
-                someObstacle: someObstacle,
-                sprintId: sprintId,
-            });
+            const dailyScrum = await createDailyScrum(sprintId, doneYesterday, goingToDoDay, someObstacle)
 
-            res.status(201).send(createDailyScrum);
+            res.status(201).send(dailyScrum);
         } catch (error) {
             console.log(error);
             res.status(500).send({ error });

@@ -19,4 +19,14 @@ module.exports = {
 
         return sprints;
     },
+    async createDailyScrum(sprintId, doneYesterday, goingToDoDay, someObstacle) {
+        const dailyScrum = await DailyScrum.create({
+            sprintId: sprintId,
+            doneYesterday: doneYesterday,
+            goingToDoDay: goingToDoDay,
+            someObstacle: someObstacle,
+        });
+
+        return dailyScrum;
+    }
 }
