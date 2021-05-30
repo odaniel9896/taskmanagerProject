@@ -24,6 +24,7 @@ const sprintController = require("./controller/sprint/sprint");
 const productBacklogController = require("./controller/productBacklog/productBacklog");
 const sprintPlanningController = require("./controller/sprintPlanning/sprintPlanning");
 const feedController = require("./controller/feed/feed");
+const messageController = require("./controller/message/message");
 
 //IMPORT DOS SERVICES
 
@@ -159,7 +160,10 @@ routes.post("/sprintPlanning/:sprintId", sprintPlanningValidator.create, sprintP
 
 // ROTAS PARA O FEED
 
-
 routes.get("/feed/:workspaceId", feedController.index); 
+
+// ROTAS PARA AS MENSAGENS
+
+routes.get("/messages/:groupId", messageController.index);
 
 module.exports = routes;
