@@ -2,7 +2,7 @@ const { sendEmail, verifyEmail } = require("../../services/emailConfirmation.js"
 const bcrypt = require("bcryptjs");
 const randomstring = require("randomstring");
 const { createUserTeacher, findUserByEmail, findUserById } = require("../../repositories/user");
-const { findTeacherByPk } = require("../../repositories/teacher.js");
+const { findTeacherByPk, findTeacherByUserId } = require("../../repositories/teacher.js");
 
 
 module.exports = {
