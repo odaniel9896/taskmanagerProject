@@ -22,6 +22,7 @@ class User extends Model {
         this.hasOne(models.Teacher, { foreignKey: "id" });
         this.hasOne(models.Invite);
         this.hasOne(models.Annotation);
+        this.hasMany(models.Message);
     }
 }
 

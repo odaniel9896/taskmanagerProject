@@ -20,6 +20,7 @@ class Group extends Model {
         this.hasOne(models.Workspace);
         this.hasOne(models.Sprint);
         this.hasMany(models.ProductBacklog);
+        this.hasMany(models.Message);
     }
 }
 

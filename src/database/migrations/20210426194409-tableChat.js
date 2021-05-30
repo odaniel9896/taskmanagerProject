@@ -11,7 +11,7 @@ module.exports = {
         primaryKey: true,
       },
       room: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
         allowNull: false,
         defaultValue: false,
       },
