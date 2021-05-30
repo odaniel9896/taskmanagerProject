@@ -12,7 +12,7 @@ app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`)
 });
 
-const serverWebsocket = app.listen(PORT2, () => {
+const serverWebsocket = app2.listen(PORT2, () => {
     console.log("Servidor rodando na porta 3002")
 });
 
