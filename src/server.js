@@ -1,10 +1,6 @@
 const app = require("./app");
 const app2 = require("./app");
 
-const socket = require("socket.io");
-const Message = require("./models/Message");
-
-
 const PORT = 3333;
 const PORT2 = 3002;
 
