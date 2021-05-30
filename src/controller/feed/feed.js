@@ -1,4 +1,3 @@
-const Workspace = require("../../models/Workspace");
 const { feedCard } = require("../../repositories/feed");
 const { findWorkspaceByPk } = require("../../repositories/workspace");
 
