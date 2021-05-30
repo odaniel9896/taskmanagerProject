@@ -1,9 +1,17 @@
 const { Model, DataTypes } = require("sequelize");
+const { v4: uuidv4 } = require('uuid');
+
 
 class Message extends Model {
     static init(sequelize) {
         super.init(
             {
+                id: {
+                    type: DataTypes.UUID,
+                    primaryKey: true,
+                    allowNull: false,
+                    defaultValue: () => uuidv4(),
+                },
                 text: DataTypes.STRING,
                 userId: DataTypes.INTEGER,
                 groupId: DataTypes.INTEGER,
