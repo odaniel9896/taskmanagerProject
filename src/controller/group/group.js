@@ -43,6 +43,10 @@ module.exports = {
             if (user.role == "student")
                 await group.addStudent(user.id)
 
+            await group.createChat({
+                room : "Sala geral"
+            })
+
             res.status(201).send({
                 group: {
                     groupId: group.id,
