@@ -55,7 +55,13 @@ module.exports = {
             if (!teacher)
                 return res.status(404).send({ erro: "Aluno não encontrado" });
 
-            res.send(teacher);
+                res.send({
+                    id : userId,
+                    email : teacher.email,
+                    role : teacher.role,
+                    name : teacher.Teacher.name,
+                    profileImage : teacher.Teacher.profileImage
+                });
         } catch (error) {
             console.log(error);
             res.status(500).send({ error });
