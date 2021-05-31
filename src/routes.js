@@ -25,6 +25,7 @@ const productBacklogController = require("./controller/productBacklog/productBac
 const sprintPlanningController = require("./controller/sprintPlanning/sprintPlanning");
 const feedController = require("./controller/feed/feed");
 const messageController = require("./controller/message/message");
+const taskController  = require("./controller/tasks/task");
 
 //IMPORT DOS SERVICES
 
@@ -50,6 +51,7 @@ const cardValidator = require("./validators/cards");
 const listValidator = require("./validators/lists");
 const workspaceValidator = require("./validators/workspace");
 const sprintPlanningValidator = require("./validators/sprintPlanning");
+const taskValidator = require("./validators/task");
 
 
 
@@ -165,5 +167,9 @@ routes.get("/feed/:workspaceId", feedController.index);
 // ROTAS PARA AS MENSAGENS
 
 routes.get("/messages/:groupId", messageController.index);
+
+//ROTAS PARA AS TAREFAS DO CARD
+
+routes.post("/task/:cardId", taskValidator.create, taskController.store);
 
 module.exports = routes;

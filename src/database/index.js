@@ -22,6 +22,7 @@ const Sprint = require("../models/Sprint");
 const SprintRetrospective = require("../models/SprintRetrospective");
 const SprintPlanning = require("../models/SprintPlanning");
 const Priority = require("../models/Priority");
+const Task = require("../models/Task");
 
 
 const connection = new Sequelize(dbConfig.url, dbConfig.config);
@@ -48,6 +49,7 @@ ProductBacklog.init(connection);
 SprintPlanning.init(connection);
 Sprint.init(connection);
 Priority.init(connection);
+Task.init(connection);
 
 
 
@@ -71,11 +73,12 @@ ProductBacklog.associate(connection.models);
 SprintPlanning.associate(connection.models);
 Sprint.associate(connection.models);
 Priority.associate(connection.models);
+Task.associate(connection.models);
 
 
-for (let assoc of Object.keys(Group.associations)) {
-    for (let accessor of Object.keys(Group.associations[assoc].accessors)) {
-        console.log(Group.name + '.' + Group.associations[assoc].accessors[accessor] + '()');
+for (let assoc of Object.keys(Card.associations)) {
+    for (let accessor of Object.keys(Card.associations[assoc].accessors)) {
+        console.log(Card.name + '.' + Card.associations[assoc].accessors[accessor] + '()');
     }
 }
 module.exports = connection
