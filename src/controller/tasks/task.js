@@ -1,4 +1,5 @@
 const Card = require("../../models/Card");
+const Task = require("../../models/Task");
 
 module.exports = {
     async store(req, res) {
@@ -21,6 +22,28 @@ module.exports = {
                 
         } catch (error) {
             console.log(error);
+            res.status(500).send(error);
+        }
+    },
+    async delete(req, res) {
+        const taskId = req.params.taskId;
+        const cardId = req.params.cardId;
+
+        try {
+            const task = await Task.findByPk(taskId);
+            console.log(task);
+
+            if(!task)
+                return res.status(404).send({ error: "Essa task não existe"});
+            
+            if(!task.cardId === cardId)
+                return res.status(404).send({ error: "Não permitido"});
+
+            await task.destroy();
+
+            res.status(200).send()
+        } catch (error) {
+             console.log(error);
             res.status(500).send(error);
         }
     }

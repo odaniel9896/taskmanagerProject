@@ -171,5 +171,6 @@ routes.get("/messages/:groupId", messageController.index);
 //ROTAS PARA AS TAREFAS DO CARD
 
 routes.post("/task/:cardId", taskValidator.create, taskController.store);
+routes.delete("/task/:taskId/:cardId", taskController.delete);
 
 module.exports = routes;
