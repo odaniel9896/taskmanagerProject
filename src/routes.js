@@ -85,6 +85,7 @@ routes.use(authMiddleware)
 //Rotas para grupo
 routes.post("/group", groupValidator.create, groupController.store);
 routes.get("/group", groupController.index);
+routes.get("/group/:groupId", groupController.find)
 routes.patch("/group/:inviteToken/add", memberGroup.addMemberGroup);
 routes.post("/group/:groupId/invite", memberGroup.sendInviteGroup);
 routes.delete("/group/:id", groupController.delete);
@@ -166,7 +167,7 @@ routes.get("/feed/:workspaceId", feedController.index);
 
 // ROTAS PARA AS MENSAGENS
 
-routes.get("/messages/:groupId", messageController.index);
+routes.get("/messages/:chatId", messageController.index);
 
 //ROTAS PARA AS TAREFAS DO CARD
 

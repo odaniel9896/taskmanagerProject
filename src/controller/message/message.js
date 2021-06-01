@@ -1,21 +1,23 @@
+const Chat = require("../../models/Chat");
 const Group = require("../../models/Group");
 const Message = require("../../models/Message");
 
 module.exports = {
     async index(req, res) {
-        const groupId = req.params.groupId;
+        const chatId = req.params.chatId;
 
         try {
-            const group = await Group.findByPk(groupId);
+            const group = await Chat.findByPk(chatId);
 
             if (!group)
-                return res.status(401).send({ error: "Grupo não encontrado" });
+                return res.status(401).send({ error: "Chat não encontrado" });
             
             const message = await Message.findAll({
                 where: {
-                    groupId : groupId
+                    chatId : chatId
                 },
-                attributes: ["text", "userId", "groupId", "chatId", "createdAt"]
+                attributes: ["text", "userId", "groupId", "chatId", "createdAt"],
+                order: [["createdAt", "DESC"]]
             })
             res.send(message);
         } catch (error) {

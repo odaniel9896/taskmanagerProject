@@ -1,3 +1,4 @@
+const Group = require("../../models/Group");
 const Student = require("../../models/Student");
 const Teacher = require("../../models/Teacher");
 const { findGroupByPykStudentOrTeacher, createGroup, findGroupById } = require("../../repositories/group");
@@ -44,7 +45,7 @@ module.exports = {
                 await group.addStudent(user.id)
 
             await group.createChat({
-                room : "Sala geral"
+                room: "Sala geral"
             })
 
             res.status(201).send({
@@ -108,6 +109,28 @@ module.exports = {
             group.save();
 
             res.status(200).send();
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
+    },
+    async find(req, res) {
+        const groupId = req.params.groupId;
+
+        try {
+
+            if(!groupId)
+                return res.status(404).send({ error: "Id de grupo não passado"})
+
+            const group = await Group.findByPk(groupId, {
+                include: [
+                    {
+                        association: "Chat",
+                        attributes: ["id", "room"]
+                    }
+                ]
+            })
+            res.send(group)
         } catch (error) {
             console.log(error);
             res.status(500).send(error);
