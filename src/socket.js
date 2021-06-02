@@ -21,7 +21,6 @@ io.on("connection", async (socket) => {
                 groupId: data.groupId,
                 chatId: data.chatId,
             });
-            console.log(data)
             socket.to(data.room).emit("receive_message", data.content);
     });
 

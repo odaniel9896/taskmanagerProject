@@ -12,7 +12,7 @@ module.exports = {
                 "title",
                 "createdAt",
                 "userId"
-            ],
+            ],  
             order: [["createdAt", "DESC"]]
         });
 
