@@ -9,6 +9,7 @@ module.exports = {
             attributes: [
                 "id",
                 "text",
+                "title",
                 "createdAt",
                 "userId"
             ],

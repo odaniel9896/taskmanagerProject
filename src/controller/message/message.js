@@ -17,7 +17,7 @@ module.exports = {
                     chatId : chatId
                 },
                 attributes: ["text", "userId", "groupId", "chatId", "createdAt"],
-                order: [["createdAt", "DESC"]]
+                order: [["createdAt", "ASC"]]
             })
             res.send(message);
         } catch (error) {

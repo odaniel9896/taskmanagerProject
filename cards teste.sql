@@ -1,5 +1,4 @@
 
-
 insert into cards(`description`, dueDate, `order`, listId, createdAt, updatedAt)
 values("teste6", current_timestamp(), 6, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
@@ -12,12 +11,32 @@ values("teste8", current_timestamp(), 8, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTA
 insert into cards(`description`, dueDate, `order`, listId, createdAt, updatedAt)
 values("teste9", current_timestamp(), 9, 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
+
 insert into productbacklogs(`description`, priority, groupId, createdAt, updatedAt)
-values(current_timestamp(), "urgente", 1, current_timestamp(), current_timestamp());
+values("vapova awrasasrwarwarawpo", "urgente", 1, current_timestamp(), current_timestamp());
+
+	insert into sprints(timeBox, createdAt, updatedAt)
+	values(current_timestamp(), current_timestamp(), current_timestamp());
+    
+insert into studentGroup(studentId, groupId, createdAt, updatedAt)
+values(2, 1, current_timestamp(), current_timestamp());
 
 
-insert into sprints(timeBox, storieId, createdAt, updatedAt)
-values(current_timestamp(), 1, current_timestamp(), current_timestamp());
+
+
+SELECT * FROM db_task_manager_project.productbacklogs;
+
+SELECT * FROM db_task_manager_project.sprints;
+
+
+
+
+
+
+
+
+
+
 
 SELECT * FROM db_task_manager_project.dailyscrums;
 select * from cards order by `order` asc
