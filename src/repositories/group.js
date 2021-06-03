@@ -45,9 +45,10 @@ module.exports = {
 
         return findGroupUser;
     },
-    async createGroup(name) {
+    async createGroup(name, req) {
         const group = await Group.create({
-            name
+            name,
+            image: req.file ? req.file.firebaseUrl : null
         });
         return group
     },

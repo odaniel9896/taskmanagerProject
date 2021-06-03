@@ -83,7 +83,7 @@ routes.get('/verify', emailMiddleware.verifyEmail);
 routes.use(authMiddleware)
 
 //Rotas para grupo
-routes.post("/group", groupValidator.create, groupController.store);
+routes.post("/group", uploadSingleImage, uploadFirebase, groupValidator.create, groupController.store);
 routes.get("/group", groupController.index);
 routes.get("/group/:groupId", groupController.find)
 routes.patch("/group/:inviteToken/add", memberGroup.addMemberGroup);
