@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    await queryInterface.bulkInsert('prioritys',
+    await queryInterface.bulkInsert('priorities',
       [
         {
           priority: 'Baixa',
@@ -29,6 +29,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('prioritys', null, {})
+    await queryInterface.bulkDelete('priorities', null, {})
   }
 };
