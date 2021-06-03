@@ -13,8 +13,6 @@ io.on("connection", async (socket) => {
     });
 
     socket.on("send_message", async (data) => {
-        // console.log(data);
-        // console.log(data.content.message);
             const message = await Message.create({
                 text: data.content.message,
                 userId: data.userId,
@@ -44,4 +42,3 @@ io.on("connection", async (socket) => {
 });
 
 module.exports = io;
-
