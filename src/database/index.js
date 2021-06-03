@@ -25,7 +25,7 @@ const Priority = require("../models/Priority");
 const Task = require("../models/Task");
 
 
-const connection = new Sequelize(dbConfig.url, dbConfig.config);
+const connection = new Sequelize(dbConfig);
 
 
 //INICIALIZA OS MODELS
