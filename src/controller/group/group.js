@@ -3,6 +3,7 @@ const Student = require("../../models/Student");
 const Teacher = require("../../models/Teacher");
 const { findGroupByPykStudentOrTeacher, createGroup, findGroupById } = require("../../repositories/group");
 const { findUserById } = require("../../repositories/user");
+const { createListsForWorkspace } = require("../../repositories/workspace");
 
 module.exports = {
     async index(req, res) {
@@ -47,6 +48,8 @@ module.exports = {
             await group.createChat({
                 room: "Sala geral"
             })
+
+            await createListsForWorkspace(group)
 
             res.status(201).send({
                 group: {
@@ -127,6 +130,10 @@ module.exports = {
                     {
                         association: "Chat",
                         attributes: ["id", "room"]
+                    },
+                    {
+                        association : "Workspace",
+                        attributes: ["id", "name"],
                     }
                 ]
             })
