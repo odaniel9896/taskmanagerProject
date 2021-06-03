@@ -16,7 +16,7 @@ module.exports = {
                 where: {
                     chatId : chatId
                 },
-                attributes: ["text", "userId", "groupId", "chatId", "createdAt"],
+                attributes: ["message", "userId", "groupId", "chatId", "createdAt"],
                 order: [["createdAt", "ASC"]]
             })
             res.send(message);

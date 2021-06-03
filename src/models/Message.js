@@ -12,7 +12,7 @@ class Message extends Model {
                     allowNull: false,
                     defaultValue: () => uuidv4(),
                 },
-                text: DataTypes.STRING,
+                message: DataTypes.STRING,
                 userId: DataTypes.INTEGER,
                 groupId: DataTypes.INTEGER,
                 chatId: DataTypes.INTEGER
