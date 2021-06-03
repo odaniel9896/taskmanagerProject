@@ -132,7 +132,7 @@ module.exports = {
                         attributes: ["id", "room"]
                     },
                     {
-                        association : "Workspace",
+                        association : "Workspaces",
                         attributes: ["id", "name"],
                     }
                 ]
