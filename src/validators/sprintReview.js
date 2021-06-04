@@ -4,6 +4,7 @@ module.exports = {
   create: celebrate({
     [Segments.BODY]: Joi.object().keys({
       feedback: Joi.string().min(8).max(255).required(),
+      wasDelivered: Joi.string().min(8).max(255).required(),
     }),
     [Segments.PARAMS]: Joi.object().keys({
         sprintId: Joi.number().required()

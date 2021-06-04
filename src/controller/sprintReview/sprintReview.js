@@ -6,7 +6,7 @@ module.exports = {
 
         const sprintId = req.params.sprintId;
 
-        const { feedback } = req.body;
+        const { feedback, wasDelivered } = req.body;
 
         try {
             const sprint = await findSprintById(sprintId)
@@ -16,6 +16,7 @@ module.exports = {
 
             const createSprintReview = await sprint.createSprintReview({
                 feedback: feedback,
+                wasDelivered : wasDelivered
             })
 
             res.status(201).send(createSprintReview);

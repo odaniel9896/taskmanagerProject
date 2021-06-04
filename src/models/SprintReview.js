@@ -6,6 +6,7 @@ class SprintReview extends Model {
             {
                 sprintId: DataTypes.INTEGER,
                 feedback: DataTypes.TEXT,
+                wasDelivered: DataTypes.TEXT,
             },
             {
                 sequelize,

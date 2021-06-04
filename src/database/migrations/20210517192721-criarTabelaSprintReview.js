@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
+      wasDelivered: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       sprintId: {
         type: Sequelize.INTEGER,
         allowNull: false,
