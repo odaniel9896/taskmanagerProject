@@ -15,7 +15,7 @@ describe("TEACHERS", () => {
   it("é possivel criar um novo professor", async () => {
     const response = await request(app).post("/teachers").send({
       name: "O Daniel vapo vapo",
-      email: "danielvapovapo95aaaaaa8@gmail.com",
+      email: "danielvapovapo95aaaaaa0008@gmail.com",
       password: "123456",
     });
 

@@ -14,7 +14,7 @@ describe("STUDENTS", () => {
   it("é possivel criar um novo estudante", async () => {
     const response = await request(app).post("/students").send({
       name: "O Daniel vapo vapo",
-      email: "danielvapovapo1aaaa0@gmail.com",
+      email: "danielvapovapo1aaaaaaa0@gmail.com",
       password: "123456",
     });
 
@@ -26,13 +26,13 @@ describe("STUDENTS", () => {
 
     let response = await request(app).post("/students").send({
       name: "O Daniel vapo",
-      email: "danielvapovapo100@gmail.com",
+      email: "danielvapovapo1000@gmail.com",
       password: "123456",
     });
 
     response = await request(app).post("/students").send({
         name: "O Daniel vapo",
-        email: "danielvapovapo100@gmail.com",
+        email: "danielvapovapo1000@gmail.com",
         password: "123456",
     });
 
