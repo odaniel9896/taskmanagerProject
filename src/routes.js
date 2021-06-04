@@ -52,6 +52,7 @@ const listValidator = require("./validators/lists");
 const workspaceValidator = require("./validators/workspace");
 const sprintPlanningValidator = require("./validators/sprintPlanning");
 const taskValidator = require("./validators/task");
+const { route } = require("./app");
 
 
 
@@ -135,6 +136,7 @@ routes.put("/cards/order/:cardId/:listId", cardOrderController.update);
 
 routes.post("/sprints/:groupId", sprintValidator.create, sprintController.store);
 routes.put("/sprints/:sprintId", sprintController.update);
+routes.get("/sprints/:sprintId", sprintController.find);
 
 //ROTAS PARA A DAILY_SCRUM
 
