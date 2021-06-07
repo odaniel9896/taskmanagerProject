@@ -17,7 +17,7 @@ module.exports = {
                     attributes: ["id", "name", "order", "createdAt"],
                     include: [
                         {
-                            association: "Card",
+                            association: "Cards",
                             attributes: ["id", "description", "dueDate", "order", "createdAt"],
                             include: [
                                 {

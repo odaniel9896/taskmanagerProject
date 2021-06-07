@@ -8,12 +8,6 @@ module.exports = {
             where: {
                 workspaceId: workspaceId
             },
-            include: [
-                {
-                    include: ["Card"],
-                    attributes: ["id", "name"]      
-                }
-            ],
             order: [["order", "ASC"]]
 
         })
