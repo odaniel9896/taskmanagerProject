@@ -23,6 +23,8 @@ const SprintRetrospective = require("../models/SprintRetrospective");
 const SprintPlanning = require("../models/SprintPlanning");
 const Priority = require("../models/Priority");
 const Task = require("../models/Task");
+const Question = require("../models/Question");
+const Answer = require("../models/Answer");
 
 
 const connection = new Sequelize(dbConfig);
@@ -50,6 +52,8 @@ SprintPlanning.init(connection);
 Sprint.init(connection);
 Priority.init(connection);
 Task.init(connection);
+Question.init(connection);
+Answer.init(connection);
 
 
 
@@ -74,6 +78,8 @@ SprintPlanning.associate(connection.models);
 Sprint.associate(connection.models);
 Priority.associate(connection.models);
 Task.associate(connection.models);
+Question.associate(connection.models);
+Answer.associate(connection.models);
 
 
 // for (let assoc of Object.keys(Group.associations)) {
