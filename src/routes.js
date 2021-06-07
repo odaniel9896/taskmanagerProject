@@ -26,6 +26,8 @@ const sprintPlanningController = require("./controller/sprintPlanning/sprintPlan
 const feedController = require("./controller/feed/feed");
 const messageController = require("./controller/message/message");
 const taskController  = require("./controller/tasks/task");
+const questionController = require("./controller/questions/questions");
+const answerController = require("./controller/answers/answers");
 
 //IMPORT DOS SERVICES
 
@@ -52,7 +54,8 @@ const listValidator = require("./validators/lists");
 const workspaceValidator = require("./validators/workspace");
 const sprintPlanningValidator = require("./validators/sprintPlanning");
 const taskValidator = require("./validators/task");
-const { route } = require("./app");
+const questionValidators = require("./validators/questions");
+const answerValidators = require("./validators/answers");
 
 
 
@@ -175,5 +178,24 @@ routes.get("/messages/:chatId", messageController.index);
 
 routes.post("/task/:cardId", taskValidator.create, taskController.store);
 routes.delete("/task/:taskId/:cardId", taskController.delete);
+
+
+//ROTAS PARA O PORTAL DE PERGUNTAS E RESPOSTAS
+
+routes.post(
+    "/questions",
+    uploadSingleImage,
+    uploadFirebase,
+    questionValidators.create,
+    questionController.store
+);
+routes.delete("/questions/:questionId", questionController.delete);
+routes.put("/questions/:questionId", questionController.update);
+
+routes.post(
+    "/questions/:questionId/answers",
+    answerValidators.create,
+    answerController.store
+);
 
 module.exports = routes;
