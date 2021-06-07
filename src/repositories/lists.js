@@ -5,18 +5,6 @@ module.exports = {
 
         const list = await List.findAll({
             attributes: ["id", "name", "order"],
-            include: [
-                {
-                    association: "Workspace",
-                    attributes: ["id", "name"],
-                    include: [
-                        {
-                            association: "Group",
-                            attributes: ["id", "name"],
-                        }
-                    ]
-                }
-            ],
             where: {
                 workspaceId: workspaceId
             },
