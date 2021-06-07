@@ -168,7 +168,8 @@ routes.post("/sprintPlanning/:sprintId", sprintPlanningValidator.create, sprintP
 
 // ROTAS PARA O FEED
 
-routes.get("/feed/:workspaceId", feedController.index); 
+routes.get("/feed/:workspaceId", feedController.index);
+routes.get("/questionFeed", feedController.indexQuestion); 
 
 // ROTAS PARA AS MENSAGENS
 
