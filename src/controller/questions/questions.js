@@ -47,7 +47,7 @@ module.exports = {
       if (!question)
         return res.status(404).send({ error: "Questão não encontrada" });
 
-      if (question.userId != userId)
+      if (question.UserId !== userId)
         return res.status(401).send({ error: "Não autorizado" });
 
       question.title = title;
