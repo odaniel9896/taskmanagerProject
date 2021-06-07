@@ -121,7 +121,7 @@ routes.post("/workspace/:groupId", workspaceValidator.create, workspaceControlle
 
 //ROTAS PARA LISTAS
 
-routes.get("/lists/:groupId", listController.index);
+routes.get("/lists/:workspaceId", listController.index);
 routes.post("/lists/:groupId", listValidator.create, listController.store);
 routes.put("/lists/:listId/:workspaceId", listController.update);
 routes.delete("/lists/:listId/:groupId", listController.delete);

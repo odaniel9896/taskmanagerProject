@@ -3,25 +3,23 @@ const List = require("../../models/List");
 const { findGroupWorkspace } = require("../../repositories/group");
 const { findAllList, countList, createList, findOneList } = require("../../repositories/lists");
 const { findUserById } = require("../../repositories/user");
+const { findWorkspaceByPk } = require("../../repositories/workspace");
 
 
 module.exports = {
     async index(req, res) {
 
 
-        const groupId = req.params.groupId;
+        const workspaceId = req.params.workspaceId;
 
         try {
 
-            const group = await findGroupWorkspace(groupId);
+            const workspace = await findWorkspaceByPk(workspaceId);
 
-            if (!group)
-                return res.status(404).send({ error: "Grupo não existe" });
+            if (!workspace)
+                return res.status(404).send({ error: "Workspace não existe" });
 
-            if (!group.Workspace.id)
-                return res.status(404).send({ error: "Esse grupo não tem uma workspace" });
-
-            const list = await findAllList({workspaceId : group.Workspace.id})
+            const list = await findAllList({workspaceId : workspaceId})
 
             res.send(list)
         } catch (error) {
