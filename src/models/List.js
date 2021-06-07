@@ -15,7 +15,7 @@ class List extends Model {
     }
     static associate(models) {
         this.belongsTo(models.Workspace);
-        this.hasOne(models.Card);
+        this.hasMany(models.Card);
 
     }
 }
