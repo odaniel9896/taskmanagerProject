@@ -8,8 +8,13 @@ module.exports = {
             where: {
                 workspaceId: workspaceId
             },
+            include: [
+                {
+                    association : "Cards",
+                    attributes: ["id", "description"]
+                }
+            ],
             order: [["order", "ASC"]]
-
         })
 
         return list;
