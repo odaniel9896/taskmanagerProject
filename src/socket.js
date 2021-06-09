@@ -14,12 +14,12 @@ io.on("connection", async (socket) => {
 
     socket.on("send_message", async (data) => {
             const message = await Message.create({
-                message: data.content.message,
+                message: data.message,
                 userId: data.userId,
                 groupId: data.groupId,
                 chatId: data.chatId,
             });
-            socket.to(data.chatId).emit("receive_message", data.content);
+            socket.to(data.chatId).emit("receive_message", data);
     });
 
     socket.on("disconnect", () => {
