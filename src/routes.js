@@ -135,6 +135,8 @@ routes.put("/cards/:cardId", cardController.update);
 routes.delete("/cards/:cardId", cardController.delete);
 routes.put("/cards/order/:cardId/:listId", cardOrderController.update);
 
+routes.put("/cards/list/:cardId/:listId", cardOrderController.updateList);
+
 //ROTAS PARA A SPRINTS
 
 routes.post("/sprints/:groupId", sprintValidator.create, sprintController.store);

@@ -11,10 +11,10 @@ module.exports = {
             include: [
                 {
                     association : "Cards",
-                    attributes: ["id", "description"]
+                    attributes: ["id", "description"],
+                    order: [["order", "DESC"]],
                 }
             ],
-            order: [["order", "ASC"]]
         })
 
         return list;
