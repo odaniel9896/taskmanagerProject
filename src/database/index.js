@@ -27,7 +27,7 @@ const Question = require("../models/Question");
 const Answer = require("../models/Answer");
 
 
-const connection = new Sequelize(dbConfig);
+const connection = new Sequelize(dbConfig.url, dbConfig.config);
 
 
 //INICIALIZA OS MODELS
