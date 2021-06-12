@@ -1,7 +1,70 @@
+const { Op } = require("sequelize");
 const Question = require("../../models/Question");
 const { findUserById } = require("../../repositories/user");
 
 module.exports = {
+  async index(req, res) {
+    const { search } = req.query;
+
+    try {
+      const questions = await Question.findAll({
+        where: {
+          [Op.or]: [
+            {
+              title: {
+                [Op.substring]: search,
+              },
+            },
+            {
+              description: {
+                [Op.substring]: search,
+              },
+            },
+          ],
+        },
+        attributes: [
+          "id",
+          "title",
+          "description",
+          "image",
+          "createdAt",
+          "UserId",
+        ],
+        include: [
+          {
+            association: "User",
+            attributes: ["id", "role"],
+            include: [
+              {
+                association: "Student",
+                attributes: ["name", "profileImage"],
+              },
+            ],
+          },
+          {
+            association: "Answers",
+            attributes: ["id", "description", "createdAt"],
+            include: {
+              association: "User",
+              attributes: ["id", "role"],
+              include: [
+                {
+                  association: "Student",
+                  attributes: ["name", "profileImage"],
+                },
+              ],
+            },
+          },
+        ],
+        order: [["createdAt", "DESC"]],
+      });
+      console.log(questions)
+      res.send(questions);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);console.log(error)
+    }
+  },
   async store(req, res) {
     const { title, description } = req.body;
 

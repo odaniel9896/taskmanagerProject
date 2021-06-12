@@ -194,6 +194,7 @@ routes.post(
 );
 routes.delete("/questions/:questionId", questionController.delete);
 routes.put("/questions/:questionId", questionController.update);
+routes.get("/questions", questionController.index);
 
 routes.post(
     "/questions/:questionId/answers",
