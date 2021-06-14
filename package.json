@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev" : "nodemon src/server.js",
-    "start": "nodemon src/server.js",
+    "start": "node src/server.js",
     "pretest": "cross-env NODE_ENV=test sequelize db:migrate",
     "test": "jest",
     "posttest": "cross-env NODE_ENV=test sequelize db:migrate:undo:all"
