@@ -36,11 +36,13 @@ module.exports = {
 
         return createUser;
     },
-    async createInvite(groupId, tokenInvite) {
-        const createInvite = await User.createInvite({
+    async createInvite(user, groupId, tokenInvite) {
+        const createInvite = await user.createInvite({
             groupId: groupId,
             inviteToken: tokenInvite
-        });
+        })
+
+        console.log(createInvite)
         return createInvite
     }
 }

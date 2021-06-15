@@ -24,7 +24,7 @@ module.exports = {
 
             const tokenInvite = randomstring.generate(120);
 
-            await createInvite(groupId, tokenInvite)
+            await createInvite(user, groupId, tokenInvite)
 
             let path = urlSend.generate({
                 baseUrl: 'http://localhost:3000',
