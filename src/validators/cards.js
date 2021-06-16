@@ -4,7 +4,7 @@ module.exports = {
   create: celebrate({
     [Segments.BODY]: Joi.object().keys({
       description: Joi.string().min(8).max(255).required(),
-      dueDate: Joi.date().iso().required(),
+      dueDate: Joi.date().iso(),
       users: Joi.array(),
     }),
     [Segments.PARAMS]: Joi.object().keys({

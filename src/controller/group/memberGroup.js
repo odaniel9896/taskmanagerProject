@@ -28,7 +28,7 @@ module.exports = {
 
             let path = urlSend.generate({
                 baseUrl: 'http://localhost:3000',
-                path: 'group/:inviteToken/add',
+                path: 'confirmGroup/:inviteToken/add',
                 params: {
                     inviteToken: tokenInvite
                 },
@@ -39,7 +39,7 @@ module.exports = {
             const url = path;
 
             sendEmail(email, url)
-            res.send("Email de convite enviado")
+
         } catch (error) {
             console.log(error);
             res.status(500).send(error);
