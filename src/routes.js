@@ -183,6 +183,7 @@ routes.get("/messages/:chatId", messageController.index);
 routes.post("/task/:cardId", taskValidator.create, taskController.store);
 routes.delete("/task/:taskId/:cardId", taskController.delete);
 routes.get("/tasks/:cardId", taskController.index);
+routes.put("/task/:taskId", taskController.update);
 
 
 //ROTAS PARA O PORTAL DE PERGUNTAS E RESPOSTAS

@@ -65,5 +65,27 @@ module.exports = {
             console.log(error);
             res.status(500).send(error);
         }
+    },
+    async update(req, res) {
+        const taskId = req.params.taskId
+
+        try {
+            const task = await Task.findByPk(taskId);
+
+            if(!task)
+                return res.status(404).send({ error: "Tarefa não encontrada"})
+
+            if(task.checked === false)
+                task.checked = true;
+            else
+                task.checked = false;
+                
+            task.save();
+            
+            res.send().status(200);
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
     }
 }
