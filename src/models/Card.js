@@ -5,11 +5,12 @@ class Card extends Model {
         super.init(
             {
                 description: DataTypes.STRING,
+                progress: DataTypes.STRING,
                 initialDate: DataTypes.DATE,
                 dueDate: DataTypes.DATE,
                 order: DataTypes.INTEGER,
                 listId: DataTypes.INTEGER,
-                storieId: DataTypes.INTEGER,
+                priorityId: DataTypes.INTEGER,
             },
             {
                 sequelize,
@@ -19,8 +20,9 @@ class Card extends Model {
     static associate(models) {
         this.belongsTo(models.List);
         this.belongsToMany(models.User, { through: "usersCard" });
-        this.belongsTo(models.ProductBacklog, {foreignKey: "storieId"});
         this.hasMany(models.Task);
+        this.belongsTo(models.Priority)
+
     }
 }
 

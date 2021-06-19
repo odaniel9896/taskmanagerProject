@@ -26,6 +26,7 @@ const sprintPlanningController = require("./controller/sprintPlanning/sprintPlan
 const feedController = require("./controller/feed/feed");
 const messageController = require("./controller/message/message");
 const taskController  = require("./controller/tasks/task");
+const cardInfoController = require("./controller/card/cardsInfo");
 const questionController = require("./controller/questions/questions");
 const answerController = require("./controller/answers/answers");
 
@@ -50,6 +51,7 @@ const sprintReviewValidator = require("./validators/sprintReview");
 const storiesValidator = require("./validators/stories");
 const sprintValidator = require("./validators/sprint");
 const cardValidator = require("./validators/cards");
+const cardInfoValidator = require("./validators/cardsInfo");
 const listValidator = require("./validators/lists");
 const workspaceValidator = require("./validators/workspace");
 const sprintPlanningValidator = require("./validators/sprintPlanning");
@@ -136,6 +138,9 @@ routes.delete("/cards/:cardId", cardController.delete);
 routes.put("/cards/order/:cardId/:listId", cardOrderController.update);
 
 routes.put("/cards/list/:cardId/:listId", cardOrderController.updateList);
+
+routes.put("/cards/info/:cardId", cardInfoController.update, cardInfoController.update);
+routes.get("/cards/info/:cardId", cardInfoController.index);
 
 //ROTAS PARA A SPRINTS
 

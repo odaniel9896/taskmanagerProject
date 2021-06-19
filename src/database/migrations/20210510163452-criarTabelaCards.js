@@ -21,25 +21,27 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true,
       },
+      progress: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       order: {
         type : Sequelize.INTEGER,
         allowNull: false,
+      },
+      priorityId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "priorities",
+          key: "id"
+        },
       },
       listId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: "lists",
-          key: "id"
-        },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE"
-      },
-      storieId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: "productBacklogs",
           key: "id"
         },
         onUpdate: "CASCADE",

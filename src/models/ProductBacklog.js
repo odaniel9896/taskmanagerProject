@@ -17,7 +17,6 @@ class ProductBacklog extends Model {
     static associate(models) {
         this.belongsTo(models.Sprint);
         this.belongsTo(models.Group);
-        this.hasOne(models.Card, {foreignKey: "storieId"});
         this.belongsTo(models.Priority)
     }
 }
