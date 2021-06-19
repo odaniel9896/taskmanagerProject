@@ -25,6 +25,7 @@ const Priority = require("../models/Priority");
 const Task = require("../models/Task");
 const Question = require("../models/Question");
 const Answer = require("../models/Answer");
+const Progress = require("../models/Progress");
 
 
 const connection = new Sequelize(dbConfig.url, dbConfig.config);
@@ -54,6 +55,7 @@ Priority.init(connection);
 Task.init(connection);
 Question.init(connection);
 Answer.init(connection);
+Progress.init(connection);
 
 
 
@@ -80,6 +82,7 @@ Priority.associate(connection.models);
 Task.associate(connection.models);
 Question.associate(connection.models);
 Answer.associate(connection.models);
+Progress.associate(connection.models);
 
 
 for (let assoc of Object.keys(Group.associations)) {

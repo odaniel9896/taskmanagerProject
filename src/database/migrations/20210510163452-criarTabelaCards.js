@@ -21,9 +21,13 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true,
       },
-      progress: {
-        type: Sequelize.STRING,
-        allowNull: true,
+      progressId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "progress",
+          key: "id"
+        },
       },
       order: {
         type : Sequelize.INTEGER,

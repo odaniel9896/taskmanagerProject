@@ -5,7 +5,7 @@ class Card extends Model {
         super.init(
             {
                 description: DataTypes.STRING,
-                progress: DataTypes.STRING,
+                progressId: DataTypes.INTEGER,
                 initialDate: DataTypes.DATE,
                 dueDate: DataTypes.DATE,
                 order: DataTypes.INTEGER,
@@ -22,6 +22,7 @@ class Card extends Model {
         this.belongsToMany(models.User, { through: "usersCard" });
         this.hasMany(models.Task);
         this.belongsTo(models.Priority)
+        this.belongsTo(models.Progress)
 
     }
 }
