@@ -57,7 +57,7 @@ module.exports = {
                 return res.status(404).send({ error: "Card não encontrado"})
 
             const listCard = await card.getTasks({
-                attributes: ["id", "task", "dueDate", "cardId", "createdAt", "updatedAt"]
+                attributes: ["id", "task", "dueDate", "cardId", "createdAt", "updatedAt", "checked"]
             });
             
             res.send(listCard)
