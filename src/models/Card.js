@@ -10,7 +10,6 @@ class Card extends Model {
                 order: DataTypes.INTEGER,
                 listId: DataTypes.INTEGER,
                 storieId: DataTypes.INTEGER,
-                priorityId: DataTypes.INTEGER,            
             },
             {
                 sequelize,
@@ -22,7 +21,6 @@ class Card extends Model {
         this.belongsToMany(models.User, { through: "usersCard" });
         this.belongsTo(models.ProductBacklog, {foreignKey: "storieId"});
         this.hasMany(models.Task);
-        this.hasOne(models.Priority)
     }
 }
 
