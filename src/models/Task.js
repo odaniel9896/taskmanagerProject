@@ -6,6 +6,7 @@ class Task extends Model {
             {
                 task: DataTypes.STRING,
                 dueDate: DataTypes.DATE,
+                checked: DataTypes.BOOLEAN,
                 cardId: DataTypes.INTEGER            
             },
             {
