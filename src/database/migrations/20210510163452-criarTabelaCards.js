@@ -13,9 +13,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      initialDate: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
       dueDate: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       order: {
         type : Sequelize.INTEGER,
