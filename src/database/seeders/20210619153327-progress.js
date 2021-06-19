@@ -6,17 +6,17 @@ module.exports = {
     await queryInterface.bulkInsert('progress',
       [
         {
-          priority: 'Em andamento',
+          progress: 'Em andamento',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          priority: 'Não iniciada',
+          progress: 'Não iniciada',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          priority: 'Concluida',
+          progress: 'Concluida',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
