@@ -6,7 +6,7 @@ module.exports = {
       name: Joi.string().min(8).max(255).required(),
     }),
     [Segments.PARAMS]: Joi.object().keys({
-        workspaceId: Joi.number().required()
+        groupId: Joi.number().required()
     }),
   }),
 }
