@@ -162,6 +162,7 @@ routes.get("/sprintRetrospective/:sprintId", sprintRetrospectiveController.index
 
 routes.post("/stories/:groupId", storiesValidator.create, productBacklogController.store);
 routes.delete("/stories/:storieId/:groupId", storiesValidator.delete, productBacklogController.delete);
+routes.get("/stories/:groupId", productBacklogController.index);
 
 //ROTAS PARA A SPRINT SprintPlanning
 
