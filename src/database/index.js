@@ -82,9 +82,9 @@ Question.associate(connection.models);
 Answer.associate(connection.models);
 
 
-for (let assoc of Object.keys(Question.associations)) {
-    for (let accessor of Object.keys(Question.associations[assoc].accessors)) {
-        console.log(Question.name + '.' + Question.associations[assoc].accessors[accessor] + '()');
+for (let assoc of Object.keys(Card.associations)) {
+    for (let accessor of Object.keys(Card.associations[assoc].accessors)) {
+        console.log(Card.name + '.' + Card.associations[assoc].accessors[accessor] + '()');
     }
 }
 module.exports = connection

@@ -46,5 +46,24 @@ module.exports = {
              console.log(error);
             res.status(500).send(error);
         }
+    },
+    async index(req, res) {
+        const cardId = req.params.cardId;
+
+        try {
+            const card = await Card.findByPk(cardId);
+
+            if(!card)
+                return res.status(404).send({ error: "Card não encontrado"})
+
+            const listCard = await card.getTasks({
+                attributes: ["id", "task", "dueDate", "cardId", "createdAt", "updatedAt"]
+            });
+            
+            res.send(listCard)
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
     }
 }
