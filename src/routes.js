@@ -100,6 +100,8 @@ routes.delete("/group/:id", groupController.delete);
 routes.put("/group/:id", groupController.update);
 routes.delete("/group/:groupId/students/:idDeleteUser", memberGroup.deleteMemberGroup);
 
+routes.get("/group/users/:groupId", memberGroup.indexMemberGroup)
+
 //Rotas para enviar imagens
 routes.post("/user/images", uploadSingleImage, uploadFirebase, userImage.store);
 routes.post("/group/images", uploadSingleImage, uploadFirebase, groupImage.store);
