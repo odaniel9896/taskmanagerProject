@@ -28,29 +28,44 @@ module.exports = {
   async index(req, res) {
     const cardId = req.params.cardId;
 
+    const { userRole } = req;
+
     try {
 
+
+      const role = userRole === "student" ? "Student" : "Teacher"
+
       const card = await Card.findOne({
-          where : { 
-              id : cardId
+        where: {
+          id: cardId,
+        },
+        attributes: ["id", "initialDate", "dueDate"],
+        include: [
+          {
+            association: "Progress",
+            attributes: ["id", "progress"],
           },
-          attributes: ["id", "initialDate", "dueDate"],
-          include : [
-            {
-              association: "Progress",
-              attributes: ["id", "progress"]
-            },
-            {
-              association: "Priority",
-              attributes: ["id", "priority"]
-            }
-          ]
+          {
+            association: "Priority",
+            attributes: ["id", "priority"],
+          },
+          {
+            association: "Users",
+            attributes: ["id"],
+            through: { attributes: [] },
+            include: [
+              {
+                association: `${role}`,
+                attributes: ["id", "name", "profileImage"],
+              },
+            ],
+          },
+        ],
       });
 
-      if (!card)  
-        return res.status(404).send({ error: "Card não encontrado" });
+      if (!card) return res.status(404).send({ error: "Card não encontrado" });
 
-      res.send(card).status(200)
+      res.send(card).status(200);
     } catch (error) {
       console.log(error);
       res.status(500).send(error);
