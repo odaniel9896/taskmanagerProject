@@ -39,7 +39,7 @@ module.exports = {
             const url = path;
 
             sendEmail(email, url)
-
+            res.send().status(200)
         } catch (error) {
             console.log(error);
             res.status(500).send(error);
