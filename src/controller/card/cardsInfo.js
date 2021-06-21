@@ -39,7 +39,7 @@ module.exports = {
         where: {
           id: cardId,
         },
-        attributes: ["id", "initialDate", "dueDate"],
+        attributes: ["id", "initialDate", "dueDate", "updatedAt", "createdAt"],
         include: [
           {
             association: "Progress",
