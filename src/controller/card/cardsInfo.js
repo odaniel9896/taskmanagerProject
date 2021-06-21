@@ -3,7 +3,7 @@ const { findOneCard } = require("../../repositories/cards");
 
 module.exports = {
   async update(req, res) {
-    const { initialDate, dueDate } = req.body;
+    const { initialDate, dueDate, progressId, priorityId } = req.body;
 
     const cardId = req.params.cardId;
 
@@ -14,6 +14,8 @@ module.exports = {
 
       card.initialDate = initialDate;
       card.dueDate = dueDate;
+      card.progressId = progressId;
+      card.priorityId = priorityId;
 
       card.save();
 
@@ -32,10 +34,20 @@ module.exports = {
           where : { 
               id : cardId
           },
-          attributes: ["id", "initialDate", "dueDate"]
+          attributes: ["id", "initialDate", "dueDate"],
+          include : [
+            {
+              association: "Progress",
+              attributes: ["id", "progress"]
+            },
+            {
+              association: "Priority",
+              attributes: ["id", "priority"]
+            }
+          ]
       });
 
-      if (!card) 
+      if (!card)  
         return res.status(404).send({ error: "Card não encontrado" });
 
       res.send(card).status(200)

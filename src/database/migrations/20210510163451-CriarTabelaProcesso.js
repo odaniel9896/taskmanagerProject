@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('progress', {
+    queryInterface.createTable('progresses', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -24,6 +24,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("progress")
+    queryInterface.dropTable("progresses")
   }
 };
