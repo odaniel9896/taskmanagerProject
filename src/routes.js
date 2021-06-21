@@ -29,6 +29,8 @@ const taskController  = require("./controller/tasks/task");
 const cardInfoController = require("./controller/card/cardsInfo");
 const questionController = require("./controller/questions/questions");
 const answerController = require("./controller/answers/answers");
+const progressController = require("./controller/progress/progress");
+const priorityController = require("./controller/priority/priority");
 
 //IMPORT DOS SERVICES
 
@@ -209,5 +211,10 @@ routes.post(
     answerValidators.create,
     answerController.store
 );
+
+//PROGRESSOES E PRIORITIES
+
+routes.get("/priorities", priorityController.index);
+routes.get("/progresses", progressController.index);
 
 module.exports = routes;
