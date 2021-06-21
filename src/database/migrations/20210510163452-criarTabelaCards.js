@@ -23,7 +23,7 @@ module.exports = {
       },
       progressId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "progress",
           key: "id"
@@ -35,7 +35,7 @@ module.exports = {
       },
       priorityId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "priorities",
           key: "id"
