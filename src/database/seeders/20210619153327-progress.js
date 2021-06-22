@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    await queryInterface.bulkInsert('progress',
+    await queryInterface.bulkInsert('progresses',
       [
         {
           progress: 'Em andamento',
@@ -24,6 +24,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('progress', null, {})
+    await queryInterface.bulkDelete('progresses', null, {})
   }
 };
