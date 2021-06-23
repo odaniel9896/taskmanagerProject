@@ -28,7 +28,7 @@ module.exports = {
                 name,
                 id: createUser.id
             });
-            const url = `http://localhost:3333/verify?confirmationCode=${rand}`
+            const url = `https://tecnotcc.herokuapp.com/verify?confirmationCode=${rand}`
 
             sendEmail(
                 email,
