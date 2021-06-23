@@ -66,7 +66,7 @@ module.exports = {
         listId: listId,
         order: totalCardList + 1,
       });
-      res.status(200);
+      res.status(200).send();
     } catch (error) {
       console.log(error);
     }
