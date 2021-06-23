@@ -1,20 +1,20 @@
 const app = require("./app");
 const app2 = require("./app");
 
-const PORT = 3333;
-const PORT2 = 3002;
+const PORT = process.env.PORT || 3333;
+//const PORT2 = process.env.PORT || 3002;
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`)
 });
 
-const serverWebsocket = app2.listen(PORT2, () => {
-    console.log("Servidor rodando na porta 3002")
-});
+// const serverWebsocket = app2.listen(PORT2, () => {
+//     console.log("Servidor rodando na porta 3002")
+// });
 
-module.exports = serverWebsocket;
+// module.exports = serverWebsocket;
 
-require("./socket");
+// require("./socket");
 
 // const io = socket(serverWebsocket);
 
