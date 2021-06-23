@@ -13,7 +13,7 @@ module.exports = {
 
             const token = user.passwordToken;
             
-            const url = `http://localhost:3000/passwordreset?passwordToken=${token}`
+            const url = `https://tecnotcc.netlify.app/passwordreset?passwordToken=${token}`
             sendEmail(
                 email,
                 url

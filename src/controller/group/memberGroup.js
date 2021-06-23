@@ -25,7 +25,7 @@ module.exports = {
       await createInvite(user, groupId, tokenInvite);
 
       let path = urlSend.generate({
-        baseUrl: "http://localhost:3000",
+        baseUrl: "https://tecnotcc.netlify.app",
         path: "confirmGroup/:inviteToken/add",
         params: {
           inviteToken: tokenInvite,
