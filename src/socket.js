@@ -18,6 +18,7 @@ io.on("connection", async (socket) => {
                 userId: data.userId,
                 groupId: data.groupId,
                 chatId: data.chatId,
+                createdAt: data.createdAt,
             });
             socket.to(data.chatId).emit("receive_message", data);
     });
