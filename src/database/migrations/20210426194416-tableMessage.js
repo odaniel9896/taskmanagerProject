@@ -3,7 +3,7 @@
 const { v4: uuidv4 } = require('uuid');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('messages', {
+    queryInterface.createTable('Messages', {
       id: {
         type: Sequelize.UUID,
         defaultValue: uuidv4(),
@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "users",
+          model: "Users",
           key: "id"
         },
         onUpdate: "CASCADE",
@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "chats",
+          model: "Chats",
           key: "id"
         },
         onUpdate: "CASCADE",
@@ -38,7 +38,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: "groups",
+          model: "Groups",
           key: "id"
         },
         onUpdate: "CASCADE",
@@ -56,6 +56,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("messages")
+    queryInterface.dropTable("Messages")
   }
 };

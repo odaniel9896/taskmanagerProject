@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('annotations', {
+    queryInterface.createTable('Annotations', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "users",
+          model: "Users",
           key: "id"
         },
         onUpdate: "CASCADE",
@@ -39,6 +39,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("annotations")
+    queryInterface.dropTable("Annotations")
   }
 };

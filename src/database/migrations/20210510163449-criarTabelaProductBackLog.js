@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('productBacklogs', {
+    queryInterface.createTable('ProductBacklogs', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "priorities",
+          model: "Priorities",
           key: "id"
         },
       },
@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "groups",
+          model: "Groups",
           key: "id"
         },
       },
@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: "sprints",
+          model: "Sprints",
           key: "id"
         },
       },
@@ -49,6 +49,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("productBacklogs")
+    queryInterface.dropTable("ProductBacklogs")
   }
 };

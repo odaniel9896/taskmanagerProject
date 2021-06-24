@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('cards', {
+    queryInterface.createTable('Cards', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: "progresses",
+          model: "Progresses",
           key: "id"
         },
       },
@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: "priorities",
+          model: "Priorities",
           key: "id"
         },
       },
@@ -45,7 +45,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "lists",
+          model: "Lists",
           key: "id"
         },
         onUpdate: "CASCADE",
@@ -63,6 +63,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("cards");
+    queryInterface.dropTable("Cards");
   }
 };

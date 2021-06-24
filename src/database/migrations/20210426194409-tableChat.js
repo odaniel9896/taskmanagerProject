@@ -3,7 +3,7 @@
 const { v4: uuidv4 } = require('uuid');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('chats', {
+    queryInterface.createTable('Chats', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "groups",
+          model: "Groups",
           key: "id"
         },
         onUpdate: "CASCADE",
@@ -37,6 +37,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable("chats")
+    queryInterface.dropTable("Chats")
   }
 };
