@@ -21,7 +21,7 @@ module.exports = {
             else
                 userUpdate = Student    
 
-            const userImage = await findStudentByPk(userId);
+            const userImage = await userUpdate.findByPk(userId);
 
             userImage.profileImage = firebaseUrl;
 
