@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.createTable('UserChat', { 
+    queryInterface.createTable('userChat', { 
       chatId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -35,6 +35,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    queryInterface.dropTable('UserChat');
+    queryInterface.dropTable('userChat');
   }
 };
