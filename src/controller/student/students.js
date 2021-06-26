@@ -98,24 +98,30 @@ module.exports = {
 
                 let student = await findStudentByPk(userId);
 
-                student.name = name;
+                if(name) 
+                    student.name = name;
 
-                student.email = email;
-                student.password = newPassword;
+                if(email)
+                    user.email = email;
+                
+                if(newPassword)    
+                    user.password = newPassword;
 
                 student.save();
+                user.save();
                 res.status(200).send();
-
             }
             else {
                 let student = await findStudentByPk(userId);
 
-                student.name = name;
+                if(name) 
+                    student.name = name;
 
-                student.email = email;
-                student.password = newPassword;
-
+                if(email)  
+                    user.email = email;
+                
                 student.save();
+                user.save();
                 res.status(200).send();
             }
         } catch (error) {
