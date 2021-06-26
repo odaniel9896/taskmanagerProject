@@ -85,24 +85,30 @@ module.exports = {
 
                 let teacher = await findTeacherByPk(userId);
 
-                teacher.name = name;
-
-                teacher.email = email;
-                teacher.password = newPassword;
+                if(name)
+                    teacher.name = name;
+                
+                if(email)    
+                    user.email = email;
+                
+                if(newPassword)     
+                    user.password = newPassword;
 
                 teacher.save();
+                user.save();
                 res.status(200).send();
-
             }
             else {
                 let teacher = await findTeacherByPk(userId);
 
-                teacher.name = name ;
+                if(name)
+                    teacher.name = name ;
 
-                teacher.email = email;
-                teacher.password = newPassword;
+                if(email)    
+                    user.email = email;
 
                 teacher.save();
+                user.save();
                 res.status(200).send();
             }
         } catch (error) {
