@@ -37,6 +37,10 @@ module.exports = {
                             attributes: ["id", "name"],
                             through: { attributes: [] }
                         },
+                        {
+                            association: "Chat",
+                            attributes: ["id"],
+                        }
                     ]
                 },
 
