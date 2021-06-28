@@ -71,7 +71,7 @@ const verifyEmail = async (req, res) => {
       user.isValid = true;
       user.save();
     }
-    res.redirect("http://tecnotcc.herokuapp.com/confirmemail");
+    res.redirect("https://tecnotcc.herokuapp.com/confirmemail");
     console.log(res.redirect);
   } else {
     console.log("Status atualizado");
