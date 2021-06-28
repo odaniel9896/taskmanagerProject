@@ -16,6 +16,7 @@ module.exports = {
 
     try {
       const user = await findUserById(userId);
+      console.log(user)
 
       if (!user)
         return res.status(404).send({ error: "Usuário não encontrado" });
@@ -36,7 +37,14 @@ module.exports = {
       const email = emailSend;
       const url = path;
 
-      sendEmail(email, url);
+      const replacements = {
+        email: emailSend,
+        url : url
+      };
+
+      const viewUrl = "/views/ConfirmGroupInvite/index.html";
+
+      sendEmail(email, replacements, viewUrl);
       res.send().status(200);
     } catch (error) {
       console.log(error);
@@ -95,30 +103,27 @@ module.exports = {
             .status(404)
             .send({ error: "Você não faz parte desse grupo" });
       } else
-        return res
-          .status(404)
-          .send({
-            error: "Você não tem permissão para apagar um estudante do grupo",
-          });
+        return res.status(404).send({
+          error: "Você não tem permissão para apagar um estudante do grupo",
+        });
     } catch (error) {
       console.log(error);
       res.status(500).send(error);
     }
   },
   async indexMemberGroup(req, res) {
-
     const groupId = req.params.groupId;
 
     try {
-        const group = await Group.findByPk(groupId)
+      const group = await Group.findByPk(groupId);
 
-        if(!group)
-            return res.status(404).send({ error: "Grupo não encontrado"});
-        const listStudents = await group.getStudents();
-        
-        const listTeachers = await group.getTeachers();
+      if (!group)
+        return res.status(404).send({ error: "Grupo não encontrado" });
+      const listStudents = await group.getStudents();
 
-        res.send([...listTeachers, ...listStudents]).status(200);
+      const listTeachers = await group.getTeachers();
+
+      res.send([...listTeachers, ...listStudents]).status(200);
     } catch (error) {
       console.log(error);
     }

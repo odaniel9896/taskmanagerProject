@@ -1,0 +1,229 @@
+<html>
+  <head>
+    <title>Confirmação de email</title>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" type="text/css" href="./styles.css" /> -->
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        font-family: Roboto;
+      }
+
+      .centerObject {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      a:link,
+      a:visited,
+      a:active {
+        text-decoration: none;
+      }
+
+      h1 {
+        margin-top: 15px;
+        margin-left: 40px;
+
+        color: white;
+      }
+
+      h2 {
+        margin-bottom: 40px;
+
+        font-size: 28px;
+        color: #1f1456;
+      }
+
+      #Container {
+        max-width: 700px;
+        min-height: 630px;
+        height: auto;
+        overflow: hidden;
+
+        border: solid 2px #1f1456;
+      }
+
+      header {
+        width: 100%;
+        height: 100px;
+
+        display: flex;
+        padding: 15px;
+
+        background-color: #1f1456;
+      }
+
+      header > img {
+        width: 85px;
+        height: 70px;
+      }
+
+      #Conteudo {
+        width: 100%;
+        min-height: 100px;
+        height: auto;
+        overflow: hidden;
+
+        margin-bottom: 45px;
+        padding: 30px;
+      }
+
+      #Conteudo > p {
+        font-size: 22px;
+        margin-bottom: 20px;
+
+        text-align: justify;
+      }
+
+      button {
+        min-width: 100px;
+        height: 35px;
+
+        padding-left: 15px;
+        padding-right: 15px;
+
+        margin-top: 70px;
+        margin-left: 170px;
+
+        font-size: 20px;
+        color: white;
+        font-weight: bold;
+
+        border: none;
+        border-radius: 5px;
+        background-color: #4adda9;
+      }
+
+      button:hover {
+        cursor: pointer;
+      }
+
+      footer {
+        width: 100%;
+        height: 130px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        background-color: #1f1456;
+      }
+
+      #Contatos {
+        width: 300px;
+        height: 100px;
+      }
+
+      #Contatos > ul > li {
+        margin-bottom: 10px;
+
+        font-size: 16px;
+        color: white;
+
+        display: flex;
+      }
+
+      #Contatos > ul > li > img {
+        margin-right: 5px;
+      }
+
+      #Contatos > ul > li:hover {
+        cursor: pointer;
+      }
+
+      #Contatos > ul > li > p {
+        margin-top: 5px;
+        margin-left: 5px;
+      }
+
+      #TermosPrivacidade {
+        width: 320px;
+        min-height: 30px;
+        height: auto;
+        overflow: hidden;
+
+        margin-right: 70px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        color: white;
+      }
+
+      #Logo > img {
+        width: 130px;
+        height: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="Container" class="centerObject">
+      <header>
+        <img src="../logo_fundo_roxo_chapeu.png" alt="Logo" title="Logo" />
+        <h1>Olá, {{name}} !</h1>
+      </header>
+
+      <div id="Conteudo">
+        <h2>A equipe TecnoTc agradece por seu cadastro!</h2>
+
+        <p>Você está quase lá...</p>
+        <p>
+          Abaixo está o botão com o link para confirmar seu e-mail em nossa
+          plataforma. Basta clicar e será redirecionado para a plataforma.
+        </p>
+
+        <button>
+          <a href="{{url}}"> Confirmar endereço de e-mail! </a>
+        </button>
+      </div>
+
+      <footer>
+        <div id="Contatos">
+          <ul>
+            <li>
+              <img
+                src="../ImagesConfirmEmail/contato_whatsapp.png"
+                alt="Contato para whatsapp"
+                title="Contato para whatsapp"
+              />
+              <p>(11) 94981-9506</p>
+            </li>
+            <li>
+              <img
+                src="../ImagesConfirmEmail/contato_instagram.png"
+                alt="Contato para instagram"
+                title="Contato para instagram"
+              />
+              <p>tecnotc_</p>
+            </li>
+            <li>
+              <img
+                src="../ImagesConfirmEmail/contato_email.png"
+                alt="Contato para email"
+                title="Contato para email"
+              />
+              <p>tecnotc@gmail.com</p>
+            </li>
+          </ul>
+        </div>
+
+        <div id="TermosPrivacidade">
+          <p>Copyright © 2021 TecnoTc Ltda.</p>
+          <p>Todos os direitos reservados.</p>
+          <p>#FiqueEmCasa</p>
+        </div>
+
+        <div id="Logo">
+          <img src="../logos/logo_fundo_roxo.png" alt="Logo" title="Logo" />
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

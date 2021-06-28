@@ -30,9 +30,18 @@ module.exports = {
             });
             const url = `https://tecnotcc.herokuapp.com/verify?confirmationCode=${rand}`
 
+            
+            const replacements = {
+                name : name,
+                url : url
+            };
+
+            const viewUrl = "/views/ConfirmEmail/index.html"
+
             sendEmail(
                 email,
-                url
+                replacements,
+                viewUrl
             )
             res.status(201).send({
                 teacher: {
