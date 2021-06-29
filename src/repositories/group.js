@@ -24,7 +24,7 @@ module.exports = {
             include: [
                 {
                     association: "Groups",
-                    attributes: ["id", "name"],
+                    attributes: ["id", "name", "image"],
                     through: { attributes: [] },
                     include: [
                         {

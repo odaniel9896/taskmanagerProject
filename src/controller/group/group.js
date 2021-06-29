@@ -37,7 +37,10 @@ module.exports = {
             if (!user)
                 return res.status(404).send({ error: "Usuário não encontrado" });
 
-            const group = await createGroup(name, req);
+            const group = await createGroup({
+                name, 
+                image : req.file ? req.file.firebaseUrl : null
+            });
 
             if (user.role == "teacher")
                 await group.addTeacher(user.id)
@@ -55,6 +58,7 @@ module.exports = {
                 group: {
                     groupId: group.id,
                     groupName: group.name,
+                    groupImage : req.file ? req.file.firebaseUrl : null
                 }
             });
 
