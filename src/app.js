@@ -1,13 +1,12 @@
 //import do express
 const express = require("express");
-const { errors } = require("celebrate");
+const { errors, isCelebrateError } = require("celebrate");
 
 const cors = require("cors");
 
-require("dotenv").config()
+require("dotenv").config();
 
 const routes = require("./routes");
-
 
 require("./database");
 

@@ -27,7 +27,7 @@ module.exports = {
         where: {
           chatId: chatId,
         },
-        attributes: ["message", "userId", "groupId", "chatId", "createdAt"],
+        attributes: ["id", "message", "userId", "groupId", "chatId", "createdAt"],
         include: [
           {
             association: "User",
