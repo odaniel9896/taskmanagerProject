@@ -12,10 +12,17 @@ module.exports = {
 
       if (!card) return res.status(404).send({ error: "Card não encontrado" });
 
-      card.initialDate = initialDate;
-      card.dueDate = dueDate;
-      card.progressId = progressId;
-      card.priorityId = priorityId;
+      if(initialDate)
+        card.initialDate = initialDate;
+      
+      if(dueDate)  
+          card.dueDate = dueDate;
+      
+      if(progressId)    
+          card.progressId = progressId;
+      
+      if(priorityId)
+          card.priorityId = priorityId;
 
       card.save();
 
