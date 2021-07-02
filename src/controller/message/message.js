@@ -15,14 +15,6 @@ module.exports = {
 
       if (!group) return res.status(401).send({ error: "Chat não encontrado" });
 
-    //   const findUser = await User.findByPk(userId, {
-    //       include: [
-    //           {
-    //               association : `${ROLE}`
-    //           }
-    //       ]
-    //   })
-
       const message = await Message.findAll({
         where: {
           chatId: chatId,
