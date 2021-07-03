@@ -10,6 +10,8 @@ module.exports = {
 
         const { stories, name, timeBox } = req.body;
 
+        console.log(...stories)
+
         try {
 
             const group = await findGroupById(groupId);

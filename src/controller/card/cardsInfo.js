@@ -3,7 +3,7 @@ const { findOneCard } = require("../../repositories/cards");
 
 module.exports = {
   async update(req, res) {
-    const { initialDate, dueDate, progressId, priorityId } = req.body;
+    const { initialDate, dueDate, progressId, priorityId, users } = req.body;
 
     const cardId = req.params.cardId;
 
@@ -23,6 +23,9 @@ module.exports = {
       
       if(priorityId)
           card.priorityId = priorityId;
+
+      if(users)
+          await card.addUsers(users)
 
       card.save();
 
