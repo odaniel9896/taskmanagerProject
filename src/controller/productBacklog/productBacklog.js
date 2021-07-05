@@ -61,6 +61,7 @@ module.exports = {
           "id",
           "description",
           "groupId",
+          "checked",
           "sprintId",
           "priorityId",
           "createdAt",
@@ -69,6 +70,24 @@ module.exports = {
       });
 
       res.send(listStories);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
+  },
+  async update(req, res) {
+    const storieId = req.params.storieId;
+
+    try {
+      const storie = await ProductBacklog.findByPk(storieId);
+
+      if (!storie)
+        return res.status(404).send({ error: "História não encontrada " });
+
+      storie.checked = true;
+
+      storie.save();
+      res.status(200).send();
     } catch (error) {
       console.log(error);
       res.status(500).send(error);

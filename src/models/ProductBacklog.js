@@ -5,6 +5,7 @@ class ProductBacklog extends Model {
         super.init(
             {
                 description: DataTypes.STRING,
+                checked: DataTypes.BOOLEAN,
                 groupId: DataTypes.INTEGER,
                 sprintId: DataTypes.INTEGER,
                 priorityId: DataTypes.INTEGER,
