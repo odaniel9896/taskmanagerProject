@@ -4,95 +4,108 @@ const { findGroupById } = require("../../repositories/group");
 const { findSprintById } = require("../../repositories/sprint");
 
 module.exports = {
-    async store(req, res) {
+  async index(req, res) {
+    const groupId = req.params.groupId;
 
-        const groupId = req.params.groupId;
+    try {
+      const group = await findGroupById(groupId);
 
-        const { stories, name, timeBox } = req.body;
+      if (!groupId)
+        return res.status(404).send({ error: "Grupo não encontrado" });
 
-        console.log(...stories)
+			const sprint = await Sprint.findAll({where: {
+				groupId : groupId
+			}});
 
-        try {
+			res.send(sprint).status(200)
+    
+    } catch (error) {
+			console.log(error)
+		}
+  },
+  async store(req, res) {
+    const groupId = req.params.groupId;
 
-            const group = await findGroupById(groupId);
+    const { stories, name, timeBox } = req.body;
 
-            if (!group)
-                return res.status(404).send({ error: "Grupo não encontrado" })
+    console.log(...stories);
 
-            const sprintCount = await Sprint.count({
-                where: {
-                    groupId: groupId
-                }
-            });
+    try {
+      const group = await findGroupById(groupId);
 
-            const sprint = await group.createSprint({
-                name: name ? name : `Sprint ${sprintCount + 1}`,
-                timeBox: timeBox
-            })
+      if (!group)
+        return res.status(404).send({ error: "Grupo não encontrado" });
 
-            const productBacklogs = await ProductBacklog.findAll({
-                where: {
-                    id:
-                        stories
-                }
-            })
+      const sprintCount = await Sprint.count({
+        where: {
+          groupId: groupId,
+        },
+      });
 
-            if (!productBacklogs)
-                return res.status(404).send({ error: "Nenhuma história encontrada para esse grupo" })
+      const sprint = await group.createSprint({
+        name: name ? name : `Sprint ${sprintCount + 1}`,
+        timeBox: timeBox,
+      });
 
-            const addStoriesSprint = await sprint.addProductBacklogs(productBacklogs)
+      const productBacklogs = await ProductBacklog.findAll({
+        where: {
+          id: stories,
+        },
+      });
 
-            res.status(201).send(addStoriesSprint)
+      if (!productBacklogs)
+        return res
+          .status(404)
+          .send({ error: "Nenhuma história encontrada para esse grupo" });
 
-        } catch (error) {
-            console.log(error);
-            res.status(500).send(error);
-        }
-    },
-    async update(req, res) {
+      const addStoriesSprint = await sprint.addProductBacklogs(productBacklogs);
 
-        const sprintId = req.params.sprintId
-
-        const { stories } = req.body;
-
-        try {
-
-            const sprint = await findSprintById(sprintId)
-
-            if (!sprint)
-                return res.status(404).send({ error: "Sprint não encontrada" });
-
-            await sprint.addProductBacklogs(stories);
-
-            res.send()
-        } catch (error) {
-            console.log(error);
-            res.status(500).send(error);
-        }
-    },
-    async find(req, res) {
-        const sprintId = req.params.sprintId;
-
-        try {
-            const sprint = await Sprint.findByPk(sprintId,
-                {
-                    attributes: ["id", "name", "createdAt"],
-                    include: [
-                        {
-                            association: "Group",
-                            attributes: ["id", "name"]
-                        }
-                    ]
-                }
-            );
-
-            if(!sprint) 
-                return res.status(404).send({ error: "Sprint não encontrada" });
-                
-            res.send(sprint)
-        } catch (error) {
-            console.log(error);
-            res.status(500).send(error);
-        }
+      res.status(201).send(addStoriesSprint);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
     }
-}
+  },
+  async update(req, res) {
+    const sprintId = req.params.sprintId;
+
+    const { stories } = req.body;
+
+    try {
+      const sprint = await findSprintById(sprintId);
+
+      if (!sprint)
+        return res.status(404).send({ error: "Sprint não encontrada" });
+
+      await sprint.addProductBacklogs(stories);
+
+      res.send();
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
+  },
+  async find(req, res) {
+    const sprintId = req.params.sprintId;
+
+    try {
+      const sprint = await Sprint.findByPk(sprintId, {
+        attributes: ["id", "name", "createdAt"],
+        include: [
+          {
+            association: "Group",
+            attributes: ["id", "name"],
+          },
+        ],
+      });
+
+      if (!sprint)
+        return res.status(404).send({ error: "Sprint não encontrada" });
+
+      res.send(sprint);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
+  },
+};

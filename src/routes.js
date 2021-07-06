@@ -150,7 +150,8 @@ routes.get("/cards/info/:cardId", cardInfoController.index);
 
 routes.post("/sprints/:groupId", sprintValidator.create, sprintController.store);
 routes.put("/sprints/:sprintId", sprintController.update);
-routes.get("/sprints/:sprintId", sprintController.find);
+routes.get("/sprint/:sprintId", sprintController.find);
+routes.get("/sprints/:groupId", sprintController.index);
 
 //ROTAS PARA A DAILY_SCRUM
 
